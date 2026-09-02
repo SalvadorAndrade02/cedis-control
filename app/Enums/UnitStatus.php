@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Enums;
+
+enum UnitStatus: string
+{
+    case IMPORTED = 'IMPORTED';
+
+    case ARRIVAL_PENDING = 'ARRIVAL_PENDING';
+    case ARRIVAL_COMPLETED = 'ARRIVAL_COMPLETED';
+
+    case ASSEMBLY_PENDING = 'ASSEMBLY_PENDING';
+    case ASSEMBLY_COMPLETED = 'ASSEMBLY_COMPLETED';
+
+    case DELIVERY_PENDING = 'DELIVERY_PENDING';
+
+    case COMPLETED = 'COMPLETED';
+}
