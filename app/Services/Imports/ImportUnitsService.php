@@ -35,6 +35,8 @@ class ImportUnitsService
         string $xmlPath,
         ?string $pdfPath = null,
         ?int $userId = null,
+        ?string $xmlOriginalFilename = null,
+        ?string $pdfOriginalFilename = null,
     ): ImportResult {
         if (! is_file($xmlPath)) {
             throw new RuntimeException(
@@ -83,7 +85,9 @@ class ImportUnitsService
                 $userId,
                 $context,
                 $supplier,
-                $parsedUnits
+                $parsedUnits,
+                $xmlOriginalFilename,
+                $pdfOriginalFilename
             ) {
                 /*
                  * La clave que relaciona XML + PDF.
@@ -97,11 +101,12 @@ class ImportUnitsService
                 $pairKey = $this->buildPairKey(
                     $context->data->series,
                     $context->data->folio,
-                    $xmlPath
+                    $xmlOriginalFilename ?? basename($xmlPath)
                 );
 
                 $xmlDocument = $this->createDocument(
                     filePath: $xmlPath,
+                    originalFilename: $xmlOriginalFilename ?? basename($xmlPath),
                     type: DocumentType::XML,
                     supplierId: $supplier->id,
                     pairKey: $pairKey,
@@ -177,6 +182,7 @@ class ImportUnitsService
                 if ($pdfPath !== null) {
                     $pdfDocument = $this->createDocument(
                         filePath: $pdfPath,
+                        originalFilename: $pdfOriginalFilename ?? basename($pdfPath),
                         type: DocumentType::PDF,
                         supplierId: $supplier->id,
                         pairKey: $pairKey,
@@ -328,6 +334,7 @@ class ImportUnitsService
 
     private function createDocument(
         string $filePath,
+        string $originalFilename,
         DocumentType $type,
         int $supplierId,
         string $pairKey,
@@ -358,13 +365,9 @@ class ImportUnitsService
 
         $extension = strtolower(
             pathinfo(
-                $filePath,
+                $originalFilename,
                 PATHINFO_EXTENSION
             )
-        );
-
-        $originalFilename = basename(
-            $filePath
         );
 
         $targetDirectory =
