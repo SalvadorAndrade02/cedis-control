@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\UnitController;
 
 Route::middleware('guest')
     ->group(function () {
@@ -40,4 +42,19 @@ Route::middleware('auth')
             '/imports',
             'imports.index'
         )->name('imports.index');
+
+        Route::view(
+            '/units',
+            'units.index'
+        )->name('units.index');
+
+        Route::get(
+            '/units/{unit}',
+            [UnitController::class, 'show']
+        )->name('units.show');
+
+        Route::get(
+            '/documents/{document}/download',
+            [DocumentController::class, 'download']
+        )->name('documents.download');
     });

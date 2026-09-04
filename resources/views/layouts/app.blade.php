@@ -80,120 +80,269 @@
 
             <nav
                 class="
-                flex-1
-                space-y-1
-                p-4
-            ">
+        flex-1
+        space-y-1
+        p-4
+    ">
 
+                {{-- DASHBOARD --}}
                 <a
                     href="{{ route('dashboard') }}"
                     class="
-                    flex
-                    items-center
-                    rounded-xl
-                    bg-slate-950
-                    px-4
-                    py-3
-                    text-sm
-                    font-medium
-                    text-white
-                ">
+            flex
+            items-center
+            rounded-xl
+            px-4
+            py-3
+            text-sm
+            font-medium
+            transition
+
+            {{ request()->routeIs('dashboard')
+                ? 'bg-slate-950 text-white'
+                : 'text-slate-600 hover:bg-slate-100'
+            }}
+        ">
                     Dashboard
                 </a>
 
+
+                {{-- UNIDADES --}}
+                @can('units.view')
+
                 <a
-                    href="#"
+                    href="{{ route('units.index') }}"
                     class="
-                    flex
-                    items-center
-                    rounded-xl
-                    px-4
-                    py-3
-                    text-sm
-                    font-medium
-                    text-slate-600
-                    hover:bg-slate-100
-                ">
+                flex
+                items-center
+                rounded-xl
+                px-4
+                py-3
+                text-sm
+                font-medium
+                transition
+
+                {{ request()->routeIs('units.*')
+                    ? 'bg-slate-950 text-white'
+                    : 'text-slate-600 hover:bg-slate-100'
+                }}
+            ">
                     Unidades
                 </a>
+
+                @endcan
+
+
+                {{-- IMPORTACIÓN --}}
+                @can('imports.manage')
 
                 <a
                     href="{{ route('imports.index') }}"
                     class="
-                    flex
-                    items-center
-                    rounded-xl
-                    px-4
-                    py-3
-                    text-sm
-                    font-medium
-                    text-slate-600
-                    hover:bg-slate-100
-                ">
+                flex
+                items-center
+                rounded-xl
+                px-4
+                py-3
+                text-sm
+                font-medium
+                transition
+
+                {{ request()->routeIs('imports.*')
+                    ? 'bg-slate-950 text-white'
+                    : 'text-slate-600 hover:bg-slate-100'
+                }}
+            ">
                     Importar documentos
                 </a>
 
+                @endcan
+
+
+                {{-- BLOQUE OPERATIVO --}}
+                @canany([
+                'arrival.view',
+                'assembly.view',
+                'delivery.view'
+                ])
+
                 <div
                     class="
-                    my-4
-                    border-t
-                    border-slate-200
-                "></div>
+                my-4
+                border-t
+                border-slate-200
+            "></div>
 
                 <p
                     class="
-                    px-4
-                    py-2
-                    text-xs
-                    font-semibold
-                    uppercase
-                    tracking-wider
-                    text-slate-400
-                ">
-                    Evidencias
+                px-4
+                py-2
+                text-xs
+                font-semibold
+                uppercase
+                tracking-wider
+                text-slate-400
+            ">
+                    Operación
                 </p>
+
+                @endcanany
+
+
+                {{-- LLEGADAS --}}
+                @can('arrival.view')
 
                 <a
                     href="#"
                     class="
-                    block
-                    rounded-xl
-                    px-4
-                    py-3
-                    text-sm
-                    text-slate-600
-                    hover:bg-slate-100
-                ">
+                block
+                rounded-xl
+                px-4
+                py-3
+                text-sm
+                text-slate-600
+                transition
+                hover:bg-slate-100
+            ">
                     Llegadas
                 </a>
 
-                <a
-                    href="#"
-                    class="
-                    block
-                    rounded-xl
-                    px-4
-                    py-3
-                    text-sm
-                    text-slate-600
-                    hover:bg-slate-100
-                ">
-                    Armados finalizados
-                </a>
+                @endcan
+
+
+                {{-- ARMADOS --}}
+                @can('assembly.view')
 
                 <a
                     href="#"
                     class="
-                    block
-                    rounded-xl
-                    px-4
-                    py-3
-                    text-sm
-                    text-slate-600
-                    hover:bg-slate-100
-                ">
+                block
+                rounded-xl
+                px-4
+                py-3
+                text-sm
+                text-slate-600
+                transition
+                hover:bg-slate-100
+            ">
+                    Armados finalizados
+                </a>
+
+                @endcan
+
+
+                {{-- ENTREGAS --}}
+                @can('delivery.view')
+
+                <a
+                    href="#"
+                    class="
+                block
+                rounded-xl
+                px-4
+                py-3
+                text-sm
+                text-slate-600
+                transition
+                hover:bg-slate-100
+            ">
                     Entregas
                 </a>
+
+                @endcan
+
+
+                {{-- ADMINISTRACIÓN --}}
+                @canany([
+                'users.manage',
+                'catalogs.manage',
+                'reports.view'
+                ])
+
+                <div
+                    class="
+                my-4
+                border-t
+                border-slate-200
+            "></div>
+
+                <p
+                    class="
+                px-4
+                py-2
+                text-xs
+                font-semibold
+                uppercase
+                tracking-wider
+                text-slate-400
+            ">
+                    Administración
+                </p>
+
+                @endcanany
+
+
+                {{-- REPORTES --}}
+                @can('reports.view')
+
+                <a
+                    href="#"
+                    class="
+                block
+                rounded-xl
+                px-4
+                py-3
+                text-sm
+                text-slate-600
+                transition
+                hover:bg-slate-100
+            ">
+                    Reportes
+                </a>
+
+                @endcan
+
+
+                {{-- USUARIOS --}}
+                @can('users.manage')
+
+                <a
+                    href="#"
+                    class="
+                block
+                rounded-xl
+                px-4
+                py-3
+                text-sm
+                text-slate-600
+                transition
+                hover:bg-slate-100
+            ">
+                    Usuarios
+                </a>
+
+                @endcan
+
+
+                {{-- CONFIGURACIÓN --}}
+                @can('catalogs.manage')
+
+                <a
+                    href="#"
+                    class="
+                block
+                rounded-xl
+                px-4
+                py-3
+                text-sm
+                text-slate-600
+                transition
+                hover:bg-slate-100
+            ">
+                    Configuración
+                </a>
+
+                @endcan
 
             </nav>
 
