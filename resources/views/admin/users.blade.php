@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard | CEDIS')
+@section('title', 'Usuarios | CEDIS')
 
 @section('content')
 
 <div class="space-y-8">
-
-    {{-- HEADER --}}
 
     <div>
 
@@ -16,7 +14,7 @@
                 font-medium
                 text-blue-600
             ">
-            Control de unidades CEDIS
+            Administración
         </p>
 
         <h1
@@ -27,7 +25,7 @@
                 tracking-tight
                 text-slate-950
             ">
-            Dashboard
+            Usuarios
         </h1>
 
         <p
@@ -36,16 +34,14 @@
                 text-sm
                 text-slate-500
             ">
-            Bienvenido,
-            {{ auth()->user()->name }}.
+            Administra el personal,
+            sus accesos y su rol operativo.
         </p>
 
     </div>
 
 
-    {{-- DASHBOARD DINÁMICO --}}
-
-    <livewire:dashboard-overview />
+    <livewire:user-management />
 
 </div>
 

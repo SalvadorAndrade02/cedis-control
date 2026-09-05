@@ -15,6 +15,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RuntimeException;
+use App\Models\User;
 use Throwable;
 
 class CompleteArrivalService
@@ -151,6 +152,10 @@ class CompleteArrivalService
                         ]);
                     }
 
+                    $actor = User::findOrFail(
+                        $userId
+                    );
+
                     $milestone->update([
                         'status' =>
                         MilestoneStatus::COMPLETED,
@@ -166,6 +171,9 @@ class CompleteArrivalService
 
                         'observations' =>
                         $observations,
+
+                        'completed_by_name' =>
+                        $actor->name,
                     ]);
 
                     $unit->update([
@@ -194,6 +202,9 @@ class CompleteArrivalService
 
                         'performed_by' =>
                         $userId,
+
+                        'performed_by_name' =>
+                        $actor->name,
 
                         'metadata' => [
                             'evidence_count' =>

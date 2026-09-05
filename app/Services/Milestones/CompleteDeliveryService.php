@@ -7,6 +7,8 @@ use App\Enums\MilestoneStage;
 use App\Enums\MilestoneStatus;
 use App\Enums\UnitEventType;
 use App\Enums\UnitStatus;
+use App\Models\Carrier;
+use App\Models\CarrierDelivery;
 use App\Models\Evidence;
 use App\Models\Unit;
 use App\Models\UnitEvent;
@@ -18,13 +20,20 @@ use RuntimeException;
 use Throwable;
 use App\Models\User;
 
-class CompleteAssemblyService
+class CompleteDeliveryService
 {
     /**
      * @param array<UploadedFile> $photos
      */
     public function execute(
         Unit $unit,
+        string $carrierName,
+        string $operatorName,
+        ?string $operatorIdentification,
+        ?string $operatorPhone,
+        string $vehiclePlate,
+        ?string $vehicleNumber,
+        ?string $transportType,
         array $photos,
         ?string $observations,
         int $userId,
@@ -32,16 +41,16 @@ class CompleteAssemblyService
 
         if (
             $unit->status
-            !== UnitStatus::ASSEMBLY_PENDING
+            !== UnitStatus::DELIVERY_PENDING
         ) {
             throw new RuntimeException(
-                'La unidad no está pendiente de armado.'
+                'La unidad no está pendiente de entrega.'
             );
         }
 
         if ($photos === []) {
             throw new RuntimeException(
-                'Debes registrar al menos una evidencia del armado finalizado.'
+                'Debes registrar al menos una evidencia de entrega.'
             );
         }
 
@@ -49,13 +58,13 @@ class CompleteAssemblyService
             ->milestones()
             ->where(
                 'stage',
-                MilestoneStage::ASSEMBLY_COMPLETED->value
+                MilestoneStage::CARRIER_DELIVERY->value
             )
             ->first();
 
         if (! $milestone) {
             throw new RuntimeException(
-                'No existe la etapa de armado para esta unidad.'
+                'No existe la etapa de entrega para esta unidad.'
             );
         }
 
@@ -64,7 +73,7 @@ class CompleteAssemblyService
             === MilestoneStatus::COMPLETED
         ) {
             throw new RuntimeException(
-                'El armado ya fue documentado.'
+                'La entrega ya fue documentada.'
             );
         }
 
@@ -75,12 +84,35 @@ class CompleteAssemblyService
             return DB::transaction(
                 function () use (
                     $unit,
+                    $carrierName,
+                    $operatorName,
+                    $operatorIdentification,
+                    $operatorPhone,
+                    $vehiclePlate,
+                    $vehicleNumber,
+                    $transportType,
                     $photos,
                     $observations,
                     $userId,
                     $milestone,
                     &$storedPaths
                 ) {
+
+                    /*
+                     * Por ahora permitimos capturar
+                     * transportadora libremente.
+                     *
+                     * Después Administración tendrá
+                     * su catálogo formal.
+                     */
+                    $carrier = Carrier::firstOrCreate(
+                        [
+                            'name' => trim($carrierName),
+                        ],
+                        [
+                            'active' => true,
+                        ]
+                    );
 
                     foreach ($photos as $photo) {
 
@@ -90,14 +122,14 @@ class CompleteAssemblyService
                         );
 
                         $filename =
-                            uniqid('assembly_', true)
+                            uniqid('delivery_', true)
                             . '.'
                             . $extension;
 
                         $path =
                             'cedis/evidences/'
                             . $unit->vin
-                            . '/assembly/'
+                            . '/delivery/'
                             . $filename;
 
                         $contents = file_get_contents(
@@ -106,7 +138,7 @@ class CompleteAssemblyService
 
                         if ($contents === false) {
                             throw new RuntimeException(
-                                'No fue posible leer una de las evidencias.'
+                                'No fue posible leer una evidencia de entrega.'
                             );
                         }
 
@@ -118,7 +150,7 @@ class CompleteAssemblyService
 
                         if (! $stored) {
                             throw new RuntimeException(
-                                'No fue posible almacenar una de las evidencias.'
+                                'No fue posible almacenar una evidencia.'
                             );
                         }
 
@@ -163,6 +195,40 @@ class CompleteAssemblyService
                         ]);
                     }
 
+                    CarrierDelivery::create([
+                        'unit_milestone_id' =>
+                        $milestone->id,
+
+                        'carrier_id' =>
+                        $carrier->id,
+
+                        'operator_name' =>
+                        trim($operatorName),
+
+                        'operator_identification' =>
+                        $operatorIdentification,
+
+                        'operator_phone' =>
+                        $operatorPhone,
+
+                        'vehicle_plate' =>
+                        strtoupper(
+                            trim($vehiclePlate)
+                        ),
+
+                        'vehicle_number' =>
+                        $vehicleNumber,
+
+                        'transport_type' =>
+                        $transportType,
+
+                        'delivered_at' =>
+                        now(),
+
+                        'observations' =>
+                        $observations,
+                    ]);
+
                     $actor = User::findOrFail(
                         $userId
                     );
@@ -187,9 +253,12 @@ class CompleteAssemblyService
                         $observations,
                     ]);
 
+                    /*
+                     * Aquí termina el proceso CEDIS.
+                     */
                     $unit->update([
                         'status' =>
-                        UnitStatus::DELIVERY_PENDING,
+                        UnitStatus::COMPLETED,
                     ]);
 
                     UnitEvent::create([
@@ -197,13 +266,13 @@ class CompleteAssemblyService
                         $unit->id,
 
                         'event_type' =>
-                        UnitEventType::ASSEMBLY_COMPLETED,
+                        UnitEventType::DELIVERY_COMPLETED,
 
                         'title' =>
-                        'Armado finalizado',
+                        'Entrega a transportadora',
 
                         'description' =>
-                        'Se registró la evidencia del armado finalizado de la unidad.',
+                        'La unidad fue entregada a la transportadora y el expediente quedó completo.',
 
                         'reference_type' =>
                         UnitMilestone::class,
@@ -218,6 +287,17 @@ class CompleteAssemblyService
                         $actor->name,
 
                         'metadata' => [
+                            'carrier' =>
+                            $carrier->name,
+
+                            'operator' =>
+                            trim($operatorName),
+
+                            'vehicle_plate' =>
+                            strtoupper(
+                                trim($vehiclePlate)
+                            ),
+
                             'evidence_count' =>
                             count($photos),
                         ],
@@ -228,6 +308,10 @@ class CompleteAssemblyService
             );
         } catch (Throwable $exception) {
 
+            /*
+             * Si MySQL hace rollback también
+             * limpiamos los archivos.
+             */
             foreach ($storedPaths as $path) {
                 Storage::disk('local')
                     ->delete($path);

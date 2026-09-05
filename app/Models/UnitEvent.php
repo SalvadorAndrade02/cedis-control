@@ -19,6 +19,7 @@ class UnitEvent extends Model
         'reference_id',
         'performed_by',
         'metadata',
+        'performed_by_name',
     ];
 
     protected $casts = [

@@ -21,6 +21,7 @@ class UnitMilestone extends Model
         'completed_by',
         'observations',
         'metadata',
+        'completed_by_name',
     ];
 
     protected $casts = [

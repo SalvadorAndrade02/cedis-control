@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RuntimeException;
 use Throwable;
+use App\Models\User;
 
 class ImportUnitsService
 {
@@ -525,6 +526,18 @@ class ImportUnitsService
         ?int $userId,
         UnitImportData $data,
     ): void {
+
+        /*
+     * Guardamos el nombre histórico del usuario
+     * que realizó la importación.
+     */
+        $performedByName = $userId
+            ? User::query()
+            ->whereKey($userId)
+            ->value('name')
+            : null;
+
+
         UnitEvent::create([
             'unit_id' =>
             $unit->id,
@@ -546,6 +559,9 @@ class ImportUnitsService
 
             'performed_by' =>
             $userId,
+
+            'performed_by_name' =>
+            $performedByName,
 
             'metadata' => [
                 'vin_source' =>

@@ -193,17 +193,20 @@
                 @can('arrival.view')
 
                 <a
-                    href="#"
+                    href="{{ route('operations.arrivals') }}"
                     class="
-                block
-                rounded-xl
-                px-4
-                py-3
-                text-sm
-                text-slate-600
-                transition
-                hover:bg-slate-100
-            ">
+            block
+            rounded-xl
+            px-4
+            py-3
+            text-sm
+            transition
+
+            {{ request()->routeIs('operations.arrivals')
+                ? 'bg-slate-950 font-medium text-white'
+                : 'text-slate-600 hover:bg-slate-100'
+            }}
+        ">
                     Llegadas
                 </a>
 
@@ -214,17 +217,20 @@
                 @can('assembly.view')
 
                 <a
-                    href="#"
+                    href="{{ route('operations.assemblies') }}"
                     class="
-                block
-                rounded-xl
-                px-4
-                py-3
-                text-sm
-                text-slate-600
-                transition
-                hover:bg-slate-100
-            ">
+            block
+            rounded-xl
+            px-4
+            py-3
+            text-sm
+            transition
+
+            {{ request()->routeIs('operations.assemblies')
+                ? 'bg-slate-950 font-medium text-white'
+                : 'text-slate-600 hover:bg-slate-100'
+            }}
+        ">
                     Armados finalizados
                 </a>
 
@@ -235,17 +241,20 @@
                 @can('delivery.view')
 
                 <a
-                    href="#"
+                    href="{{ route('operations.deliveries') }}"
                     class="
-                block
-                rounded-xl
-                px-4
-                py-3
-                text-sm
-                text-slate-600
-                transition
-                hover:bg-slate-100
-            ">
+            block
+            rounded-xl
+            px-4
+            py-3
+            text-sm
+            transition
+
+            {{ request()->routeIs('operations.deliveries')
+                ? 'bg-slate-950 font-medium text-white'
+                : 'text-slate-600 hover:bg-slate-100'
+            }}
+        ">
                     Entregas
                 </a>
 
@@ -307,7 +316,7 @@
                 @can('users.manage')
 
                 <a
-                    href="#"
+                    href="{{ route('admin.users') }}"
                     class="
                 block
                 rounded-xl

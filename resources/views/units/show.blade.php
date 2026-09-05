@@ -635,22 +635,68 @@
 
                     @if ($milestone->completed_at)
 
-                    <p
+                    <div
                         class="
-                                        mt-4
-                                        text-xs
-                                        text-slate-500
-                                    ">
-                        Completado:
-                        {{ \App\Support\DateHelper::format(
-                                        $milestone->completed_at
-                                    ) }}
-                    </p>
+            mt-5
+            border-t
+            border-slate-100
+            pt-4
+        ">
+
+                        <p
+                            class="
+                text-xs
+                text-slate-500
+            ">
+                            Completado
+                        </p>
+
+                        <p
+                            class="
+                mt-1
+                text-sm
+                font-medium
+                text-slate-900
+            ">
+                            {{ \App\Support\DateHelper::format(
+                $milestone->completed_at
+            ) }}
+                        </p>
+
+
+                        @if (
+                        $milestone->completed_by_name
+                        || $milestone->completedBy
+                        )
+
+                        <p
+                            class="
+            mt-3
+            text-xs
+            text-slate-500
+        ">
+                            Realizado por
+                        </p>
+
+                        <p
+                            class="
+            mt-1
+            text-sm
+            font-medium
+            text-slate-900
+        ">
+                            {{ $milestone->completed_by_name
+            ?? $milestone->completedBy?->name
+            ?? '—'
+        }}
+                        </p>
+
+                        @endif
+
+                    </div>
 
                     @endif
-
                     @endif
-
                 </article>
 
                 @endforeach
@@ -660,6 +706,464 @@
         </div>
 
     </section>
+
+    {{-- EVIDENCIAS DEL EXPEDIENTE --}}
+
+    @if (
+    $unit->milestones
+    ->sum(
+    fn ($milestone) =>
+    $milestone->evidences->count()
+    ) > 0
+    )
+
+    <section
+        class="
+            rounded-2xl
+            border
+            border-slate-200
+            bg-white
+            shadow-sm
+        ">
+
+        <div
+            class="
+                border-b
+                border-slate-200
+                px-6
+                py-5
+            ">
+
+            <h2 class="font-semibold">
+                Evidencias del expediente
+            </h2>
+
+            <p
+                class="
+                    mt-1
+                    text-sm
+                    text-slate-500
+                ">
+                Fotografías registradas durante
+                el proceso de la unidad.
+            </p>
+
+        </div>
+
+
+        <div class="space-y-8 p-6">
+
+            @foreach (
+            $unit->milestones
+            ->sortBy('id')
+            as $milestone
+            )
+
+            @if (
+            $milestone->evidences->isNotEmpty()
+            )
+
+            <div>
+
+                {{-- HEADER ETAPA --}}
+
+                <div
+                    class="
+                                flex
+                                flex-col
+                                gap-2
+                                sm:flex-row
+                                sm:items-center
+                                sm:justify-between
+                            ">
+
+                    <div>
+
+                        <h3
+                            class="
+                                        font-semibold
+                                        text-slate-950
+                                    ">
+                            {{ $milestone
+                                        ->stage
+                                        ->label()
+                                    }}
+                        </h3>
+
+
+                        <div
+                            class="
+                                        mt-1
+                                        flex
+                                        flex-wrap
+                                        gap-x-3
+                                        gap-y-1
+                                        text-xs
+                                        text-slate-500
+                                    ">
+
+                            @if ($milestone->completed_at)
+
+                            <span>
+                                {{ \App\Support\DateHelper::format(
+                                                $milestone->completed_at
+                                            ) }}
+                            </span>
+
+                            @endif
+
+
+                            @if (
+                            $milestone->completed_by_name
+                            || $milestone->completedBy
+                            )
+
+                            <span>
+                                ·
+                                {{ $milestone->completed_by_name
+            ?? $milestone->completedBy?->name
+            ?? '—'
+        }}
+                            </span>
+
+                            @endif
+
+                        </div>
+
+                    </div>
+
+
+                    <span
+                        class="
+                                    w-fit
+                                    rounded-full
+                                    bg-slate-100
+                                    px-3
+                                    py-1
+                                    text-xs
+                                    font-semibold
+                                    text-slate-600
+                                ">
+                        {{ $milestone
+                                    ->evidences
+                                    ->count()
+                                }}
+                        evidencia(s)
+                    </span>
+
+                </div>
+
+
+                {{-- GALERÍA --}}
+
+                <div
+                    class="
+                                mt-4
+                                grid
+                                grid-cols-2
+                                gap-3
+                                sm:grid-cols-3
+                                lg:grid-cols-4
+                                xl:grid-cols-5
+                            ">
+
+                    @foreach (
+                    $milestone->evidences
+                    as $evidence
+                    )
+
+                    <a
+                        href="{{ route(
+                                        'evidences.show',
+                                        $evidence
+                                    ) }}"
+                        target="_blank"
+                        class="
+                                        group
+                                        relative
+                                        overflow-hidden
+                                        rounded-xl
+                                        border
+                                        border-slate-200
+                                        bg-slate-100
+                                    ">
+
+                        @if (
+                        $evidence->type
+                        === \App\Enums\EvidenceType::IMAGE
+                        )
+
+                        <img
+                            src="{{ route(
+                                                'evidences.show',
+                                                $evidence
+                                            ) }}"
+                            alt="Evidencia"
+                            loading="lazy"
+                            class="
+                                                aspect-square
+                                                w-full
+                                                object-cover
+                                                transition
+                                                duration-200
+                                                group-hover:scale-105
+                                            ">
+
+                        @else
+
+                        <div
+                            class="
+                                                flex
+                                                aspect-square
+                                                items-center
+                                                justify-center
+                                                p-4
+                                                text-center
+                                                text-sm
+                                                text-slate-500
+                                            ">
+                            {{ $evidence
+                                                ->type
+                                                ->value
+                                            }}
+                        </div>
+
+                        @endif
+
+
+                        <div
+                            class="
+                                            absolute
+                                            inset-x-0
+                                            bottom-0
+                                            bg-gradient-to-t
+                                            from-black/70
+                                            to-transparent
+                                            p-3
+                                            pt-10
+                                        ">
+
+                            <p
+                                class="
+                                                truncate
+                                                text-xs
+                                                font-medium
+                                                text-white
+                                            ">
+                                {{ $evidence
+                                                ->original_filename
+                                                ?? 'Evidencia'
+                                            }}
+                            </p>
+
+                        </div>
+
+                    </a>
+
+                    @endforeach
+
+                </div>
+
+
+                {{-- OBSERVACIONES --}}
+
+                @if ($milestone->observations)
+
+                <div
+                    class="
+                                    mt-4
+                                    rounded-xl
+                                    bg-slate-50
+                                    p-4
+                                ">
+
+                    <p
+                        class="
+                                        text-xs
+                                        font-semibold
+                                        uppercase
+                                        tracking-wider
+                                        text-slate-400
+                                    ">
+                        Observaciones
+                    </p>
+
+                    <p
+                        class="
+                                        mt-2
+                                        text-sm
+                                        leading-6
+                                        text-slate-700
+                                    ">
+                        {{ $milestone->observations }}
+                    </p>
+
+                </div>
+
+                @endif
+
+                @if (
+                $milestone->stage
+                === \App\Enums\MilestoneStage::CARRIER_DELIVERY
+                && $milestone->carrierDelivery
+                )
+
+                <div
+                    class="
+            mt-4
+            rounded-xl
+            border
+            border-slate-200
+            p-4
+        ">
+
+                    <p
+                        class="
+                text-xs
+                font-semibold
+                uppercase
+                tracking-wider
+                text-slate-400
+            ">
+                        Datos de entrega
+                    </p>
+
+
+                    <dl
+                        class="
+                mt-4
+                grid
+                gap-4
+                sm:grid-cols-2
+                lg:grid-cols-3
+            ">
+
+                        <div>
+
+                            <dt class="text-xs text-slate-500">
+                                Transportadora
+                            </dt>
+
+                            <dd class="mt-1 text-sm font-medium">
+                                {{ $milestone
+                        ->carrierDelivery
+                        ->carrier
+                        ?->name
+                        ?? '—'
+                    }}
+                            </dd>
+
+                        </div>
+
+
+                        <div>
+
+                            <dt class="text-xs text-slate-500">
+                                Operador
+                            </dt>
+
+                            <dd class="mt-1 text-sm font-medium">
+                                {{ $milestone
+                        ->carrierDelivery
+                        ->operator_name
+                        ?? '—'
+                    }}
+                            </dd>
+
+                        </div>
+
+
+                        <div>
+
+                            <dt class="text-xs text-slate-500">
+                                Placas
+                            </dt>
+
+                            <dd class="mt-1 text-sm font-medium">
+                                {{ $milestone
+                        ->carrierDelivery
+                        ->vehicle_plate
+                        ?? '—'
+                    }}
+                            </dd>
+
+                        </div>
+
+
+                        @if (
+                        $milestone
+                        ->carrierDelivery
+                        ->vehicle_number
+                        )
+
+                        <div>
+
+                            <dt class="text-xs text-slate-500">
+                                Número económico
+                            </dt>
+
+                            <dd class="mt-1 text-sm font-medium">
+                                {{ $milestone
+                            ->carrierDelivery
+                            ->vehicle_number
+                        }}
+                            </dd>
+
+                        </div>
+
+                        @endif
+
+
+                        @if (
+                        $milestone
+                        ->carrierDelivery
+                        ->transport_type
+                        )
+
+                        <div>
+
+                            <dt class="text-xs text-slate-500">
+                                Tipo de transporte
+                            </dt>
+
+                            <dd class="mt-1 text-sm font-medium">
+                                {{ $milestone
+                            ->carrierDelivery
+                            ->transport_type
+                        }}
+                            </dd>
+
+                        </div>
+
+                        @endif
+
+                    </dl>
+
+                </div>
+
+                @endif
+
+            </div>
+
+            @unless ($loop->last)
+
+            <div
+                class="
+                                border-t
+                                border-slate-100
+                            "></div>
+
+            @endunless
+
+            @endif
+
+            @endforeach
+
+        </div>
+
+    </section>
+
+    @endif
 
     {{-- ACCIÓN OPERATIVA: LLEGADA --}}
 
@@ -691,6 +1195,20 @@
     @endif
 
 
+    {{-- ACCIÓN OPERATIVA: ENTREGA A TRANSPORTADORA --}}
+
+    @if (
+    $unit->status
+    === \App\Enums\UnitStatus::DELIVERY_PENDING
+    && auth()->user()?->can('delivery.complete')
+    )
+
+    <livewire:delivery-evidence
+        :unit="$unit"
+        :key="'delivery-' . $unit->id" />
+
+    @endif
+
     {{-- HISTORIAL --}}
 
     <section
@@ -702,115 +1220,110 @@
         shadow-sm
     ">
 
-
-        {{-- HISTORIAL --}}
-
-        <section
+        <div
             class="
-            rounded-2xl
-            border
+            border-b
             border-slate-200
-            bg-white
-            shadow-sm
+            px-6
+            py-5
         ">
+            <h2 class="font-semibold">
+                Historial
+            </h2>
+        </div>
 
-            <div
-                class="
-                border-b
-                border-slate-200
-                px-6
-                py-5
-            ">
-                <h2 class="font-semibold">
-                    Historial
-                </h2>
-            </div>
+        <div class="p-6">
 
+            <div class="space-y-6">
 
-            <div class="p-6">
+                @forelse (
+                $unit->events
+                ->sortByDesc('created_at')
+                as $event
+                )
 
-                <div class="space-y-6">
-
-                    @forelse (
-                    $unit->events
-                    ->sortByDesc('created_at')
-                    as $event
-                    )
+                <div
+                    class="
+                        relative
+                        pl-8
+                    ">
 
                     <div
                         class="
-                            relative
-                            pl-8
-                        ">
-
-                        <div
-                            class="
-                                absolute
-                                left-0
-                                top-1.5
-                                h-3
-                                w-3
-                                rounded-full
-                                bg-blue-600
-                            "></div>
-
-                        <p
-                            class="
-                                text-sm
-                                font-semibold
-                                text-slate-950
-                            ">
-                            {{ $event->title }}
-                        </p>
-
-                        @if ($event->description)
-
-                        <p
-                            class="
-                                    mt-1
-                                    text-sm
-                                    text-slate-500
-                                ">
-                            {{ $event->description }}
-                        </p>
-
-                        @endif
-
-                        <p
-                            class="
-                                mt-2
-                                text-xs
-                                text-slate-400
-                            ">
-                            {{ \App\Support\DateHelper::format(
-                                $event->created_at
-                            ) }}
-
-                            @if ($event->performedBy)
-                            ·
-                            {{ $event->performedBy->name }}
-                            @endif
-                        </p>
-
-                    </div>
-
-                    @empty
+                            absolute
+                            left-0
+                            top-1.5
+                            h-3
+                            w-3
+                            rounded-full
+                            bg-blue-600
+                        "></div>
 
                     <p
                         class="
                             text-sm
-                            text-slate-500
+                            font-semibold
+                            text-slate-950
                         ">
-                        No existe actividad registrada.
+                        {{ $event->title }}
                     </p>
 
-                    @endforelse
+                    @if ($event->description)
+
+                    <p
+                        class="
+                                mt-1
+                                text-sm
+                                text-slate-500
+                            ">
+                        {{ $event->description }}
+                    </p>
+
+                    @endif
+
+                    <p
+                        class="
+                            mt-2
+                            text-xs
+                            text-slate-400
+                        ">
+                        {{ \App\Support\DateHelper::format(
+                            $event->created_at
+                        ) }}
+
+                        @if (
+                        $event->performed_by_name
+                        || $event->performedBy
+                        )
+
+                        ·
+                        {{ $event->performed_by_name
+        ?? $event->performedBy?->name
+        ?? '—'
+    }}
+
+                        @endif
+                    </p>
 
                 </div>
 
+                @empty
+
+                <p
+                    class="
+                        text-sm
+                        text-slate-500
+                    ">
+                    No existe actividad registrada.
+                </p>
+
+                @endforelse
+
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 </div>
 

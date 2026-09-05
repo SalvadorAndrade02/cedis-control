@@ -16,8 +16,10 @@ class UnitController extends Controller
             'documents.supplier',
             'documents.invoiceData',
 
-            'milestones.evidences',
-            'milestones.carrierDelivery',
+            'milestones.completedBy',
+            'milestones.evidences.uploader',
+
+            'milestones.carrierDelivery.carrier',
 
             'events.performedBy',
         ]);

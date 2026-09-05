@@ -29,6 +29,18 @@ class LoginController extends Controller
             ],
         ]);
 
+        /*
+        |--------------------------------------------------------------------------
+        | SOLO USUARIOS ACTIVOS
+        |--------------------------------------------------------------------------
+        |
+        | Además de validar correo y contraseña,
+        | Laravel exigirá que users.active = 1.
+        |
+        */
+
+        $credentials['active'] = true;
+
         $remember = $request->boolean('remember');
 
         if (
@@ -54,6 +66,7 @@ class LoginController extends Controller
             ])
             ->onlyInput('email');
     }
+
 
     public function destroy(
         Request $request
