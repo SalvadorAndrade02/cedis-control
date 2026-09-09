@@ -10,13 +10,15 @@ class ImportPreviewService
         private readonly CfdiReader $cfdiReader,
         private readonly SupplierResolver $supplierResolver,
         private readonly VehicleParserResolver $vehicleParserResolver,
-    ) {}
+    ) {
+    }
 
     public function preview(
         string $xmlPath,
         string $xmlOriginalFilename,
         ?string $pdfOriginalFilename = null,
     ): array {
+
         $context = $this->cfdiReader->read(
             $xmlPath
         );
@@ -34,83 +36,173 @@ class ImportPreviewService
             $supplier
         );
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | VIN DETECTADOS
+        |--------------------------------------------------------------------------
+        |
+        | Normalizamos antes de comparar.
+        |
+        */
+
         $vins = collect($parsedUnits)
             ->pluck('vin')
+            ->filter()
             ->map(
                 fn($vin) =>
-                strtoupper(trim($vin))
+                strtoupper(
+                    trim(
+                        (string) $vin
+                    )
+                )
             )
             ->values();
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | VIN YA EXISTENTES
+        |--------------------------------------------------------------------------
+        */
+
         $existingVins = Unit::query()
-            ->whereIn('vin', $vins)
+            ->whereIn(
+                'vin',
+                $vins->all()
+            )
             ->pluck('vin')
-            ->all();
-
-        $units = collect($parsedUnits)
-            ->map(function ($unit) use (
-                $existingVins
-            ) {
-                return [
-                    'vin' =>
-                    $unit->vin,
-
-                    'brand' =>
-                    $unit->brand,
-
-                    'model' =>
-                    $unit->model,
-
-                    'version' =>
-                    $unit->version,
-
-                    'year' =>
-                    $unit->year,
-
-                    'exterior_color' =>
-                    $unit->exteriorColor,
-
-                    'interior_color' =>
-                    $unit->interiorColor,
-
-                    'engine_number' =>
-                    $unit->engineNumber,
-
-                    'pedimento' =>
-                    $unit->pedimento,
-
-                    'purchase_order' =>
-                    $unit->purchaseOrder,
-
-                    'vin_source' =>
-                    $unit->vinSource->value,
-
-                    'requires_review' =>
-                    $unit->requiresReview,
-
-                    'duplicate' =>
-                    in_array(
-                        $unit->vin,
-                        $existingVins,
-                        true
-                    ),
-                ];
-            })
+            ->map(
+                fn($vin) =>
+                strtoupper(
+                    trim(
+                        (string) $vin
+                    )
+                )
+            )
             ->values()
             ->all();
 
-        $series = $context->data->series;
-        $folio = $context->data->folio;
+
+        /*
+        |--------------------------------------------------------------------------
+        | UNIDADES PARA PREVIEW
+        |--------------------------------------------------------------------------
+        */
+
+        $units = collect($parsedUnits)
+            ->map(
+                function ($unit) use ($existingVins) {
+
+                    $normalizedVin =
+                        strtoupper(
+                            trim(
+                                (string) $unit->vin
+                            )
+                        );
+
+
+                    return [
+
+                        'vin' =>
+                            $normalizedVin,
+
+                        'brand' =>
+                            strtoupper(
+                                trim(
+                                    (string) $unit->brand
+                                )
+                            ),
+
+                        'model' =>
+                            $unit->model,
+
+                        'version' =>
+                            $unit->version,
+
+                        'year' =>
+                            $unit->year,
+
+                        'exterior_color' =>
+                            $unit->exteriorColor,
+
+                        'interior_color' =>
+                            $unit->interiorColor,
+
+                        'engine_number' =>
+                            $unit->engineNumber,
+
+                        'pedimento' =>
+                            $unit->pedimento,
+
+                        'purchase_order' =>
+                            $unit->purchaseOrder,
+
+                        /*
+                         * Datos informativos del parser.
+                         *
+                         * Estos no son editables desde
+                         * la pantalla.
+                         */
+                        'vin_source' =>
+                            $unit->vinSource->value,
+
+                        'requires_review' =>
+                            $unit->requiresReview,
+
+                        /*
+                         * Importante:
+                         *
+                         * Este duplicate describe el VIN
+                         * ORIGINAL detectado por el parser.
+                         *
+                         * Si el usuario lo corrige después,
+                         * ImportUnits.php hará nuevamente
+                         * la validación con el VIN editable.
+                         */
+                        'duplicate' =>
+                            in_array(
+                                $normalizedVin,
+                                $existingVins,
+                                true
+                            ),
+                    ];
+                }
+            )
+            ->values()
+            ->all();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | DATOS FACTURA
+        |--------------------------------------------------------------------------
+        */
+
+        $series =
+            $context->data->series;
+
+        $folio =
+            $context->data->folio;
+
 
         $pairKey = trim(
             ($series ?? '')
-                . ($folio ?? '')
+            . ($folio ?? '')
         );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | VALIDACIÓN NOMBRES XML / PDF
+        |--------------------------------------------------------------------------
+        */
 
         $xmlBase = pathinfo(
             $xmlOriginalFilename,
             PATHINFO_FILENAME
         );
+
 
         $pdfBase = $pdfOriginalFilename
             ? pathinfo(
@@ -119,11 +211,13 @@ class ImportPreviewService
             )
             : null;
 
+
         /*
-         * Es una advertencia, no bloqueo.
+         * Es solamente una advertencia.
          *
-         * Algunos proveedores podrían cambiar
-         * convenciones de nombres.
+         * No bloqueamos porque los proveedores
+         * pueden utilizar convenciones distintas
+         * para nombrar XML y PDF.
          */
         $fileNamesMatch =
             $pdfBase === null
@@ -132,67 +226,106 @@ class ImportPreviewService
                 $pdfBase
             ) === 0;
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | RESPUESTA
+        |--------------------------------------------------------------------------
+        */
+
         return [
+
             'supplier' => [
-                'id' => $supplier->id,
-                'name' => $supplier->name,
-                'rfc' => $supplier->rfc,
+
+                'id' =>
+                    $supplier->id,
+
+                'name' =>
+                    $supplier->name,
+
+                'rfc' =>
+                    $supplier->rfc,
+
                 'parser_key' =>
-                $supplier->parser_key,
+                    $supplier->parser_key,
             ],
+
 
             'invoice' => [
-                'series' => $series,
-                'folio' => $folio,
-                'pair_key' => $pairKey,
+
+                'series' =>
+                    $series,
+
+                'folio' =>
+                    $folio,
+
+                'pair_key' =>
+                    $pairKey,
 
                 'uuid' =>
-                $context->data->uuid,
+                    $context->data->uuid,
 
                 'issued_at' =>
-                $context->data
-                    ->issuedAt
-                    ?->format(
-                        'Y-m-d H:i:s'
-                    ),
+                    $context
+                        ->data
+                        ->issuedAt
+                            ?->format(
+                            'Y-m-d H:i:s'
+                        ),
 
                 'receiver_name' =>
-                $context->data
-                    ->receiverName,
+                    $context
+                        ->data
+                        ->receiverName,
 
                 'receiver_rfc' =>
-                $context->data
-                    ->receiverRfc,
+                    $context
+                        ->data
+                        ->receiverRfc,
 
                 'currency' =>
-                $context->data->currency,
+                    $context->data->currency,
 
                 'total' =>
-                $context->data->total,
+                    $context->data->total,
             ],
+
 
             'files' => [
+
                 'xml' =>
-                $xmlOriginalFilename,
+                    $xmlOriginalFilename,
 
                 'pdf' =>
-                $pdfOriginalFilename,
+                    $pdfOriginalFilename,
 
                 'names_match' =>
-                $fileNamesMatch,
+                    $fileNamesMatch,
             ],
 
-            'units' => $units,
 
+            'units' =>
+                $units,
+
+
+            /*
+             * Esto sigue siendo útil únicamente
+             * como advertencia del análisis original.
+             *
+             * Ya NO debe utilizarse para bloquear
+             * directamente el botón de importación.
+             */
             'has_duplicates' =>
-            $existingVins !== [],
+                $existingVins !== [],
+
 
             'requires_review' =>
-            collect($parsedUnits)
-                ->contains(
-                    fn($unit) =>
-                    $unit->requiresReview
-                ),
+                collect(
+                    $parsedUnits
+                )->contains(
+                        fn($unit) =>
+                        $unit->requiresReview
+                    ),
         ];
     }
 }

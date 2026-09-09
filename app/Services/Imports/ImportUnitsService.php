@@ -21,6 +21,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RuntimeException;
+use App\Enums\VinSource;
 use Throwable;
 use App\Models\User;
 
@@ -30,7 +31,48 @@ class ImportUnitsService
         private readonly CfdiReader $cfdiReader,
         private readonly SupplierResolver $supplierResolver,
         private readonly VehicleParserResolver $vehicleParserResolver,
-    ) {}
+    ) {
+    }
+
+    private function nullableString(
+        mixed $value
+    ): ?string {
+
+        if ($value === null) {
+            return null;
+        }
+
+
+        $value =
+            trim(
+                (string) $value
+            );
+
+
+        return $value !== ''
+            ? $value
+            : null;
+    }
+
+    private function normalizeComparisonValue(
+        mixed $value
+    ): ?string {
+
+        if ($value === null) {
+            return null;
+        }
+
+
+        $value =
+            trim(
+                (string) $value
+            );
+
+
+        return $value !== ''
+            ? $value
+            : null;
+    }
 
     public function import(
         string $xmlPath,
@@ -38,14 +80,15 @@ class ImportUnitsService
         ?int $userId = null,
         ?string $xmlOriginalFilename = null,
         ?string $pdfOriginalFilename = null,
+        array $unitOverrides = [],
     ): ImportResult {
-        if (! is_file($xmlPath)) {
+        if (!is_file($xmlPath)) {
             throw new RuntimeException(
                 "El XML no existe: {$xmlPath}"
             );
         }
 
-        if ($pdfPath !== null && ! is_file($pdfPath)) {
+        if ($pdfPath !== null && !is_file($pdfPath)) {
             throw new RuntimeException(
                 "El PDF no existe: {$pdfPath}"
             );
@@ -75,21 +118,42 @@ class ImportUnitsService
             );
         }
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | APLICAR CORRECCIONES DE VISTA PREVIA
+        |--------------------------------------------------------------------------
+        |
+        | Los parsers siguen siendo la fuente original.
+        |
+        | Si el usuario corrigió o completó información,
+        | generamos nuevos UnitImportData con esos valores.
+        |
+        */
+
+        $parsedUnits = $this->applyUnitOverrides(
+            parsedUnits: $parsedUnits,
+            unitOverrides: $unitOverrides,
+        );
+
+
+        /*
+         * La validación final ocurre DESPUÉS
+         * de aplicar las modificaciones.
+         *
+         * Por lo tanto también detectamos:
+         *
+         * - VIN editado que ya existe.
+         * - VIN duplicados entre unidades.
+         * - VIN vacío.
+         */
+
         $this->validateUnitsBeforeImport(
             $parsedUnits
         );
 
         try {
-            return DB::transaction(function () use (
-                $xmlPath,
-                $pdfPath,
-                $userId,
-                $context,
-                $supplier,
-                $parsedUnits,
-                $xmlOriginalFilename,
-                $pdfOriginalFilename
-            ) {
+            return DB::transaction(function () use ($xmlPath, $pdfPath, $userId, $context, $supplier, $parsedUnits, $xmlOriginalFilename, $pdfOriginalFilename) {
                 /*
                  * La clave que relaciona XML + PDF.
                  *
@@ -119,62 +183,62 @@ class ImportUnitsService
 
                 $invoiceData = InvoiceData::create([
                     'document_id' =>
-                    $xmlDocument->id,
+                        $xmlDocument->id,
 
                     'cfdi_version' =>
-                    $context->data->version,
+                        $context->data->version,
 
                     'series' =>
-                    $context->data->series,
+                        $context->data->series,
 
                     'folio' =>
-                    $context->data->folio,
+                        $context->data->folio,
 
                     'uuid' =>
-                    $context->data->uuid,
+                        $context->data->uuid,
 
                     'issued_at' =>
-                    $context->data->issuedAt,
+                        $context->data->issuedAt,
 
                     'certified_at' =>
-                    $context->data->certifiedAt,
+                        $context->data->certifiedAt,
 
                     'issuer_rfc' =>
-                    $context->data->issuerRfc,
+                        $context->data->issuerRfc,
 
                     'issuer_name' =>
-                    $context->data->issuerName,
+                        $context->data->issuerName,
 
                     'receiver_rfc' =>
-                    $context->data->receiverRfc,
+                        $context->data->receiverRfc,
 
                     'receiver_name' =>
-                    $context->data->receiverName,
+                        $context->data->receiverName,
 
                     'currency' =>
-                    $context->data->currency,
+                        $context->data->currency,
 
                     'payment_method' =>
-                    $context->data->paymentMethod,
+                        $context->data->paymentMethod,
 
                     'payment_form' =>
-                    $context->data->paymentForm,
+                        $context->data->paymentForm,
 
                     'subtotal' =>
-                    $context->data->subtotal,
+                        $context->data->subtotal,
 
                     'tax' =>
-                    $context->data->tax,
+                        $context->data->tax,
 
                     'total' =>
-                    $context->data->total,
+                        $context->data->total,
 
                     'raw_data' => [
                         'parser_key' =>
-                        $supplier->parser_key,
+                            $supplier->parser_key,
 
                         'source_file' =>
-                        basename($xmlPath),
+                            basename($xmlPath),
                     ],
                 ]);
 
@@ -243,6 +307,457 @@ class ImportUnitsService
     }
 
     /**
+     * @param array<UnitImportData> $parsedUnits
+     * @param array<int, array<string, mixed>> $unitOverrides
+     *
+     * @return array<UnitImportData>
+     */
+    private function applyUnitOverrides(
+        array $parsedUnits,
+        array $unitOverrides,
+    ): array {
+
+        /*
+        |--------------------------------------------------------------------------
+        | SIN MODIFICACIONES
+        |--------------------------------------------------------------------------
+        */
+
+        if ($unitOverrides === []) {
+            return $parsedUnits;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | INDEXAR OVERRIDES
+        |--------------------------------------------------------------------------
+        |
+        | Livewire envía:
+        |
+        | [
+        |     'index' => 0,
+        |     ...
+        | ]
+        |
+        */
+
+        $overridesByIndex = [];
+
+        foreach ($unitOverrides as $override) {
+
+            if (
+                !array_key_exists(
+                    'index',
+                    $override
+                )
+            ) {
+                continue;
+            }
+
+            $index = (int) $override['index'];
+
+            $overridesByIndex[$index] =
+                $override;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CONSTRUIR UNIDADES DEFINITIVAS
+        |--------------------------------------------------------------------------
+        */
+
+        $result = [];
+
+
+        foreach (
+            $parsedUnits
+            as $index => $original
+        ) {
+
+            /*
+             * Si no existe override para esta unidad,
+             * conservamos exactamente el DTO original.
+             */
+            if (
+                !isset(
+                $overridesByIndex[$index]
+            )
+            ) {
+
+                $result[] = $original;
+
+                continue;
+            }
+
+
+            $override =
+                $overridesByIndex[$index];
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | SEGURIDAD: VERIFICAR QUE EL PREVIEW
+            | SIGUE CORRESPONDIENDO A ESTA UNIDAD
+            |--------------------------------------------------------------------------
+            */
+
+            $originalVin =
+                strtoupper(
+                    trim(
+                        $original->vin
+                    )
+                );
+
+
+            $previewOriginalVin =
+                strtoupper(
+                    trim(
+                        (string) (
+                            $override['original_vin']
+                            ?? ''
+                        )
+                    )
+                );
+
+
+            if (
+                $previewOriginalVin !== ''
+                && $previewOriginalVin !== $originalVin
+            ) {
+
+                throw new RuntimeException(
+                    'La información de la vista previa ya no coincide con el XML. '
+                    . 'Vuelve a analizar los documentos.'
+                );
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | VALORES FINALES
+            |--------------------------------------------------------------------------
+            */
+
+            $finalVin =
+                strtoupper(
+                    trim(
+                        (string) (
+                            $override['vin']
+                            ?? $original->vin
+                        )
+                    )
+                );
+
+
+            $finalBrand =
+                strtoupper(
+                    trim(
+                        (string) (
+                            $override['brand']
+                            ?? $original->brand
+                            ?? ''
+                        )
+                    )
+                );
+
+
+            $finalBrand =
+                $finalBrand !== ''
+                ? $finalBrand
+                : null;
+
+
+            $finalModel =
+                $this->nullableString(
+                    $override['model']
+                    ?? $original->model
+                );
+
+
+            $finalVersion =
+                $this->nullableString(
+                    $override['version']
+                    ?? $original->version
+                );
+
+
+            $finalYear =
+                array_key_exists(
+                    'year',
+                    $override
+                )
+                ? (
+                    $override['year'] !== null
+                    && $override['year'] !== ''
+                    ? (int) $override['year']
+                    : null
+                )
+                : $original->year;
+
+
+            $finalExteriorColor =
+                $this->nullableString(
+                    $override['exterior_color']
+                    ?? $original->exteriorColor
+                );
+
+
+            $finalInteriorColor =
+                $this->nullableString(
+                    $override['interior_color']
+                    ?? $original->interiorColor
+                );
+
+
+            $finalEngineNumber =
+                $this->nullableString(
+                    $override['engine_number']
+                    ?? $original->engineNumber
+                );
+
+
+            $finalPedimento =
+                $this->nullableString(
+                    $override['pedimento']
+                    ?? $original->pedimento
+                );
+
+
+            $finalPurchaseOrder =
+                $this->nullableString(
+                    $override['purchase_order']
+                    ?? $original->purchaseOrder
+                );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | DETECTAR CAMBIOS MANUALES
+            |--------------------------------------------------------------------------
+            */
+
+            $originalValues = [
+
+                'vin' =>
+                    $originalVin,
+
+                'brand' =>
+                    $original->brand,
+
+                'model' =>
+                    $original->model,
+
+                'version' =>
+                    $original->version,
+
+                'year' =>
+                    $original->year,
+
+                'exterior_color' =>
+                    $original->exteriorColor,
+
+                'interior_color' =>
+                    $original->interiorColor,
+
+                'engine_number' =>
+                    $original->engineNumber,
+
+                'pedimento' =>
+                    $original->pedimento,
+
+                'purchase_order' =>
+                    $original->purchaseOrder,
+            ];
+
+
+            $finalValues = [
+
+                'vin' =>
+                    $finalVin,
+
+                'brand' =>
+                    $finalBrand,
+
+                'model' =>
+                    $finalModel,
+
+                'version' =>
+                    $finalVersion,
+
+                'year' =>
+                    $finalYear,
+
+                'exterior_color' =>
+                    $finalExteriorColor,
+
+                'interior_color' =>
+                    $finalInteriorColor,
+
+                'engine_number' =>
+                    $finalEngineNumber,
+
+                'pedimento' =>
+                    $finalPedimento,
+
+                'purchase_order' =>
+                    $finalPurchaseOrder,
+            ];
+
+
+            /*
+             * Sólo guardamos los campos realmente
+             * modificados.
+             */
+            $manualOverrides = [];
+
+
+            foreach (
+                $finalValues
+                as $field => $value
+            ) {
+
+                $originalValue =
+                    $originalValues[$field]
+                    ?? null;
+
+
+                if (
+                    $this->normalizeComparisonValue(
+                        $originalValue
+                    )
+                    !==
+                    $this->normalizeComparisonValue(
+                        $value
+                    )
+                ) {
+
+                    $manualOverrides[$field] = [
+                        'original' =>
+                            $originalValue,
+
+                        'final' =>
+                            $value,
+                    ];
+                }
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | METADATOS DE TRAZABILIDAD
+            |--------------------------------------------------------------------------
+            |
+            | Esto terminará guardándose en:
+            |
+            | document_units.parsed_vehicle_data
+            |
+            | porque attachDocumentToUnit ya utiliza
+            | UnitImportData->extraData.
+            |
+            */
+
+            $extraData =
+                $original->extraData;
+
+
+            $extraData['manual_review'] = [
+
+                'was_modified' =>
+                    $manualOverrides !== [],
+
+                'original_values' =>
+                    $originalValues,
+
+                'manual_overrides' =>
+                    $manualOverrides,
+            ];
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | ORIGEN DEL VIN
+            |--------------------------------------------------------------------------
+            |
+            | Si el usuario corrigió el VIN,
+            | el valor definitivo ya es MANUAL.
+            |
+            */
+
+            $vinSource =
+                $finalVin !== $originalVin
+                ? VinSource::MANUAL
+                : $original->vinSource;
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | NUEVO DTO
+            |--------------------------------------------------------------------------
+            */
+
+            $result[] = new UnitImportData(
+
+                vin:
+                $finalVin,
+
+                brand:
+                $finalBrand,
+
+                model:
+                $finalModel,
+
+                version:
+                $finalVersion,
+
+                year:
+                $finalYear,
+
+                exteriorColor:
+                $finalExteriorColor,
+
+                interiorColor:
+                $finalInteriorColor,
+
+                engineNumber:
+                $finalEngineNumber,
+
+                pedimento:
+                $finalPedimento,
+
+                purchaseOrder:
+                $finalPurchaseOrder,
+
+                /*
+                 * Estos datos pertenecen al XML
+                 * original y NO son editables.
+                 */
+                conceptIdentifier:
+                $original->conceptIdentifier,
+
+                conceptIndex:
+                $original->conceptIndex,
+
+                rawDescription:
+                $original->rawDescription,
+
+                vinSource:
+                $vinSource,
+
+                extraData:
+                $extraData,
+
+                requiresReview:
+                $original->requiresReview,
+            );
+        }
+
+
+        return $result;
+    }
+
+    /**
      * @param array<UnitImportData> $units
      */
     private function validateUnitsBeforeImport(
@@ -278,7 +793,7 @@ class ImportUnitsService
         if ($existing !== []) {
             throw new RuntimeException(
                 'Ya existen unidades con VIN: '
-                    . implode(', ', $existing)
+                . implode(', ', $existing)
             );
         }
     }
@@ -293,7 +808,7 @@ class ImportUnitsService
             )
             ->first();
 
-        if (! $brand) {
+        if (!$brand) {
             throw new RuntimeException(
                 "Marca no registrada: {$data->brand}"
             );
@@ -301,35 +816,35 @@ class ImportUnitsService
 
         return Unit::create([
             'vin' =>
-            strtoupper(trim($data->vin)),
+                strtoupper(trim($data->vin)),
 
             'brand_id' =>
-            $brand->id,
+                $brand->id,
 
             'model' =>
-            $data->model,
+                $data->model,
 
             'version' =>
-            $data->version,
+                $data->version,
 
             'year' =>
-            $data->year,
+                $data->year,
 
             'exterior_color' =>
-            $data->exteriorColor,
+                $data->exteriorColor,
 
             'interior_color' =>
-            $data->interiorColor,
+                $data->interiorColor,
 
             'engine_number' =>
-            $data->engineNumber,
+                $data->engineNumber,
 
             /*
              * Después de importar, el siguiente paso
              * operativo real es documentar llegada.
              */
             'status' =>
-            UnitStatus::ARRIVAL_PENDING,
+                UnitStatus::ARRIVAL_PENDING,
         ]);
     }
 
@@ -355,12 +870,12 @@ class ImportUnitsService
 
         if (
             Document::query()
-            ->where('file_hash', $hash)
-            ->exists()
+                ->where('file_hash', $hash)
+                ->exists()
         ) {
             throw new RuntimeException(
                 'El archivo ya fue importado anteriormente: '
-                    . basename($filePath)
+                . basename($filePath)
             );
         }
 
@@ -403,7 +918,7 @@ class ImportUnitsService
                 $contents
             );
 
-        if (! $stored) {
+        if (!$stored) {
             throw new RuntimeException(
                 "No fue posible almacenar {$filePath}"
             );
@@ -411,42 +926,42 @@ class ImportUnitsService
 
         return Document::create([
             'supplier_id' =>
-            $supplierId,
+                $supplierId,
 
             'document_type' =>
-            $type,
+                $type,
 
             'original_filename' =>
-            $originalFilename,
+                $originalFilename,
 
             'storage_disk' =>
-            'local',
+                'local',
 
             'storage_path' =>
-            $targetPath,
+                $targetPath,
 
             'file_hash' =>
-            $hash,
+                $hash,
 
             'mime_type' =>
-            mime_content_type($filePath)
+                mime_content_type($filePath)
                 ?: null,
 
             'file_size' =>
-            filesize($filePath)
+                filesize($filePath)
                 ?: null,
 
             'pair_key' =>
-            $pairKey,
+                $pairKey,
 
             'processing_status' =>
-            $processingStatus,
+                $processingStatus,
 
             'processed_at' =>
-            now(),
+                now(),
 
             'uploaded_by' =>
-            $userId,
+                $userId,
         ]);
     }
 
@@ -458,43 +973,43 @@ class ImportUnitsService
     ): void {
         DocumentUnit::create([
             'document_id' =>
-            $document->id,
+                $document->id,
 
             'unit_id' =>
-            $unit->id,
+                $unit->id,
 
             'concept_index' =>
-            $includeParsingMetadata
+                $includeParsingMetadata
                 ? $data->conceptIndex
                 : null,
 
             'concept_identifier' =>
-            $includeParsingMetadata
+                $includeParsingMetadata
                 ? $data->conceptIdentifier
                 : null,
 
             'raw_description' =>
-            $includeParsingMetadata
+                $includeParsingMetadata
                 ? $data->rawDescription
                 : null,
 
             'pedimento' =>
-            $includeParsingMetadata
+                $includeParsingMetadata
                 ? $data->pedimento
                 : null,
 
             'purchase_order' =>
-            $includeParsingMetadata
+                $includeParsingMetadata
                 ? $data->purchaseOrder
                 : null,
 
             'vin_source' =>
-            $includeParsingMetadata
+                $includeParsingMetadata
                 ? $data->vinSource
                 : null,
 
             'parsed_vehicle_data' =>
-            $includeParsingMetadata
+                $includeParsingMetadata
                 ? $data->extraData
                 : null,
         ]);
@@ -509,13 +1024,13 @@ class ImportUnitsService
         ) {
             UnitMilestone::create([
                 'unit_id' =>
-                $unit->id,
+                    $unit->id,
 
                 'stage' =>
-                $stage,
+                    $stage,
 
                 'status' =>
-                MilestoneStatus::PENDING,
+                    MilestoneStatus::PENDING,
             ]);
         }
     }
@@ -528,47 +1043,47 @@ class ImportUnitsService
     ): void {
 
         /*
-     * Guardamos el nombre histórico del usuario
-     * que realizó la importación.
-     */
+         * Guardamos el nombre histórico del usuario
+         * que realizó la importación.
+         */
         $performedByName = $userId
             ? User::query()
-            ->whereKey($userId)
-            ->value('name')
+                ->whereKey($userId)
+                ->value('name')
             : null;
 
 
         UnitEvent::create([
             'unit_id' =>
-            $unit->id,
+                $unit->id,
 
             'event_type' =>
-            UnitEventType::UNIT_IMPORTED,
+                UnitEventType::UNIT_IMPORTED,
 
             'title' =>
-            'Unidad importada',
+                'Unidad importada',
 
             'description' =>
-            'La unidad fue registrada a partir de un CFDI.',
+                'La unidad fue registrada a partir de un CFDI.',
 
             'reference_type' =>
-            Document::class,
+                Document::class,
 
             'reference_id' =>
-            $document->id,
+                $document->id,
 
             'performed_by' =>
-            $userId,
+                $userId,
 
             'performed_by_name' =>
-            $performedByName,
+                $performedByName,
 
             'metadata' => [
                 'vin_source' =>
-                $data->vinSource->value,
+                    $data->vinSource->value,
 
                 'requires_review' =>
-                $data->requiresReview,
+                    $data->requiresReview,
             ],
         ]);
     }

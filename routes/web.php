@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\EvidenceController;
+use App\Http\Controllers\UnitExpedientPdfController;
 
 Route::middleware('guest')
     ->group(function () {
@@ -105,4 +106,19 @@ Route::middleware('auth')
         )
             ->middleware('can:users.manage')
             ->name('admin.users');
+
+        Route::get(
+            '/units/{unit}/expedient/pdf',
+            [
+                UnitExpedientPdfController::class,
+                'download',
+            ]
+        )
+            ->middleware([
+                'can:units.view',
+                'can:evidences.view',
+            ])
+            ->name(
+                'units.expedient.pdf'
+            );
     });
