@@ -789,7 +789,7 @@
                             <div class="value">
                                 {{ $fieldLabels[$field]
                     ?? $field
-                                    }}
+                                                                    }}
                             </div>
                         </td>
 
@@ -803,7 +803,7 @@
                             <div>
                                 {{ $change['original']
                     ?? '—'
-                                    }}
+                                                                    }}
                             </div>
 
                             <div class="small muted" style="margin-top: 5px;">
@@ -813,7 +813,7 @@
                             <div class="value">
                                 {{ $change['final']
                     ?? '—'
-                                    }}
+                                                                    }}
                             </div>
 
                         </td>
@@ -871,7 +871,7 @@
                                     {{ $event->performed_by_name
                     ?? $event->performedBy?->name
                     ?? 'Sistema'
-                                    }}
+                                                                                    }}
 
                                 </span>
 
@@ -968,7 +968,7 @@
                         $milestone->completed_at
                     )
                     : '—'
-                                    }}
+                                                                    }}
 
                             </div>
                         </td>
@@ -989,7 +989,7 @@
                                 {{ $milestone->completed_by_name
                     ?? $milestone->completedBy?->name
                     ?? '—'
-                                    }}
+                                                                    }}
 
                             </div>
 
@@ -1005,7 +1005,7 @@
                                 {{ $milestone
                     ->evidences
                     ->count()
-                                    }}
+                                                                    }}
                             </div>
 
                         </td>
@@ -1013,6 +1013,441 @@
                     </tr>
 
                 </table>
+
+                {{-- ===================================================== --}}
+                {{-- CONTROL DE TIEMPO DE ARMADO --}}
+                {{-- ===================================================== --}}
+
+                @if (
+                        $milestone->stage
+                        === \App\Enums\MilestoneStage::ASSEMBLY_COMPLETED
+                        && $milestone->assemblyWorkSession
+                    )
+
+                    @php
+
+                        $assemblySession =
+                            $milestone->assemblyWorkSession;
+
+
+                        /*
+                         * En expediente COMPLETED normalmente
+                         * siempre tendremos completed_at.
+                         */
+                        $assemblyElapsedSeconds = 0;
+
+
+                        if (
+                            $assemblySession->started_at
+                            && $assemblySession->completed_at
+                        ) {
+
+                            $assemblyElapsedSeconds =
+                                $assemblySession
+                                    ->started_at
+                                    ->diffInSeconds(
+                                        $assemblySession
+                                            ->completed_at
+                                    );
+                        }
+
+
+                        $assemblyEffectiveSeconds =
+                            (int) $assemblySession
+                                ->total_active_seconds;
+
+
+                        $assemblyPausedSeconds =
+                            (int) $assemblySession
+                                ->total_paused_seconds;
+
+                    @endphp
+
+
+                    <h3 class="sub-title" style="margin-top: 25px;">
+                        Control de tiempo de armado
+                    </h3>
+
+
+                    <table class="data-table">
+
+                        <tr>
+
+                            <td>
+
+                                <div class="label">
+                                    Inicio del armado
+                                </div>
+
+                                <div class="value">
+
+                                    {{ $assemblySession->started_at
+                            ? \App\Support\DateHelper::format(
+                                $assemblySession->started_at
+                            )
+                            : '—'
+                                                                    }}
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="label">
+                                    Finalización del armado
+                                </div>
+
+                                <div class="value">
+
+                                    {{ $assemblySession->completed_at
+                            ? \App\Support\DateHelper::format(
+                                $assemblySession->completed_at
+                            )
+                            : '—'
+                                                                    }}
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+
+                                <div class="label">
+                                    Tiempo efectivo
+                                </div>
+
+                                <div class="value" style="
+                                                                        font-size: 14px;
+                                                                        color: #1d4ed8;
+                                                                    ">
+                                    {{ \App\Support\DurationHelper::format(
+                            $assemblyEffectiveSeconds
+                        ) }}
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="label">
+                                    Tiempo pausado
+                                </div>
+
+                                <div class="value" style="
+                                                                        font-size: 14px;
+                                                                        color: #b45309;
+                                                                    ">
+                                    {{ \App\Support\DurationHelper::format(
+                            $assemblyPausedSeconds
+                        ) }}
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+
+                                <div class="label">
+                                    Tiempo transcurrido
+                                </div>
+
+                                <div class="value">
+                                    {{ \App\Support\DurationHelper::format(
+                            $assemblyElapsedSeconds
+                        ) }}
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="label">
+                                    Estado del control de tiempo
+                                </div>
+
+                                <div class="value">
+                                    {{ $assemblySession
+                            ->status
+                            ->label()
+                                                                    }}
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+
+                                <div class="label">
+                                    Iniciado por
+                                </div>
+
+                                <div class="value">
+                                    {{ $assemblySession
+                            ->started_by_name
+                            ?? '—'
+                                                                    }}
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="label">
+                                    Finalizado por
+                                </div>
+
+                                <div class="value">
+                                    {{ $assemblySession
+                            ->completed_by_name
+                            ?? '—'
+                                                                    }}
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                    {{-- ================================================= --}}
+                    {{-- HISTORIAL DE PAUSAS --}}
+                    {{-- ================================================= --}}
+
+                    <h3 class="sub-title" style="margin-top: 25px;">
+                        Historial de pausas
+                    </h3>
+
+
+                    @forelse (
+                            $assemblySession
+                                ->pauses
+                                ->sortBy('paused_at')
+                            as $pause
+                        )
+
+                        @php
+
+                            /*
+                             * Una sesión ya terminada debería tener
+                             * todas sus pausas cerradas.
+                             *
+                             * Dejamos fallback por seguridad.
+                             */
+                            $pauseDurationSeconds =
+                                $pause->duration_seconds;
+
+
+                            if (
+                                !$pauseDurationSeconds
+                                && $pause->paused_at
+                                && $pause->resumed_at
+                            ) {
+
+                                $pauseDurationSeconds =
+                                    $pause
+                                        ->paused_at
+                                        ->diffInSeconds(
+                                            $pause->resumed_at
+                                        );
+                            }
+
+                        @endphp
+
+
+                        <div class="avoid-break" style="
+                                                                                margin-bottom: 12px;
+                                                                                border: 1px solid #e2e8f0;
+                                                                                padding: 12px;
+                                                                                background: #f8fafc;
+                                                                            ">
+
+                            <table style="
+                                                                                    width: 100%;
+                                                                                    border-collapse: collapse;
+                                                                                ">
+
+                                <tr>
+
+                                    <td colspan="2" style="
+                                                                                            padding-bottom: 9px;
+                                                                                        ">
+
+                                        <strong style="
+                                                                                                font-size: 11px;
+                                                                                                color: #0f172a;
+                                                                                            ">
+                                            {{ $pause
+                                    ->reason
+                                    ->label()
+                                                                                            }}
+                                        </strong>
+
+
+                                        <span style="
+                                                                                                float: right;
+                                                                                                font-family: monospace;
+                                                                                                font-size: 10px;
+                                                                                                font-weight: bold;
+                                                                                                color: #92400e;
+                                                                                            ">
+                                            {{ \App\Support\DurationHelper::format(
+                                    (int) $pauseDurationSeconds
+                                ) }}
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td style="
+                                                                                            width: 50%;
+                                                                                            padding-right: 8px;
+                                                                                            vertical-align: top;
+                                                                                        ">
+
+                                        <div class="label">
+                                            Inicio de pausa
+                                        </div>
+
+                                        <div>
+                                            {{ \App\Support\DateHelper::format(
+                                    $pause->paused_at
+                                ) }}
+                                        </div>
+
+                                    </td>
+
+
+                                    <td style="
+                                                                                            width: 50%;
+                                                                                            vertical-align: top;
+                                                                                        ">
+
+                                        <div class="label">
+                                            Reanudación
+                                        </div>
+
+                                        <div>
+
+                                            @if ($pause->resumed_at)
+
+                                                        {{ \App\Support\DateHelper::format(
+                                                    $pause->resumed_at
+                                                ) }}
+
+                                            @else
+
+                                                —
+
+                                            @endif
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td style="
+                                                                                            padding-top: 10px;
+                                                                                            padding-right: 8px;
+                                                                                            vertical-align: top;
+                                                                                        ">
+
+                                        <div class="label">
+                                            Pausado por
+                                        </div>
+
+                                        <div>
+                                            {{ $pause
+                                    ->paused_by_name
+                                    ?? '—'
+                                                                                            }}
+                                        </div>
+
+                                    </td>
+
+
+                                    <td style="
+                                                                                            padding-top: 10px;
+                                                                                            vertical-align: top;
+                                                                                        ">
+
+                                        <div class="label">
+                                            Reanudado por
+                                        </div>
+
+                                        <div>
+                                            {{ $pause
+                                    ->resumed_by_name
+                                    ?? '—'
+                                                                                            }}
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                @if ($pause->notes)
+
+                                    <tr>
+
+                                        <td colspan="2" style="
+                                                                                                                padding-top: 10px;
+                                                                                                            ">
+
+                                            <div class="label">
+                                                Observaciones de la pausa
+                                            </div>
+
+                                            <div>
+                                                {{ $pause->notes }}
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                @endif
+
+                            </table>
+
+                        </div>
+
+                    @empty
+
+                        <div class="box">
+                            No se registraron pausas durante el armado.
+                        </div>
+
+                    @endforelse
+
+
+                @endif
 
 
                 @if (
@@ -1041,7 +1476,7 @@
                             ->carrier
                                 ?->name
                             ?? '—'
-                                            }}
+                                                                                            }}
                                 </div>
                             </td>
 
@@ -1055,7 +1490,7 @@
                             ->carrierDelivery
                             ->operator_name
                             ?? '—'
-                                            }}
+                                                                                            }}
                                 </div>
                             </td>
 
@@ -1074,7 +1509,7 @@
                             ->carrierDelivery
                             ->vehicle_plate
                             ?? '—'
-                                            }}
+                                                                                            }}
                                 </div>
                             </td>
 
@@ -1088,7 +1523,7 @@
                             ->carrierDelivery
                             ->vehicle_number
                             ?? '—'
-                                            }}
+                                                                                            }}
                                 </div>
                             </td>
 
@@ -1107,7 +1542,7 @@
                             ->carrierDelivery
                             ->operator_phone
                             ?? '—'
-                                            }}
+                                                                                            }}
                                 </div>
                             </td>
 
@@ -1121,7 +1556,7 @@
                             ->carrierDelivery
                             ->transport_type
                             ?? '—'
-                                            }}
+                                                                                            }}
                                 </div>
                             </td>
 
@@ -1178,15 +1613,17 @@
                                             $evidenceImages[
                                                 $evidence->id
                                             ]
-                                                            }}" class="photo">
+                                                                                                                                            }}"
+                                            class="photo">
 
                                     @else
 
-                                        <div class="box" style="
-                                                                height: 205px;
-                                                                text-align: center;
-                                                                padding-top: 85px;
-                                                            ">
+                                        <div class="box"
+                                            style="
+                                                                                                                                                height: 205px;
+                                                                                                                                                text-align: center;
+                                                                                                                                                padding-top: 85px;
+                                                                                                                                            ">
                                             Evidencia no disponible
                                         </div>
 
@@ -1285,7 +1722,7 @@
                                 {{ $event->performed_by_name
                     ?? $event->performedBy?->name
                     ?? 'Sistema'
-                                }}
+                                                                                }}
 
                                 @if ($event->description)
 
@@ -1320,9 +1757,9 @@
                 $unit->milestones
                     ->sum(
                         fn($milestone) =>
-                        $milestone
-                            ->evidences
-                            ->count()
+                            $milestone
+                                ->evidences
+                                ->count()
                     );
 
 
@@ -1330,13 +1767,26 @@
                 $unit->milestones
                     ->first(
                         fn($milestone) =>
-                        $milestone->stage
-                        ===
-                        \App\Enums\MilestoneStage::CARRIER_DELIVERY
+                            $milestone->stage
+                            ===
+                            \App\Enums\MilestoneStage::CARRIER_DELIVERY
                     );
 
-        @endphp
+            $assemblyMilestoneForSummary =
+                $unit->milestones
+                    ->first(
+                        fn($milestone) =>
+                            $milestone->stage
+                            ===
+                            \App\Enums\MilestoneStage::ASSEMBLY_COMPLETED
+                    );
 
+
+            $assemblySessionForSummary =
+                $assemblyMilestoneForSummary
+                        ?->assemblyWorkSession;
+
+        @endphp
 
         <table class="data-table">
 
@@ -1384,19 +1834,64 @@
 
                     <div class="value">
 
-                        {{ $deliveryMilestone
-        ?->completed_at
+                        {{ $deliveryMilestone?->completed_at
     ? \App\Support\DateHelper::format(
-        $deliveryMilestone
-            ->completed_at
+        $deliveryMilestone->completed_at
     )
     : '—'
-                    }}
+                }}
 
                     </div>
                 </td>
 
             </tr>
+
+
+            {{-- RESUMEN DE TIEMPO DE ARMADO --}}
+
+            @if ($assemblySessionForSummary)
+
+                        <tr>
+
+                            <td>
+
+                                <div class="label">
+                                    Tiempo efectivo de armado
+                                </div>
+
+                                <div class="value">
+
+                                    {{ \App\Support\DurationHelper::format(
+                    (int) $assemblySessionForSummary
+                        ->total_active_seconds
+                ) }}
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="label">
+                                    Pausas registradas
+                                </div>
+
+                                <div class="value">
+
+                                    {{ $assemblySessionForSummary
+                    ->pauses
+                    ->count()
+                                }}
+                                    pausa(s)
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+            @endif
 
         </table>
 

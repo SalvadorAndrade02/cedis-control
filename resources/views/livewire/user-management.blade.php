@@ -1,122 +1,130 @@
 <div class="space-y-6">
 
-    {{-- MENSAJES --}}
-
-    @if (session('success'))
-
-    <div
-        class="
-                rounded-xl
-                border
-                border-emerald-200
-                bg-emerald-50
-                px-5
-                py-4
-                text-sm
-                font-medium
-                text-emerald-800
-            ">
-        {{ session('success') }}
-    </div>
-
-    @endif
-
-
-    @if (session('error'))
-
-    <div
-        class="
-                rounded-xl
-                border
-                border-red-200
-                bg-red-50
-                px-5
-                py-4
-                text-sm
-                font-medium
-                text-red-800
-            ">
-        {{ session('error') }}
-    </div>
-
-    @endif
-
-
-
+    {{-- ========================================================= --}}
     {{-- HERRAMIENTAS --}}
+    {{-- ========================================================= --}}
 
-    <section
-        class="
-            rounded-2xl
+    <section class="
+            rounded-3xl
             border
-            border-slate-200
+            border-slate-200/80
             bg-white
             p-5
-            shadow-sm
+            shadow-[0_8px_30px_rgba(15,23,42,0.04)]
+            lg:p-6
         ">
 
-        <div
-            class="
+        <div class="
                 flex
                 flex-col
-                gap-4
+                gap-5
                 lg:flex-row
                 lg:items-end
                 lg:justify-between
             ">
 
-            <div class="flex-1">
+            {{-- BUSCADOR --}}
 
-                <label
-                    class="
-                        text-sm
-                        font-medium
-                        text-slate-700
+            <div class="min-w-0 flex-1">
+
+                <label class="
+                        text-xs
+                        font-semibold
+                        uppercase
+                        tracking-[0.12em]
+                        text-slate-500
                     ">
                     Buscar usuario
                 </label>
 
-                <input
-                    type="search"
-                    wire:model.live.debounce.400ms="search"
-                    placeholder="Nombre, correo o rol..."
-                    class="
+
+                <div class="relative mt-2">
+
+                    <div class="
+                            pointer-events-none
+                            absolute
+                            inset-y-0
+                            left-0
+                            flex
+                            items-center
+                            pl-4
+                            text-slate-400
+                        ">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
+                            stroke="currentColor" class="h-5 w-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m21 21-4.35-4.35m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" />
+                        </svg>
+
+                    </div>
+
+
+                    <input type="search" wire:model.live.debounce.400ms="search"
+                        placeholder="Buscar por nombre, correo o rol..." class="
+                            w-full
+                            rounded-2xl
+                            border
+                            border-slate-200
+                            bg-slate-50/70
+                            py-3.5
+                            pl-12
+                            pr-4
+                            text-sm
+                            text-slate-900
+                            outline-none
+                            transition
+                            placeholder:text-slate-400
+                            hover:border-slate-300
+                            focus:border-blue-500
+                            focus:bg-white
+                            focus:ring-4
+                            focus:ring-blue-500/10
+                        ">
+
+                </div>
+
+
+                <div wire:loading wire:target="search" class="
                         mt-2
-                        w-full
-                        rounded-xl
-                        border
-                        border-slate-300
-                        px-4
-                        py-3
-                        text-sm
-                        outline-none
-                        transition
-                        focus:border-blue-500
-                        focus:ring-4
-                        focus:ring-blue-500/10
+                        text-xs
+                        font-medium
+                        text-blue-600
                     ">
+                    Buscando usuarios...
+                </div>
 
             </div>
 
 
-            <button
-                type="button"
-                wire:click="create"
-                class="
+            {{-- NUEVO USUARIO --}}
+
+            <button type="button" wire:click="create" class="
                     inline-flex
                     items-center
                     justify-center
+                    gap-2
                     rounded-xl
-                    bg-slate-950
+                    bg-blue-600
                     px-5
-                    py-3
+                    py-3.5
                     text-sm
                     font-semibold
                     text-white
+                    shadow-sm
                     transition
-                    hover:bg-slate-800
+                    hover:bg-blue-700
+                    hover:shadow-md
+                    active:scale-[.98]
                 ">
-                + Nuevo usuario
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
+                    stroke="currentColor" class="h-4 w-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+
+                Nuevo usuario
+
             </button>
 
         </div>
@@ -125,370 +133,595 @@
 
 
 
+    {{-- ========================================================= --}}
     {{-- FORMULARIO --}}
+    {{-- ========================================================= --}}
 
     @if ($showForm)
 
-    <section
-        class="
-                rounded-2xl
-                border
-                border-blue-200
-                bg-white
-                shadow-sm
-            ">
-
-        <div
-            class="
-                    border-b
-                    border-slate-200
-                    px-6
-                    py-5
+        <section class="
+                    overflow-hidden
+                    rounded-3xl
+                    border
+                    border-blue-100
+                    bg-white
+                    shadow-[0_8px_30px_rgba(15,23,42,0.05)]
                 ">
 
-            <h2
-                class="
-                        font-semibold
-                        text-slate-950
+            {{-- HEADER --}}
+
+            <div class="
+                        border-b
+                        border-blue-100
+                        bg-gradient-to-r
+                        from-blue-50
+                        via-white
+                        to-white
+                        px-6
+                        py-5
+                        lg:px-7
                     ">
-                {{ $editingUserId
-                        ? 'Editar usuario'
-                        : 'Nuevo usuario'
-                    }}
-            </h2>
 
-            <p
-                class="
-                        mt-1
-                        text-sm
-                        text-slate-500
-                    ">
-                Define los datos de acceso
-                y el área de trabajo.
-            </p>
-
-        </div>
-
-
-        <form
-            wire:submit="save"
-            class="
-                    grid
-                    gap-5
-                    p-6
-                    md:grid-cols-2
-                ">
-
-            {{-- NOMBRE --}}
-
-            <div>
-
-                <label class="text-sm font-medium">
-                    Nombre *
-                </label>
-
-                <input
-                    type="text"
-                    wire:model="name"
-                    class="
-                            mt-2
-                            w-full
-                            rounded-xl
-                            border
-                            border-slate-300
-                            px-4
-                            py-3
-                            text-sm
+                <div class="
+                            flex
+                            items-start
+                            gap-4
                         ">
 
-                @error('name')
-                <p class="mt-1 text-xs text-red-600">
-                    {{ $message }}
-                </p>
-                @enderror
-
-            </div>
-
-
-            {{-- CORREO --}}
-
-            <div>
-
-                <label class="text-sm font-medium">
-                    Correo *
-                </label>
-
-                <input
-                    type="email"
-                    wire:model="email"
-                    class="
-                            mt-2
-                            w-full
-                            rounded-xl
-                            border
-                            border-slate-300
-                            px-4
-                            py-3
-                            text-sm
-                        ">
-
-                @error('email')
-                <p class="mt-1 text-xs text-red-600">
-                    {{ $message }}
-                </p>
-                @enderror
-
-            </div>
-
-
-            {{-- ROL --}}
-
-            <div>
-
-                <label class="text-sm font-medium">
-                    Rol *
-                </label>
-
-                <select
-                    wire:model="role"
-                    class="
-                            mt-2
-                            w-full
-                            rounded-xl
-                            border
-                            border-slate-300
-                            bg-white
-                            px-4
-                            py-3
-                            text-sm
-                        ">
-
-                    <option value="">
-                        Selecciona un rol
-                    </option>
-
-                    @foreach ($roles as $roleOption)
-
-                    <option
-                        value="{{ $roleOption }}">
-                        {{ $roleOption }}
-                    </option>
-
-                    @endforeach
-
-                </select>
-
-                @error('role')
-                <p class="mt-1 text-xs text-red-600">
-                    {{ $message }}
-                </p>
-                @enderror
-
-            </div>
-
-
-            <div></div>
-
-
-            {{-- PASSWORD --}}
-
-            <div>
-
-                <label class="text-sm font-medium">
-                    Contraseña
-                    {{ $editingUserId ? '' : '*' }}
-                </label>
-
-                <input
-                    type="password"
-                    wire:model="password"
-                    autocomplete="new-password"
-                    class="
-                            mt-2
-                            w-full
-                            rounded-xl
-                            border
-                            border-slate-300
-                            px-4
-                            py-3
-                            text-sm
-                        ">
-
-                @if ($editingUserId)
-
-                <p
-                    class="
-                                mt-1
-                                text-xs
-                                text-slate-400
+                    <div class="
+                                flex
+                                h-12
+                                w-12
+                                shrink-0
+                                items-center
+                                justify-center
+                                rounded-2xl
+                                bg-blue-100
+                                text-blue-700
                             ">
-                    Déjala vacía para conservar
-                    la contraseña actual.
-                </p>
 
-                @endif
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
+                            stroke="currentColor" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0" />
+                        </svg>
 
-                @error('password')
-                <p class="mt-1 text-xs text-red-600">
-                    {{ $message }}
-                </p>
-                @enderror
+                    </div>
+
+
+                    <div>
+
+                        <p class="
+                                    text-[10px]
+                                    font-semibold
+                                    uppercase
+                                    tracking-[0.18em]
+                                    text-blue-700
+                                ">
+                            Administración de acceso
+                        </p>
+
+                        <h2 class="
+                                    mt-1
+                                    text-xl
+                                    font-semibold
+                                    tracking-tight
+                                    text-slate-950
+                                ">
+                            {{ $editingUserId
+            ? 'Editar usuario'
+            : 'Nuevo usuario'
+                                }}
+                        </h2>
+
+                        <p class="
+                                    mt-1
+                                    text-sm
+                                    text-slate-500
+                                ">
+                            Define la información de acceso
+                            y el rol operativo del usuario.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
 
-            {{-- CONFIRM PASSWORD --}}
 
-            <div>
+            {{-- FORMULARIO --}}
 
-                <label class="text-sm font-medium">
-                    Confirmar contraseña
-                </label>
-
-                <input
-                    type="password"
-                    wire:model="password_confirmation"
-                    autocomplete="new-password"
-                    class="
-                            mt-2
-                            w-full
-                            rounded-xl
-                            border
-                            border-slate-300
-                            px-4
-                            py-3
-                            text-sm
-                        ">
-
-            </div>
-
-
-            {{-- ACCIONES --}}
-
-            <div
-                class="
-                        flex
-                        flex-col-reverse
-                        gap-3
-                        border-t
-                        border-slate-100
-                        pt-5
-                        md:col-span-2
-                        sm:flex-row
-                        sm:justify-end
+            <form wire:submit="save" class="
+                        grid
+                        gap-5
+                        p-6
+                        md:grid-cols-2
+                        lg:p-7
                     ">
 
-                <button
-                    type="button"
-                    wire:click="cancel"
-                    class="
-                            rounded-xl
-                            border
-                            border-slate-300
-                            px-5
-                            py-3
-                            text-sm
-                            font-semibold
-                            text-slate-700
+                {{-- NOMBRE --}}
+
+                <div>
+
+                    <label class="
+                                text-xs
+                                font-semibold
+                                uppercase
+                                tracking-wider
+                                text-slate-500
+                            ">
+                        Nombre *
+                    </label>
+
+                    <input type="text" wire:model="name" placeholder="Nombre completo" class="
+                                mt-2
+                                w-full
+                                rounded-2xl
+                                border
+                                border-slate-200
+                                bg-slate-50/60
+                                px-4
+                                py-3
+                                text-sm
+                                text-slate-900
+                                outline-none
+                                transition
+                                placeholder:text-slate-400
+                                focus:border-blue-500
+                                focus:bg-white
+                                focus:ring-4
+                                focus:ring-blue-500/10
+                            ">
+
+                    @error('name')
+                        <p class="mt-1 text-xs text-red-600">
+                            {{ $message }}
+                        </p>
+                    @enderror
+
+                </div>
+
+
+
+                {{-- CORREO --}}
+
+                <div>
+
+                    <label class="
+                                text-xs
+                                font-semibold
+                                uppercase
+                                tracking-wider
+                                text-slate-500
+                            ">
+                        Correo *
+                    </label>
+
+                    <input type="email" wire:model="email" placeholder="usuario@cedis.local" class="
+                                mt-2
+                                w-full
+                                rounded-2xl
+                                border
+                                border-slate-200
+                                bg-slate-50/60
+                                px-4
+                                py-3
+                                text-sm
+                                text-slate-900
+                                outline-none
+                                transition
+                                placeholder:text-slate-400
+                                focus:border-blue-500
+                                focus:bg-white
+                                focus:ring-4
+                                focus:ring-blue-500/10
+                            ">
+
+                    @error('email')
+                        <p class="mt-1 text-xs text-red-600">
+                            {{ $message }}
+                        </p>
+                    @enderror
+
+                </div>
+
+
+
+                {{-- ROL --}}
+
+                <div class="md:col-span-2">
+
+                    <label class="
+                                text-xs
+                                font-semibold
+                                uppercase
+                                tracking-wider
+                                text-slate-500
+                            ">
+                        Rol *
+                    </label>
+
+                    <select wire:model="role" class="
+                                mt-2
+                                w-full
+                                rounded-2xl
+                                border
+                                border-slate-200
+                                bg-slate-50/60
+                                px-4
+                                py-3
+                                text-sm
+                                text-slate-900
+                                outline-none
+                                transition
+                                focus:border-blue-500
+                                focus:bg-white
+                                focus:ring-4
+                                focus:ring-blue-500/10
+                            ">
+
+                        <option value="">
+                            Selecciona un rol
+                        </option>
+
+                        @foreach ($roles as $roleOption)
+
+                            <option value="{{ $roleOption }}">
+                                {{ $roleOption }}
+                            </option>
+
+                        @endforeach
+
+                    </select>
+
+                    @error('role')
+                        <p class="mt-1 text-xs text-red-600">
+                            {{ $message }}
+                        </p>
+                    @enderror
+
+
+                    <div class="
+                                mt-3
+                                grid
+                                gap-2
+                                sm:grid-cols-2
+                                lg:grid-cols-5
+                            ">
+
+                        @foreach ([
+                                'ADMIN' => 'Acceso completo',
+                                'SUPERVISOR' => 'Consulta y supervisión',
+                                'RECEPCION' => 'Registro de llegadas',
+                                'ARMADO' => 'Proceso de armado',
+                                'ENTREGA' => 'Entrega a transportista',
+                            ] as $roleName => $roleDescription)
+
+                            @php
+
+                                $roleColor = match ($roleName) {
+                                    'ADMIN' =>
+                                        'bg-slate-100 text-slate-700',
+
+                                    'SUPERVISOR' =>
+                                        'bg-indigo-50 text-indigo-700',
+
+                                    'RECEPCION' =>
+                                        'bg-blue-50 text-blue-700',
+
+                                    'ARMADO' =>
+                                        'bg-amber-50 text-amber-700',
+
+                                    'ENTREGA' =>
+                                        'bg-violet-50 text-violet-700',
+
+                                    default =>
+                                        'bg-slate-100 text-slate-700',
+                                };
+
+                            @endphp
+
+                            <div class="
+                                            rounded-xl
+                                            {{ $roleColor }}
+                                            px-3
+                                            py-2.5
+                                        ">
+
+                                <p class="
+                                                text-[10px]
+                                                font-bold
+                                                uppercase
+                                                tracking-wider
+                                            ">
+                                    {{ $roleName }}
+                                </p>
+
+                                <p class="
+                                                mt-1
+                                                text-[10px]
+                                                opacity-80
+                                            ">
+                                    {{ $roleDescription }}
+                                </p>
+
+                            </div>
+
+                        @endforeach
+
+                    </div>
+
+                </div>
+
+
+
+                {{-- PASSWORD --}}
+
+                <div>
+
+                    <label class="
+                                text-xs
+                                font-semibold
+                                uppercase
+                                tracking-wider
+                                text-slate-500
+                            ">
+                        Contraseña
+                        {{ $editingUserId ? '' : '*' }}
+                    </label>
+
+                    <input type="password" wire:model="password" autocomplete="new-password" placeholder="{{ $editingUserId
+            ? 'Sin cambios'
+            : 'Mínimo 8 caracteres'
+                            }}" class="
+                                mt-2
+                                w-full
+                                rounded-2xl
+                                border
+                                border-slate-200
+                                bg-slate-50/60
+                                px-4
+                                py-3
+                                text-sm
+                                outline-none
+                                transition
+                                placeholder:text-slate-400
+                                focus:border-blue-500
+                                focus:bg-white
+                                focus:ring-4
+                                focus:ring-blue-500/10
+                            ">
+
+                    @if ($editingUserId)
+
+                        <p class="
+                                        mt-1.5
+                                        text-xs
+                                        text-slate-400
+                                    ">
+                            Déjala vacía para conservar
+                            la contraseña actual.
+                        </p>
+
+                    @endif
+
+                    @error('password')
+                        <p class="mt-1 text-xs text-red-600">
+                            {{ $message }}
+                        </p>
+                    @enderror
+
+                </div>
+
+
+
+                {{-- CONFIRMAR PASSWORD --}}
+
+                <div>
+
+                    <label class="
+                                text-xs
+                                font-semibold
+                                uppercase
+                                tracking-wider
+                                text-slate-500
+                            ">
+                        Confirmar contraseña
+                    </label>
+
+                    <input type="password" wire:model="password_confirmation" autocomplete="new-password" class="
+                                mt-2
+                                w-full
+                                rounded-2xl
+                                border
+                                border-slate-200
+                                bg-slate-50/60
+                                px-4
+                                py-3
+                                text-sm
+                                outline-none
+                                transition
+                                focus:border-blue-500
+                                focus:bg-white
+                                focus:ring-4
+                                focus:ring-blue-500/10
+                            ">
+
+                </div>
+
+
+
+                {{-- ACCIONES --}}
+
+                <div class="
+                            flex
+                            flex-col-reverse
+                            gap-3
+                            border-t
+                            border-slate-100
+                            pt-6
+                            md:col-span-2
+                            sm:flex-row
+                            sm:items-center
+                            sm:justify-end
                         ">
-                    Cancelar
-                </button>
+
+                    <button type="button" wire:click="cancel" class="
+                                rounded-xl
+                                border
+                                border-slate-300
+                                bg-white
+                                px-5
+                                py-3
+                                text-sm
+                                font-semibold
+                                text-slate-700
+                                transition
+                                hover:bg-slate-50
+                            ">
+                        Cancelar
+                    </button>
 
 
-                <button
-                    type="submit"
-                    wire:loading.attr="disabled"
-                    class="
-                            rounded-xl
-                            bg-blue-600
-                            px-5
-                            py-3
-                            text-sm
-                            font-semibold
-                            text-white
-                            transition
-                            hover:bg-blue-700
-                            disabled:opacity-50
-                        ">
+                    <button type="submit" wire:loading.attr="disabled" wire:target="save" class="
+                                inline-flex
+                                items-center
+                                justify-center
+                                rounded-xl
+                                bg-blue-600
+                                px-5
+                                py-3
+                                text-sm
+                                font-semibold
+                                text-white
+                                shadow-sm
+                                transition
+                                hover:bg-blue-700
+                                hover:shadow-md
+                                disabled:cursor-not-allowed
+                                disabled:opacity-50
+                            ">
 
-                    <span wire:loading.remove wire:target="save">
-                        {{ $editingUserId
-                                ? 'Guardar cambios'
-                                : 'Crear usuario'
-                            }}
-                    </span>
+                        <span wire:loading.remove wire:target="save">
+                            {{ $editingUserId
+            ? 'Guardar cambios'
+            : 'Crear usuario'
+                                }}
+                        </span>
 
-                    <span wire:loading wire:target="save">
-                        Guardando...
-                    </span>
+                        <span wire:loading wire:target="save">
+                            Guardando...
+                        </span>
 
-                </button>
+                    </button>
 
-            </div>
+                </div>
 
-        </form>
+            </form>
 
-    </section>
+        </section>
 
     @endif
 
 
 
+    {{-- ========================================================= --}}
     {{-- LISTADO --}}
+    {{-- ========================================================= --}}
 
-    <section
-        class="
+    <section class="
             overflow-hidden
-            rounded-2xl
+            rounded-3xl
             border
-            border-slate-200
+            border-slate-200/80
             bg-white
-            shadow-sm
+            shadow-[0_8px_30px_rgba(15,23,42,0.04)]
         ">
 
-        <div
-            class="
+        {{-- HEADER --}}
+
+        <div class="
+                flex
+                items-center
+                gap-4
                 border-b
-                border-slate-200
+                border-slate-100
                 px-6
                 py-5
+                lg:px-7
             ">
 
-            <h2 class="font-semibold">
-                Usuarios
-            </h2>
-
-            <p
-                class="
-                    mt-1
-                    text-sm
-                    text-slate-500
+            <div class="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    bg-blue-50
+                    text-blue-600
                 ">
-                Personal con acceso al sistema CEDIS.
-            </p>
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
+                    stroke="currentColor" class="h-5 w-5">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72M18 18.72v-.719c0-.502-.1-.98-.282-1.415M18 18.72a12.98 12.98 0 0 1-6 1.42c-2.162 0-4.2-.524-6-1.452m12 0a6 6 0 0 0-12 0M15 7.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+
+            </div>
+
+            <div>
+
+                <h2 class="
+                        text-lg
+                        font-semibold
+                        text-slate-950
+                    ">
+                    Usuarios
+                </h2>
+
+                <p class="
+                        mt-0.5
+                        text-sm
+                        text-slate-500
+                    ">
+                    Personal autorizado para acceder
+                    a Control de Unidades CEDIS.
+                </p>
+
+            </div>
 
         </div>
 
 
+
+        {{-- ===================================================== --}}
         {{-- DESKTOP --}}
+        {{-- ===================================================== --}}
 
         <div class="hidden overflow-x-auto md:block">
 
             <table class="w-full">
 
-                <thead
-                    class="
-                        bg-slate-50
-                        text-left
-                        text-xs
-                        uppercase
-                        tracking-wider
-                        text-slate-500
+                <thead class="
+                        border-b
+                        border-slate-100
+                        bg-slate-50/70
                     ">
 
-                    <tr>
+                    <tr class="
+                            text-left
+                            text-[10px]
+                            font-semibold
+                            uppercase
+                            tracking-[0.12em]
+                            text-slate-400
+                        ">
 
-                        <th class="px-6 py-4">
+                        <th class="px-6 py-4 lg:px-7">
                             Usuario
                         </th>
 
@@ -500,7 +733,12 @@
                             Estado
                         </th>
 
-                        <th class="px-6 py-4 text-right">
+                        <th class="
+                                px-6
+                                py-4
+                                text-right
+                                lg:px-7
+                            ">
                             Acciones
                         </th>
 
@@ -509,193 +747,343 @@
                 </thead>
 
 
-                <tbody
-                    class="
+                <tbody class="
                         divide-y
                         divide-slate-100
                     ">
 
                     @forelse ($users as $user)
 
-                    <tr class="hover:bg-slate-50">
+                                        @php
 
-                        <td class="px-6 py-5">
-
-                            <p
-                                class="
-                                        text-sm
-                                        font-semibold
-                                        text-slate-950
-                                    ">
-                                {{ $user->name }}
-
-                                @if ($user->id === auth()->id())
-
-                                <span
-                                    class="
-                                                ml-1
-                                                text-xs
-                                                font-normal
-                                                text-slate-400
-                                            ">
-                                    (Tú)
-                                </span>
-
-                                @endif
-                            </p>
-
-                            <p
-                                class="
-                                        mt-1
-                                        text-xs
-                                        text-slate-500
-                                    ">
-                                {{ $user->email }}
-                            </p>
-
-                        </td>
+                                            $roleName =
+                                                $user->roles
+                                                    ->first()
+                                                        ?->name
+                                                ?? 'Sin rol';
 
 
-                        <td class="px-6 py-5">
+                                            $roleStyle =
+                                                match ($roleName) {
 
-                            @foreach ($user->roles as $userRole)
+                                                    'ADMIN' =>
+                                                        'bg-slate-100 text-slate-700 ring-slate-200',
 
-                            <span
-                                class="
-                                            rounded-full
-                                            bg-slate-100
-                                            px-3
-                                            py-1
-                                            text-xs
-                                            font-semibold
-                                            text-slate-700
-                                        ">
-                                {{ $userRole->name }}
-                            </span>
+                                                    'SUPERVISOR' =>
+                                                        'bg-indigo-50 text-indigo-700 ring-indigo-100',
 
-                            @endforeach
+                                                    'RECEPCION' =>
+                                                        'bg-blue-50 text-blue-700 ring-blue-100',
 
-                        </td>
+                                                    'ARMADO' =>
+                                                        'bg-amber-50 text-amber-700 ring-amber-100',
 
+                                                    'ENTREGA' =>
+                                                        'bg-violet-50 text-violet-700 ring-violet-100',
 
-                        <td class="px-6 py-5">
+                                                    default =>
+                                                        'bg-slate-100 text-slate-700 ring-slate-200',
+                                                };
 
-                            @if ($user->active)
-
-                            <span
-                                class="
-                                            rounded-full
-                                            bg-emerald-100
-                                            px-3
-                                            py-1
-                                            text-xs
-                                            font-semibold
-                                            text-emerald-700
-                                        ">
-                                Activo
-                            </span>
-
-                            @else
-
-                            <span
-                                class="
-                                            rounded-full
-                                            bg-slate-100
-                                            px-3
-                                            py-1
-                                            text-xs
-                                            font-semibold
-                                            text-slate-500
-                                        ">
-                                Inactivo
-                            </span>
-
-                            @endif
-
-                        </td>
+                                        @endphp
 
 
-                        <td class="px-6 py-5">
+                                        <tr class="
+                                                    group
+                                                    transition
+                                                    hover:bg-slate-50/70
+                                                ">
 
-                            <div
-                                class="
-                                        flex
-                                        justify-end
-                                        gap-2
-                                    ">
+                                            {{-- USUARIO --}}
 
-                                <button
-                                    type="button"
-                                    wire:click="edit({{ $user->id }})"
-                                    class="
-                                            rounded-lg
-                                            border
-                                            border-slate-300
-                                            px-3
-                                            py-2
-                                            text-xs
-                                            font-semibold
-                                            text-slate-700
-                                        ">
-                                    Editar
-                                </button>
+                                            <td class="
+                                                        px-6
+                                                        py-5
+                                                        lg:px-7
+                                                    ">
+
+                                                <div class="
+                                                            flex
+                                                            items-center
+                                                            gap-4
+                                                        ">
+
+                                                    <div class="
+                                                                flex
+                                                                h-11
+                                                                w-11
+                                                                shrink-0
+                                                                items-center
+                                                                justify-center
+                                                                rounded-2xl
+                                                                bg-blue-50
+                                                                text-sm
+                                                                font-bold
+                                                                text-blue-700
+                                                            ">
+                                                        {{ strtoupper(
+                            substr(
+                                $user->name,
+                                0,
+                                1
+                            )
+                        ) }}
+                                                    </div>
 
 
-                                @if ($user->id !== auth()->id())
+                                                    <div class="min-w-0">
 
-                                <button
-                                    type="button"
-                                    wire:click="
-                                                toggleActive(
-                                                    {{ $user->id }}
-                                                )
-                                            "
-                                    wire:confirm="
-                                                ¿Confirmas este cambio?
-                                            "
-                                    class="
-                                                rounded-lg
-                                                px-3
-                                                py-2
-                                                text-xs
-                                                font-semibold
+                                                        <div class="
+                                                                    flex
+                                                                    items-center
+                                                                    gap-2
+                                                                ">
 
-                                                {{ $user->active
-                                                    ? 'bg-red-50 text-red-700'
-                                                    : 'bg-emerald-50 text-emerald-700'
-                                                }}
-                                            ">
-                                    {{ $user->active
-                                                ? 'Desactivar'
-                                                : 'Activar'
-                                            }}
-                                </button>
+                                                            <p class="
+                                                                        truncate
+                                                                        text-sm
+                                                                        font-semibold
+                                                                        text-slate-950
+                                                                    ">
+                                                                {{ $user->name }}
+                                                            </p>
 
-                                @endif
 
-                            </div>
+                                                            @if (
+                                                                    $user->id
+                                                                    === auth()->id()
+                                                                )
 
-                        </td>
+                                                                <span class="
+                                                                                rounded-full
+                                                                                bg-blue-50
+                                                                                px-2
+                                                                                py-0.5
+                                                                                text-[9px]
+                                                                                font-semibold
+                                                                                uppercase
+                                                                                tracking-wider
+                                                                                text-blue-600
+                                                                            ">
+                                                                    Tú
+                                                                </span>
 
-                    </tr>
+                                                            @endif
+
+                                                        </div>
+
+
+                                                        <p class="
+                                                                    mt-1
+                                                                    truncate
+                                                                    text-xs
+                                                                    text-slate-500
+                                                                ">
+                                                            {{ $user->email }}
+                                                        </p>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </td>
+
+
+
+                                            {{-- ROL --}}
+
+                                            <td class="px-6 py-5">
+
+                                                <span class="
+                                                            inline-flex
+                                                            rounded-full
+                                                            px-3
+                                                            py-1.5
+                                                            text-xs
+                                                            font-semibold
+                                                            ring-1
+                                                            ring-inset
+                                                            {{ $roleStyle }}
+                                                        ">
+                                                    {{ $roleName }}
+                                                </span>
+
+                                            </td>
+
+
+
+                                            {{-- ESTADO --}}
+
+                                            <td class="px-6 py-5">
+
+                                                @if ($user->active)
+
+                                                    <span class="
+                                                                    inline-flex
+                                                                    items-center
+                                                                    gap-2
+                                                                    rounded-full
+                                                                    bg-emerald-50
+                                                                    px-3
+                                                                    py-1.5
+                                                                    text-xs
+                                                                    font-semibold
+                                                                    text-emerald-700
+                                                                    ring-1
+                                                                    ring-inset
+                                                                    ring-emerald-100
+                                                                ">
+
+                                                        <span class="
+                                                                        h-1.5
+                                                                        w-1.5
+                                                                        rounded-full
+                                                                        bg-emerald-500
+                                                                    "></span>
+
+                                                        Activo
+
+                                                    </span>
+
+                                                @else
+
+                                                    <span class="
+                                                                    inline-flex
+                                                                    items-center
+                                                                    gap-2
+                                                                    rounded-full
+                                                                    bg-slate-100
+                                                                    px-3
+                                                                    py-1.5
+                                                                    text-xs
+                                                                    font-semibold
+                                                                    text-slate-500
+                                                                    ring-1
+                                                                    ring-inset
+                                                                    ring-slate-200
+                                                                ">
+
+                                                        <span class="
+                                                                        h-1.5
+                                                                        w-1.5
+                                                                        rounded-full
+                                                                        bg-slate-400
+                                                                    "></span>
+
+                                                        Inactivo
+
+                                                    </span>
+
+                                                @endif
+
+                                            </td>
+
+
+
+                                            {{-- ACCIONES --}}
+
+                                            <td class="
+                                                        px-6
+                                                        py-5
+                                                        lg:px-7
+                                                    ">
+
+                                                <div class="
+                                                            flex
+                                                            justify-end
+                                                            gap-2
+                                                        ">
+
+                                                    <button type="button" wire:click="
+                                                                edit({{ $user->id }})
+                                                            " class="
+                                                                rounded-xl
+                                                                border
+                                                                border-slate-200
+                                                                bg-white
+                                                                px-3.5
+                                                                py-2.5
+                                                                text-xs
+                                                                font-semibold
+                                                                text-slate-700
+                                                                shadow-sm
+                                                                transition
+                                                                hover:border-blue-200
+                                                                hover:bg-blue-50
+                                                                hover:text-blue-700
+                                                            ">
+                                                        Editar
+                                                    </button>
+
+
+                                                    @if (
+                                                                                $user->id
+                                                                                !== auth()->id()
+                                                                            )
+
+                                                                            <button type="button" wire:click="
+                                                                                            toggleActive(
+                                                                                                {{ $user->id }}
+                                                                                            )
+                                                                                        " wire:confirm="
+                                                                                            ¿Confirmas este cambio?
+                                                                                        " class="
+                                                                                            rounded-xl
+                                                                                            px-3.5
+                                                                                            py-2.5
+                                                                                            text-xs
+                                                                                            font-semibold
+                                                                                            transition
+
+                                                                                            {{ $user->active
+                                                        ? 'bg-red-50 text-red-700 hover:bg-red-100'
+                                                        : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                                                                                            }}
+                                                                                        ">
+                                                                                {{ $user->active
+                                                        ? 'Desactivar'
+                                                        : 'Activar'
+                                                                                        }}
+                                                                            </button>
+
+                                                    @endif
+
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+
 
                     @empty
 
-                    <tr>
+                        <tr>
 
-                        <td
-                            colspan="4"
-                            class="
-                                    px-6
-                                    py-12
-                                    text-center
-                                    text-sm
-                                    text-slate-500
-                                ">
-                            No se encontraron usuarios.
-                        </td>
+                            <td colspan="4" class="
+                                        px-6
+                                        py-16
+                                        text-center
+                                    ">
 
-                    </tr>
+                                <p class="
+                                            text-sm
+                                            font-semibold
+                                            text-slate-700
+                                        ">
+                                    No se encontraron usuarios
+                                </p>
+
+                                <p class="
+                                            mt-1
+                                            text-sm
+                                            text-slate-500
+                                        ">
+                                    Intenta modificar la búsqueda.
+                                </p>
+
+                            </td>
+
+                        </tr>
 
                     @endforelse
 
@@ -706,172 +1094,290 @@
         </div>
 
 
-        {{-- MOBILE --}}
 
-        <div
-            class="
+        {{-- ===================================================== --}}
+        {{-- MOBILE --}}
+        {{-- ===================================================== --}}
+
+        <div class="
                 divide-y
                 divide-slate-100
                 md:hidden
             ">
 
-            @foreach ($users as $user)
+            @forelse ($users as $user)
 
-            <article class="p-5">
+                        @php
 
-                <div
-                    class="
-                            flex
-                            items-start
-                            justify-between
-                            gap-3
-                        ">
+                            $roleName =
+                                $user->roles
+                                    ->first()
+                                        ?->name
+                                ?? 'Sin rol';
 
-                    <div>
+                            $roleStyle =
+                                match ($roleName) {
 
-                        <p class="font-semibold">
-                            {{ $user->name }}
-                        </p>
+                                    'ADMIN' =>
+                                        'bg-slate-100 text-slate-700',
 
-                        <p
-                            class="
-                                    mt-1
-                                    text-xs
-                                    text-slate-500
-                                ">
-                            {{ $user->email }}
-                        </p>
+                                    'SUPERVISOR' =>
+                                        'bg-indigo-50 text-indigo-700',
 
-                    </div>
+                                    'RECEPCION' =>
+                                        'bg-blue-50 text-blue-700',
 
+                                    'ARMADO' =>
+                                        'bg-amber-50 text-amber-700',
 
-                    @if ($user->active)
+                                    'ENTREGA' =>
+                                        'bg-violet-50 text-violet-700',
 
-                    <span
-                        class="
-                                    rounded-full
-                                    bg-emerald-100
-                                    px-2.5
-                                    py-1
-                                    text-xs
-                                    font-semibold
-                                    text-emerald-700
-                                ">
-                        Activo
-                    </span>
+                                    default =>
+                                        'bg-slate-100 text-slate-700',
+                                };
 
-                    @else
-
-                    <span
-                        class="
-                                    rounded-full
-                                    bg-slate-100
-                                    px-2.5
-                                    py-1
-                                    text-xs
-                                    font-semibold
-                                    text-slate-500
-                                ">
-                        Inactivo
-                    </span>
-
-                    @endif
-
-                </div>
+                        @endphp
 
 
-                <p
-                    class="
-                            mt-3
-                            text-xs
-                            font-semibold
-                            text-slate-600
-                        ">
-                    {{ $user->roles
-                            ->first()
-                            ?->name
-                            ?? 'Sin rol'
-                        }}
-                </p>
+                        <article class="p-5">
+
+                            <div class="
+                                        flex
+                                        items-start
+                                        gap-3
+                                    ">
+
+                                <div class="
+                                            flex
+                                            h-11
+                                            w-11
+                                            shrink-0
+                                            items-center
+                                            justify-center
+                                            rounded-2xl
+                                            bg-blue-50
+                                            text-sm
+                                            font-bold
+                                            text-blue-700
+                                        ">
+                                    {{ strtoupper(
+                    substr(
+                        $user->name,
+                        0,
+                        1
+                    )
+                ) }}
+                                </div>
 
 
-                <div
-                    class="
-                            mt-4
-                            flex
-                            gap-2
-                        ">
+                                <div class="min-w-0 flex-1">
 
-                    <button
-                        type="button"
-                        wire:click="edit({{ $user->id }})"
-                        class="
-                                flex-1
-                                rounded-xl
-                                border
-                                border-slate-300
-                                px-4
-                                py-2.5
-                                text-sm
-                                font-semibold
-                            ">
-                        Editar
-                    </button>
+                                    <div class="
+                                                flex
+                                                flex-wrap
+                                                items-center
+                                                gap-2
+                                            ">
+
+                                        <p class="
+                                                    font-semibold
+                                                    text-slate-950
+                                                ">
+                                            {{ $user->name }}
+                                        </p>
 
 
-                    @if ($user->id !== auth()->id())
+                                        @if (
+                                                $user->id
+                                                === auth()->id()
+                                            )
 
-                    <button
-                        type="button"
-                        wire:click="
-                                    toggleActive(
-                                        {{ $user->id }}
-                                    )
-                                "
-                        wire:confirm="
-                                    ¿Confirmas este cambio?
-                                "
-                        class="
-                                    flex-1
-                                    rounded-xl
-                                    px-4
-                                    py-2.5
-                                    text-sm
-                                    font-semibold
+                                            <span class="
+                                                            rounded-full
+                                                            bg-blue-50
+                                                            px-2
+                                                            py-0.5
+                                                            text-[9px]
+                                                            font-semibold
+                                                            text-blue-600
+                                                        ">
+                                                Tú
+                                            </span>
 
-                                    {{ $user->active
-                                        ? 'bg-red-50 text-red-700'
-                                        : 'bg-emerald-50 text-emerald-700'
-                                    }}
-                                ">
-                        {{ $user->active
+                                        @endif
+
+                                    </div>
+
+
+                                    <p class="
+                                                mt-1
+                                                break-all
+                                                text-xs
+                                                text-slate-500
+                                            ">
+                                        {{ $user->email }}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="
+                                        mt-4
+                                        flex
+                                        flex-wrap
+                                        gap-2
+                                    ">
+
+                                <span class="
+                                            rounded-full
+                                            px-3
+                                            py-1.5
+                                            text-xs
+                                            font-semibold
+                                            {{ $roleStyle }}
+                                        ">
+                                    {{ $roleName }}
+                                </span>
+
+
+                                @if ($user->active)
+
+                                    <span class="
+                                                    rounded-full
+                                                    bg-emerald-50
+                                                    px-3
+                                                    py-1.5
+                                                    text-xs
+                                                    font-semibold
+                                                    text-emerald-700
+                                                ">
+                                        ● Activo
+                                    </span>
+
+                                @else
+
+                                    <span class="
+                                                    rounded-full
+                                                    bg-slate-100
+                                                    px-3
+                                                    py-1.5
+                                                    text-xs
+                                                    font-semibold
+                                                    text-slate-500
+                                                ">
+                                        ● Inactivo
+                                    </span>
+
+                                @endif
+
+                            </div>
+
+
+
+                            <div class="
+                                        mt-5
+                                        flex
+                                        gap-2
+                                    ">
+
+                                <button type="button" wire:click="
+                                            edit({{ $user->id }})
+                                        " class="
+                                            flex-1
+                                            rounded-xl
+                                            border
+                                            border-slate-200
+                                            bg-white
+                                            px-4
+                                            py-2.5
+                                            text-sm
+                                            font-semibold
+                                            text-slate-700
+                                        ">
+                                    Editar
+                                </button>
+
+
+                                @if (
+                                                $user->id
+                                                !== auth()->id()
+                                            )
+
+                                            <button type="button" wire:click="
+                                                            toggleActive(
+                                                                {{ $user->id }}
+                                                            )
+                                                        " wire:confirm="
+                                                            ¿Confirmas este cambio?
+                                                        " class="
+                                                            flex-1
+                                                            rounded-xl
+                                                            px-4
+                                                            py-2.5
+                                                            text-sm
+                                                            font-semibold
+
+                                                            {{ $user->active
+                                    ? 'bg-red-50 text-red-700'
+                                    : 'bg-emerald-50 text-emerald-700'
+                                                            }}
+                                                        ">
+                                                {{ $user->active
                                     ? 'Desactivar'
                                     : 'Activar'
-                                }}
-                    </button>
+                                                        }}
+                                            </button>
 
-                    @endif
+                                @endif
+
+                            </div>
+
+                        </article>
+
+
+            @empty
+
+                <div class="
+                            px-6
+                            py-14
+                            text-center
+                        ">
+
+                    <p class="
+                                text-sm
+                                font-semibold
+                                text-slate-700
+                            ">
+                        No se encontraron usuarios.
+                    </p>
 
                 </div>
 
-            </article>
-
-            @endforeach
+            @endforelse
 
         </div>
 
+
+
+        {{-- ===================================================== --}}
+        {{-- PAGINACIÓN --}}
+        {{-- ===================================================== --}}
 
         @if ($users->hasPages())
 
-        <div
-            class="
-                    border-t
-                    border-slate-200
-                    px-6
-                    py-4
-                ">
-            {{ $users->links() }}
-        </div>
+            <div class="
+                        border-t
+                        border-slate-100
+                        bg-slate-50/40
+                        px-6
+                        py-4
+                    ">
+                {{ $users->links() }}
+            </div>
 
         @endif
 

@@ -44,6 +44,7 @@ class UnitExpedientPdfController extends Controller
             'milestones.evidences',
 
             'milestones.carrierDelivery.carrier',
+            'milestones.assemblyWorkSession.pauses',
 
             'events.performedBy',
         ]);
@@ -59,8 +60,8 @@ class UnitExpedientPdfController extends Controller
             $unit->documents
                 ->first(
                     fn($document) =>
-                    $document->document_type
-                    === DocumentType::XML
+                        $document->document_type
+                        === DocumentType::XML
                 );
 
 
@@ -68,8 +69,8 @@ class UnitExpedientPdfController extends Controller
             $unit->documents
                 ->first(
                     fn($document) =>
-                    $document->document_type
-                    === DocumentType::PDF
+                        $document->document_type
+                        === DocumentType::PDF
                 );
 
 

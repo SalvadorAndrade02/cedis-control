@@ -18,7 +18,8 @@ class UnitController extends Controller
 
             'milestones.completedBy',
             'milestones.evidences.uploader',
-
+            'milestones.assemblyWorkSession.pauses',
+            
             'milestones.carrierDelivery.carrier',
 
             'events.performedBy',

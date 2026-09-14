@@ -53,6 +53,9 @@ class RolePermissionSeeder extends Seeder
 
             // Correcciones
             'corrections.manage',
+
+            'units.delete',
+            'units.restore',
         ];
 
         foreach ($permissions as $permission) {

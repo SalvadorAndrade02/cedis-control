@@ -57,4 +57,12 @@ class UnitMilestone extends Model
     {
         return $this->hasOne(CarrierDelivery::class);
     }
+
+    public function assemblyWorkSession(): HasOne
+    {
+        return $this->hasOne(
+            AssemblyWorkSession::class,
+            'unit_milestone_id'
+        );
+    }
 }

@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
 {
+
+    use SoftDeletes;
     protected $fillable = [
         'vin',
         'brand_id',
@@ -20,6 +23,8 @@ class Unit extends Model
         'interior_color',
         'engine_number',
         'status',
+        'deleted_by',
+        'deletion_reason',
     ];
 
     protected $casts = [
@@ -63,5 +68,13 @@ class Unit extends Model
     public function events(): HasMany
     {
         return $this->hasMany(UnitEvent::class);
+    }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(
+            User::class,
+            'deleted_by'
+        );
     }
 }

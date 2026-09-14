@@ -17,4 +17,13 @@ enum UnitEventType: string
 
     case EVIDENCE_ADDED = 'EVIDENCE_ADDED';
     case EVIDENCE_REMOVED = 'EVIDENCE_REMOVED';
+
+    case UNIT_DELETED = 'UNIT_DELETED';
+    case UNIT_RESTORED = 'UNIT_RESTORED';
+
+    case ASSEMBLY_PAUSED =
+    'ASSEMBLY_PAUSED';
+
+    case ASSEMBLY_RESUMED =
+    'ASSEMBLY_RESUMED';
 }

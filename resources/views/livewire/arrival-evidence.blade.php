@@ -1,252 +1,571 @@
 <div class="space-y-5">
 
+    {{-- ========================================================= --}}
+    {{-- ERROR --}}
+    {{-- ========================================================= --}}
+
     @if ($errorMessage)
 
-    <div
-        class="
-                rounded-xl
-                border
-                border-red-200
-                bg-red-50
-                px-4
-                py-3
-                text-sm
-                text-red-700
-            ">
-        {{ $errorMessage }}
-    </div>
+        <div class="
+                    flex
+                    items-start
+                    gap-3
+                    rounded-2xl
+                    border
+                    border-red-200
+                    bg-red-50
+                    px-5
+                    py-4
+                    text-sm
+                    text-red-700
+                ">
+
+            <div class="
+                        flex
+                        h-8
+                        w-8
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-red-100
+                        font-bold
+                        text-red-700
+                    ">
+                !
+            </div>
+
+            <div>
+
+                <p class="font-semibold">
+                    No fue posible registrar la llegada
+                </p>
+
+                <p class="mt-1">
+                    {{ $errorMessage }}
+                </p>
+
+            </div>
+
+        </div>
 
     @endif
 
 
-    <section
-        class="
-            rounded-2xl
+
+    {{-- ========================================================= --}}
+    {{-- CARD PRINCIPAL --}}
+    {{-- ========================================================= --}}
+
+    <section class="
+            overflow-hidden
+            rounded-3xl
             border
-            border-slate-200
+            border-blue-100
             bg-white
-            shadow-sm
+            shadow-[0_8px_30px_rgba(15,23,42,0.05)]
         ">
 
-        <div
-            class="
+        {{-- HEADER --}}
+
+        <div class="
                 border-b
-                border-slate-200
+                border-blue-100
+                bg-gradient-to-r
+                from-blue-50
+                via-white
+                to-white
                 px-6
                 py-5
+                lg:px-7
             ">
 
-            <h2 class="font-semibold">
-                Evidencia de llegada
-            </h2>
-
-            <p class="mt-1 text-sm text-slate-500">
-                Registra cómo llegó físicamente la unidad
-                al CEDIS.
-            </p>
-
-        </div>
-
-
-        <div class="space-y-6 p-6">
-
-            {{-- ARCHIVOS --}}
-
-            <label
-                class="
+            <div class="
                     flex
-                    min-h-44
-                    cursor-pointer
-                    flex-col
-                    items-center
-                    justify-center
-                    rounded-2xl
-                    border-2
-                    border-dashed
-                    border-slate-300
-                    bg-slate-50
-                    p-6
-                    text-center
-                    transition
-                    hover:border-blue-400
-                    hover:bg-blue-50/40
+                    items-start
+                    gap-4
                 ">
 
-                <input
-                    type="file"
-                    wire:model="photos"
-                    accept="image/*"
-                    capture="environment"
-                    multiple
-                    class="sr-only">
-
-                <p
-                    class="
-                        text-sm
-                        font-semibold
-                        text-slate-900
+                <div class="
+                        flex
+                        h-12
+                        w-12
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-2xl
+                        bg-blue-100
+                        text-blue-700
                     ">
-                    Tomar o seleccionar fotografías
-                </p>
 
-                <p
-                    class="
-                        mt-2
-                        text-xs
-                        text-slate-500
-                    ">
-                    Puedes registrar hasta 15 imágenes.
-                </p>
-
-            </label>
-
-
-            @error('photos')
-            <p class="text-sm text-red-600">
-                {{ $message }}
-            </p>
-            @enderror
-
-            @error('photos.*')
-            <p class="text-sm text-red-600">
-                {{ $message }}
-            </p>
-            @enderror
-
-
-            {{-- PREVIEW --}}
-
-            @if ($photos)
-
-            <div>
-
-                <div
-                    class="
-                            mb-3
-                            flex
-                            items-center
-                            justify-between
-                        ">
-
-                    <p
-                        class="
-                                text-sm
-                                font-medium
-                                text-slate-700
-                            ">
-                        Evidencias seleccionadas
-                    </p>
-
-                    <span
-                        class="
-                                rounded-full
-                                bg-slate-100
-                                px-2.5
-                                py-1
-                                text-xs
-                                font-semibold
-                                text-slate-600
-                            ">
-                        {{ count($photos) }}
-                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
+                        stroke="currentColor" class="h-6 w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 15.75h16.5M6 15.75v2.25m12-2.25v2.25M6.75 6h10.5l2.25 5.25H4.5L6.75 6Z" />
+                    </svg>
 
                 </div>
 
 
-                <div
-                    class="
-                            grid
-                            grid-cols-2
-                            gap-3
-                            sm:grid-cols-3
-                            lg:grid-cols-4
+                <div>
+
+                    <p class="
+                            text-[10px]
+                            font-semibold
+                            uppercase
+                            tracking-[0.18em]
+                            text-blue-700
                         ">
+                        Primera etapa
+                    </p>
 
-                    @foreach (
-                    $photos as $index => $photo
-                    )
+                    <h2 class="
+                            mt-1
+                            text-xl
+                            font-semibold
+                            tracking-tight
+                            text-slate-950
+                        ">
+                        Registrar llegada al CEDIS
+                    </h2>
 
-                    <div
-                        class="
-                                    relative
-                                    overflow-hidden
-                                    rounded-xl
-                                    border
-                                    border-slate-200
-                                    bg-slate-100
-                                ">
-
-                        <img
-                            src="{{ $photo->temporaryUrl() }}"
-                            alt="Evidencia"
-                            class="
-                                        aspect-square
-                                        w-full
-                                        object-cover
-                                    ">
-
-                        <button
-                            type="button"
-                            wire:click="
-                                        removePhoto({{ $index }})
-                                    "
-                            class="
-                                        absolute
-                                        right-2
-                                        top-2
-                                        rounded-full
-                                        bg-black/70
-                                        px-2
-                                        py-1
-                                        text-xs
-                                        font-semibold
-                                        text-white
-                                    ">
-                            ×
-                        </button>
-
-                    </div>
-
-                    @endforeach
+                    <p class="
+                            mt-1
+                            max-w-2xl
+                            text-sm
+                            leading-6
+                            text-slate-500
+                        ">
+                        Documenta las condiciones físicas en las
+                        que la unidad es recibida antes de iniciar
+                        el proceso de armado.
+                    </p>
 
                 </div>
 
             </div>
 
-            @endif
+        </div>
 
 
-            {{-- OBSERVACIONES --}}
+
+        <div class="space-y-7 p-6 lg:p-7">
+
+
+            {{-- ================================================= --}}
+            {{-- INDICACIÓN --}}
+            {{-- ================================================= --}}
+
+            <div class="
+                    flex
+                    items-start
+                    gap-4
+                    rounded-2xl
+                    border
+                    border-blue-100
+                    bg-blue-50/50
+                    p-5
+                ">
+
+                <div class="
+                        flex
+                        h-9
+                        w-9
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-xl
+                        bg-blue-100
+                        text-sm
+                        font-bold
+                        text-blue-700
+                    ">
+                    i
+                </div>
+
+
+                <div>
+
+                    <p class="
+                            text-sm
+                            font-semibold
+                            text-blue-900
+                        ">
+                        Evidencia de recepción
+                    </p>
+
+                    <p class="
+                            mt-1
+                            text-xs
+                            leading-5
+                            text-blue-700
+                        ">
+                        Registra fotografías suficientes para
+                        identificar el estado de la unidad al momento
+                        de ingresar al CEDIS, especialmente si presenta
+                        daños, faltantes o alguna condición relevante.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            {{-- ================================================= --}}
+            {{-- FOTOGRAFÍAS --}}
+            {{-- ================================================= --}}
 
             <div>
 
-                <label
-                    class="
-                        text-sm
-                        font-medium
-                        text-slate-700
+                <div>
+
+                    <p class="
+                            text-sm
+                            font-semibold
+                            text-slate-950
+                        ">
+                        Evidencias fotográficas
+                    </p>
+
+                    <p class="
+                            mt-1
+                            text-sm
+                            text-slate-500
+                        ">
+                        Captura o selecciona las fotografías
+                        de recepción de la unidad.
+                    </p>
+
+                </div>
+
+
+                <label class="
+                        group
+                        mt-4
+                        flex
+                        min-h-48
+                        cursor-pointer
+                        flex-col
+                        items-center
+                        justify-center
+                        rounded-3xl
+                        border-2
+                        border-dashed
+                        border-blue-200
+                        bg-blue-50/30
+                        p-7
+                        text-center
+                        transition
+                        hover:border-blue-400
+                        hover:bg-blue-50/60
                     ">
-                    Observaciones
+
+                    <input type="file" wire:model="photos" accept="image/*" capture="environment" multiple
+                        class="sr-only">
+
+
+                    <div class="
+                            flex
+                            h-14
+                            w-14
+                            items-center
+                            justify-center
+                            rounded-2xl
+                            bg-white
+                            text-blue-600
+                            shadow-sm
+                            transition
+                            group-hover:scale-105
+                        ">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
+                            stroke="currentColor" class="h-7 w-7">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6.827 6.175A2.31 2.31 0 0 1 9.186 4.5h5.628a2.31 2.31 0 0 1 2.359 1.675l.184.66c.174.623.741 1.055 1.388 1.055H19.5A1.5 1.5 0 0 1 21 9.39v8.11A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5V9.39a1.5 1.5 0 0 1 1.5-1.5h.755c.647 0 1.214-.432 1.388-1.055l.184-.66Z" />
+
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 13.5a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                        </svg>
+
+                    </div>
+
+
+                    <p class="
+                            mt-4
+                            text-sm
+                            font-semibold
+                            text-slate-900
+                        ">
+                        Tomar o seleccionar fotografías
+                    </p>
+
+                    <p class="
+                            mt-2
+                            max-w-md
+                            text-xs
+                            leading-5
+                            text-slate-500
+                        ">
+                        Puedes registrar hasta 15 imágenes
+                        como evidencia de la llegada.
+                    </p>
+
+
+                    <span class="
+                            mt-4
+                            rounded-full
+                            bg-white
+                            px-3
+                            py-1.5
+                            text-[10px]
+                            font-semibold
+                            uppercase
+                            tracking-wider
+                            text-blue-700
+                            shadow-sm
+                        ">
+                        Máximo 15 fotografías
+                    </span>
+
                 </label>
 
-                <textarea
-                    wire:model="observations"
-                    rows="4"
-                    placeholder="
-                        Describe daños, faltantes o cualquier
-                        condición relevante de llegada...
-                    "
+
+                {{-- CARGANDO ARCHIVOS --}}
+
+                <div wire:loading wire:target="photos" class="
+                        mt-3
+                        text-xs
+                        font-medium
+                        text-blue-600
+                    ">
+                    Procesando fotografías...
+                </div>
+
+
+                @error('photos')
+
+                    <p class="
+                                mt-2
+                                text-sm
+                                font-medium
+                                text-red-600
+                            ">
+                        {{ $message }}
+                    </p>
+
+                @enderror
+
+
+                @error('photos.*')
+
+                    <p class="
+                                mt-2
+                                text-sm
+                                font-medium
+                                text-red-600
+                            ">
+                        {{ $message }}
+                    </p>
+
+                @enderror
+
+            </div>
+
+
+
+            {{-- ================================================= --}}
+            {{-- PREVIEW --}}
+            {{-- ================================================= --}}
+
+            @if ($photos)
+
+                <div>
+
+                    <div class="
+                                mb-4
+                                flex
+                                items-center
+                                justify-between
+                                gap-4
+                            ">
+
+                        <div>
+
+                            <p class="
+                                        text-sm
+                                        font-semibold
+                                        text-slate-900
+                                    ">
+                                Evidencias seleccionadas
+                            </p>
+
+                            <p class="
+                                        mt-0.5
+                                        text-xs
+                                        text-slate-500
+                                    ">
+                                Revisa las imágenes antes
+                                de confirmar la recepción.
+                            </p>
+
+                        </div>
+
+
+                        <span class="
+                                    rounded-full
+                                    bg-blue-50
+                                    px-3
+                                    py-1
+                                    text-xs
+                                    font-semibold
+                                    text-blue-700
+                                ">
+                            {{ count($photos) }}
+                            seleccionada(s)
+                        </span>
+
+                    </div>
+
+
+                    <div class="
+                                grid
+                                grid-cols-2
+                                gap-3
+                                sm:grid-cols-3
+                                lg:grid-cols-4
+                                xl:grid-cols-5
+                            ">
+
+                        @foreach (
+                                $photos
+                                as $index => $photo
+                            )
+
+                            <div class="
+                                            group
+                                            relative
+                                            overflow-hidden
+                                            rounded-2xl
+                                            border
+                                            border-slate-200
+                                            bg-slate-100
+                                            shadow-sm
+                                        ">
+
+                                <img src="{{ $photo->temporaryUrl() }}" alt="Evidencia de llegada" class="
+                                                aspect-square
+                                                w-full
+                                                object-cover
+                                            ">
+
+
+                                <div class="
+                                                pointer-events-none
+                                                absolute
+                                                inset-x-0
+                                                bottom-0
+                                                h-16
+                                                bg-gradient-to-t
+                                                from-black/70
+                                                to-transparent
+                                            "></div>
+
+
+                                <button type="button" wire:click="
+                                                removePhoto({{ $index }})
+                                            " title="Eliminar fotografía" class="
+                                                absolute
+                                                right-2
+                                                top-2
+                                                flex
+                                                h-8
+                                                w-8
+                                                items-center
+                                                justify-center
+                                                rounded-full
+                                                bg-black/70
+                                                text-sm
+                                                font-bold
+                                                text-white
+                                                shadow-sm
+                                                transition
+                                                hover:bg-red-600
+                                            ">
+                                    ×
+                                </button>
+
+
+                                <p class="
+                                                absolute
+                                                bottom-2
+                                                left-3
+                                                text-[10px]
+                                                font-medium
+                                                text-white
+                                            ">
+                                    Evidencia {{ $index + 1 }}
+                                </p>
+
+                            </div>
+
+                        @endforeach
+
+                    </div>
+
+                </div>
+
+            @endif
+
+
+
+            {{-- ================================================= --}}
+            {{-- OBSERVACIONES --}}
+            {{-- ================================================= --}}
+
+            <div class="
+                    border-t
+                    border-slate-100
+                    pt-6
+                ">
+
+                <label class="
+                        text-sm
+                        font-semibold
+                        text-slate-900
+                    ">
+                    Observaciones de recepción
+                </label>
+
+                <p class="
+                        mt-1
+                        text-xs
+                        leading-5
+                        text-slate-500
+                    ">
+                    Registra daños, faltantes o cualquier otra
+                    condición relevante observada al recibir la unidad.
+                </p>
+
+
+                <textarea wire:model="observations" rows="4" placeholder="Ej. Unidad recibida sin daños visibles..."
                     class="
-                        mt-2
+                        mt-3
                         w-full
-                        rounded-xl
+                        rounded-2xl
                         border
-                        border-slate-300
+                        border-slate-200
+                        bg-slate-50/60
                         px-4
                         py-3
                         text-sm
+                        text-slate-900
                         outline-none
+                        transition
+                        placeholder:text-slate-400
+                        hover:border-slate-300
                         focus:border-blue-500
+                        focus:bg-white
                         focus:ring-4
                         focus:ring-blue-500/10
                     "></textarea>
@@ -254,44 +573,89 @@
             </div>
 
 
-            {{-- CONFIRMAR --}}
 
-            <button
-                type="button"
-                wire:click="complete"
-                wire:loading.attr="disabled"
-                wire:target="complete,photos"
-                class="
-                    flex
-                    w-full
-                    items-center
-                    justify-center
-                    rounded-xl
-                    bg-blue-600
-                    px-5
-                    py-3.5
-                    text-sm
-                    font-semibold
-                    text-white
-                    transition
-                    hover:bg-blue-700
-                    disabled:cursor-not-allowed
-                    disabled:opacity-50
+            {{-- ================================================= --}}
+            {{-- CONFIRMAR --}}
+            {{-- ================================================= --}}
+
+            <div class="
+                    rounded-2xl
+                    border
+                    border-emerald-100
+                    bg-emerald-50/40
+                    p-5
                 ">
 
-                <span
-                    wire:loading.remove
-                    wire:target="complete">
-                    Confirmar llegada
-                </span>
+                <div class="
+                        flex
+                        flex-col
+                        gap-5
+                        lg:flex-row
+                        lg:items-center
+                        lg:justify-between
+                    ">
 
-                <span
-                    wire:loading
-                    wire:target="complete">
-                    Guardando evidencias...
-                </span>
+                    <div>
 
-            </button>
+                        <p class="
+                                text-sm
+                                font-semibold
+                                text-emerald-900
+                            ">
+                            Confirmar recepción
+                        </p>
+
+                        <p class="
+                                mt-1
+                                max-w-xl
+                                text-xs
+                                leading-5
+                                text-emerald-700
+                            ">
+                            Al confirmar, las evidencias y observaciones
+                            quedarán asociadas al expediente y la unidad
+                            avanzará automáticamente a la etapa de armado.
+                        </p>
+
+                    </div>
+
+
+                    <button type="button" wire:click="complete" wire:loading.attr="disabled"
+                        wire:target="complete,photos" class="
+                            inline-flex
+                            shrink-0
+                            items-center
+                            justify-center
+                            gap-2
+                            rounded-xl
+                            bg-emerald-600
+                            px-6
+                            py-3.5
+                            text-sm
+                            font-semibold
+                            text-white
+                            shadow-sm
+                            transition
+                            hover:bg-emerald-700
+                            hover:shadow-md
+                            active:scale-[.98]
+                            disabled:cursor-not-allowed
+                            disabled:opacity-50
+                        ">
+
+                        <span wire:loading.remove wire:target="complete">
+                            Confirmar llegada
+                        </span>
+
+                        <span wire:loading wire:target="complete">
+                            Guardando evidencias...
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 
