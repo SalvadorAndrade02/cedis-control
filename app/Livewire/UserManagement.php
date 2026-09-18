@@ -4,7 +4,9 @@ namespace App\Livewire;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
@@ -12,6 +14,7 @@ use Spatie\Permission\Models\Role;
 class UserManagement extends Component
 {
     use WithPagination;
+
 
     public string $search = '';
 
@@ -53,27 +56,41 @@ class UserManagement extends Component
     }
 
 
-    public function edit(int $userId): void
-    {
+    public function edit(
+        int $userId
+    ): void {
+
         $user = User::query()
             ->with('roles')
-            ->findOrFail($userId);
+            ->findOrFail(
+                $userId
+            );
+
 
         $this->editingUserId =
             $user->id;
 
+
         $this->name =
             $user->name;
+
 
         $this->email =
             $user->email;
 
+
         $this->role =
-            $user->roles
-            ->first()
-            ?->name
+            $user
+                ->roles
+                ->first()
+                    ?->name
             ?? '';
 
+
+        /*
+         * Nunca enviamos el hash actual
+         * al formulario.
+         */
         $this->password = '';
 
         $this->password_confirmation = '';
@@ -88,6 +105,21 @@ class UserManagement extends Component
     }
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | POLÍTICA DE CONTRASEÑA
+    |--------------------------------------------------------------------------
+    */
+
+    private function passwordRule(): Password
+    {
+        return Password::min(8)
+            ->mixedCase()
+            ->numbers()
+            ->symbols();
+    }
+
+
     public function save(): void
     {
         abort_unless(
@@ -95,12 +127,21 @@ class UserManagement extends Component
             403
         );
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | REGLAS GENERALES
+        |--------------------------------------------------------------------------
+        */
+
         $rules = [
+
             'name' => [
                 'required',
                 'string',
                 'max:150',
             ],
+
 
             'email' => [
                 'required',
@@ -111,13 +152,15 @@ class UserManagement extends Component
                     'users',
                     'email'
                 )->ignore(
-                    $this->editingUserId
-                ),
+                        $this->editingUserId
+                    ),
             ],
+
 
             'role' => [
                 'required',
                 'string',
+
                 Rule::exists(
                     'roles',
                     'name'
@@ -127,40 +170,57 @@ class UserManagement extends Component
 
 
         /*
-         * Crear usuario:
-         * contraseña obligatoria.
-         *
-         * Editar usuario:
-         * contraseña opcional.
-         */
+        |--------------------------------------------------------------------------
+        | CONTRASEÑA
+        |--------------------------------------------------------------------------
+        |
+        | NUEVO USUARIO
+        |
+        | contraseña obligatoria.
+        |
+        | EDITAR USUARIO
+        |
+        | contraseña opcional.
+        | Si se escribe una nueva debe cumplir TODA
+        | la política.
+        |
+        */
+
         if ($this->editingUserId) {
 
             $rules['password'] = [
                 'nullable',
                 'string',
-                'min:8',
+                'max:128',
                 'confirmed',
+                $this->passwordRule(),
             ];
+
         } else {
 
             $rules['password'] = [
                 'required',
                 'string',
-                'min:8',
+                'max:128',
                 'confirmed',
+                $this->passwordRule(),
             ];
         }
 
 
         $validated =
-            $this->validate($rules);
+            $this->validate(
+                $rules,
+                $this->messages()
+            );
 
 
         /*
-         * Protección:
-         * el administrador no puede modificar
-         * su propio rol accidentalmente.
-         */
+        |--------------------------------------------------------------------------
+        | PROTECCIÓN DEL PROPIO ROL
+        |--------------------------------------------------------------------------
+        */
+
         if (
             $this->editingUserId
             === Auth::id()
@@ -168,14 +228,16 @@ class UserManagement extends Component
 
             $currentRole =
                 Auth::user()
-                ?->roles
-                ->first()
-                ?->name;
+                    ?->roles
+                    ->first()
+                        ?->name;
+
 
             if (
                 $currentRole
                 !== $validated['role']
             ) {
+
                 $this->addError(
                     'role',
                     'No puedes cambiar tu propio rol.'
@@ -186,16 +248,24 @@ class UserManagement extends Component
         }
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | EDITAR
+        |--------------------------------------------------------------------------
+        */
+
         if ($this->editingUserId) {
 
             $user = User::findOrFail(
                 $this->editingUserId
             );
 
+
             $user->name =
                 trim(
                     $validated['name']
                 );
+
 
             $user->email =
                 strtolower(
@@ -205,11 +275,21 @@ class UserManagement extends Component
                 );
 
 
+            /*
+             * Sólo cambiamos la contraseña
+             * cuando el administrador escribió una.
+             */
             if (
-                ! empty($validated['password'])
+                filled(
+                    $validated['password']
+                    ?? null
+                )
             ) {
+
                 $user->password =
-                    $validated['password'];
+                    Hash::make(
+                        $validated['password']
+                    );
             }
 
 
@@ -225,26 +305,37 @@ class UserManagement extends Component
                 'success',
                 'Usuario actualizado correctamente.'
             );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | CREAR
+            |--------------------------------------------------------------------------
+            */
+
         } else {
 
             $user = User::create([
+
                 'name' =>
-                trim(
-                    $validated['name']
-                ),
+                    trim(
+                        $validated['name']
+                    ),
 
                 'email' =>
-                strtolower(
-                    trim(
-                        $validated['email']
-                    )
-                ),
+                    strtolower(
+                        trim(
+                            $validated['email']
+                        )
+                    ),
 
                 'password' =>
-                $validated['password'],
+                    Hash::make(
+                        $validated['password']
+                    ),
 
                 'active' =>
-                true,
+                    true,
             ]);
 
 
@@ -264,6 +355,52 @@ class UserManagement extends Component
     }
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | MENSAJES
+    |--------------------------------------------------------------------------
+    */
+
+    protected function messages(): array
+    {
+        return [
+
+            'name.required' =>
+                'El nombre es obligatorio.',
+
+            'name.max' =>
+                'El nombre no puede superar los 150 caracteres.',
+
+
+            'email.required' =>
+                'El correo electrónico es obligatorio.',
+
+            'email.email' =>
+                'Ingresa un correo electrónico válido.',
+
+            'email.unique' =>
+                'Este correo electrónico ya está registrado.',
+
+
+            'role.required' =>
+                'Selecciona un rol para el usuario.',
+
+            'role.exists' =>
+                'El rol seleccionado no es válido.',
+
+
+            'password.required' =>
+                'La contraseña es obligatoria.',
+
+            'password.confirmed' =>
+                'Las contraseñas no coinciden.',
+
+            'password.max' =>
+                'La contraseña no puede superar los 128 caracteres.',
+        ];
+    }
+
+
     public function toggleActive(
         int $userId
     ): void {
@@ -278,7 +415,10 @@ class UserManagement extends Component
          * Nunca permitir que un usuario
          * se desactive a sí mismo.
          */
-        if ($userId === Auth::id()) {
+        if (
+            $userId
+            === Auth::id()
+        ) {
 
             session()->flash(
                 'error',
@@ -296,15 +436,15 @@ class UserManagement extends Component
 
         $user->update([
             'active' =>
-            ! $user->active,
+                !$user->active,
         ]);
 
 
         session()->flash(
             'success',
             $user->active
-                ? 'Usuario activado correctamente.'
-                : 'Usuario desactivado correctamente.'
+            ? 'Usuario activado correctamente.'
+            : 'Usuario desactivado correctamente.'
         );
     }
 
@@ -320,6 +460,7 @@ class UserManagement extends Component
             'password_confirmation',
             'showForm',
         ]);
+
 
         $this->resetValidation();
     }
@@ -338,6 +479,7 @@ class UserManagement extends Component
                             $this->search
                         );
 
+
                     $query->where(
                         function ($query) use ($search) {
 
@@ -347,11 +489,13 @@ class UserManagement extends Component
                                     'like',
                                     "%{$search}%"
                                 )
+
                                 ->orWhere(
                                     'email',
                                     'like',
                                     "%{$search}%"
                                 )
+
                                 ->orWhereHas(
                                     'roles',
                                     function ($roleQuery) use ($search) {
@@ -367,8 +511,12 @@ class UserManagement extends Component
                     );
                 }
             )
-            ->orderBy('name')
-            ->paginate(15);
+            ->orderBy(
+                'name'
+            )
+            ->paginate(
+                15
+            );
 
 
         $roles = Role::query()
@@ -376,8 +524,12 @@ class UserManagement extends Component
                 'guard_name',
                 'web'
             )
-            ->orderBy('name')
-            ->pluck('name');
+            ->orderBy(
+                'name'
+            )
+            ->pluck(
+                'name'
+            );
 
 
         return view(

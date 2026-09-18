@@ -6,6 +6,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\EvidenceController;
 use App\Http\Controllers\UnitExpedientPdfController;
+use App\Http\Controllers\ShippingGuidePdfController;
 
 Route::middleware('guest')
     ->group(function () {
@@ -120,5 +121,30 @@ Route::middleware('auth')
             ])
             ->name(
                 'units.expedient.pdf'
+            );
+
+        Route::view(
+            '/reports/assembly',
+            'reports.assembly'
+        )
+            ->middleware(
+                'can:reports.view'
+            )
+            ->name(
+                'reports.assembly'
+            );
+
+        Route::get(
+            '/units/{unit}/shipping-guide/pdf',
+            [
+                ShippingGuidePdfController::class,
+                'download',
+            ]
+        )
+            ->middleware([
+                'can:units.view',
+            ])
+            ->name(
+                'units.shipping-guide.pdf'
             );
     });

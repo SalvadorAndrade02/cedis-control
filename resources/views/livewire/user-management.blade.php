@@ -140,45 +140,45 @@
     @if ($showForm)
 
         <section class="
-                    overflow-hidden
-                    rounded-3xl
-                    border
-                    border-blue-100
-                    bg-white
-                    shadow-[0_8px_30px_rgba(15,23,42,0.05)]
-                ">
+                        overflow-hidden
+                        rounded-3xl
+                        border
+                        border-blue-100
+                        bg-white
+                        shadow-[0_8px_30px_rgba(15,23,42,0.05)]
+                    ">
 
             {{-- HEADER --}}
 
             <div class="
-                        border-b
-                        border-blue-100
-                        bg-gradient-to-r
-                        from-blue-50
-                        via-white
-                        to-white
-                        px-6
-                        py-5
-                        lg:px-7
-                    ">
-
-                <div class="
-                            flex
-                            items-start
-                            gap-4
+                            border-b
+                            border-blue-100
+                            bg-gradient-to-r
+                            from-blue-50
+                            via-white
+                            to-white
+                            px-6
+                            py-5
+                            lg:px-7
                         ">
 
-                    <div class="
+                <div class="
                                 flex
-                                h-12
-                                w-12
-                                shrink-0
-                                items-center
-                                justify-center
-                                rounded-2xl
-                                bg-blue-100
-                                text-blue-700
+                                items-start
+                                gap-4
                             ">
+
+                    <div class="
+                                    flex
+                                    h-12
+                                    w-12
+                                    shrink-0
+                                    items-center
+                                    justify-center
+                                    rounded-2xl
+                                    bg-blue-100
+                                    text-blue-700
+                                ">
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
                             stroke="currentColor" class="h-6 w-6">
@@ -192,33 +192,33 @@
                     <div>
 
                         <p class="
-                                    text-[10px]
-                                    font-semibold
-                                    uppercase
-                                    tracking-[0.18em]
-                                    text-blue-700
-                                ">
+                                        text-[10px]
+                                        font-semibold
+                                        uppercase
+                                        tracking-[0.18em]
+                                        text-blue-700
+                                    ">
                             Administración de acceso
                         </p>
 
                         <h2 class="
-                                    mt-1
-                                    text-xl
-                                    font-semibold
-                                    tracking-tight
-                                    text-slate-950
-                                ">
+                                        mt-1
+                                        text-xl
+                                        font-semibold
+                                        tracking-tight
+                                        text-slate-950
+                                    ">
                             {{ $editingUserId
             ? 'Editar usuario'
             : 'Nuevo usuario'
-                                }}
+                                    }}
                         </h2>
 
                         <p class="
-                                    mt-1
-                                    text-sm
-                                    text-slate-500
-                                ">
+                                        mt-1
+                                        text-sm
+                                        text-slate-500
+                                    ">
                             Define la información de acceso
                             y el rol operativo del usuario.
                         </p>
@@ -234,46 +234,46 @@
             {{-- FORMULARIO --}}
 
             <form wire:submit="save" class="
-                        grid
-                        gap-5
-                        p-6
-                        md:grid-cols-2
-                        lg:p-7
-                    ">
+                            grid
+                            gap-5
+                            p-6
+                            md:grid-cols-2
+                            lg:p-7
+                        ">
 
                 {{-- NOMBRE --}}
 
                 <div>
 
                     <label class="
-                                text-xs
-                                font-semibold
-                                uppercase
-                                tracking-wider
-                                text-slate-500
-                            ">
+                                    text-xs
+                                    font-semibold
+                                    uppercase
+                                    tracking-wider
+                                    text-slate-500
+                                ">
                         Nombre *
                     </label>
 
                     <input type="text" wire:model="name" placeholder="Nombre completo" class="
-                                mt-2
-                                w-full
-                                rounded-2xl
-                                border
-                                border-slate-200
-                                bg-slate-50/60
-                                px-4
-                                py-3
-                                text-sm
-                                text-slate-900
-                                outline-none
-                                transition
-                                placeholder:text-slate-400
-                                focus:border-blue-500
-                                focus:bg-white
-                                focus:ring-4
-                                focus:ring-blue-500/10
-                            ">
+                                    mt-2
+                                    w-full
+                                    rounded-2xl
+                                    border
+                                    border-slate-200
+                                    bg-slate-50/60
+                                    px-4
+                                    py-3
+                                    text-sm
+                                    text-slate-900
+                                    outline-none
+                                    transition
+                                    placeholder:text-slate-400
+                                    focus:border-blue-500
+                                    focus:bg-white
+                                    focus:ring-4
+                                    focus:ring-blue-500/10
+                                ">
 
                     @error('name')
                         <p class="mt-1 text-xs text-red-600">
@@ -290,34 +290,34 @@
                 <div>
 
                     <label class="
-                                text-xs
-                                font-semibold
-                                uppercase
-                                tracking-wider
-                                text-slate-500
-                            ">
+                                    text-xs
+                                    font-semibold
+                                    uppercase
+                                    tracking-wider
+                                    text-slate-500
+                                ">
                         Correo *
                     </label>
 
                     <input type="email" wire:model="email" placeholder="usuario@cedis.local" class="
-                                mt-2
-                                w-full
-                                rounded-2xl
-                                border
-                                border-slate-200
-                                bg-slate-50/60
-                                px-4
-                                py-3
-                                text-sm
-                                text-slate-900
-                                outline-none
-                                transition
-                                placeholder:text-slate-400
-                                focus:border-blue-500
-                                focus:bg-white
-                                focus:ring-4
-                                focus:ring-blue-500/10
-                            ">
+                                    mt-2
+                                    w-full
+                                    rounded-2xl
+                                    border
+                                    border-slate-200
+                                    bg-slate-50/60
+                                    px-4
+                                    py-3
+                                    text-sm
+                                    text-slate-900
+                                    outline-none
+                                    transition
+                                    placeholder:text-slate-400
+                                    focus:border-blue-500
+                                    focus:bg-white
+                                    focus:ring-4
+                                    focus:ring-blue-500/10
+                                ">
 
                     @error('email')
                         <p class="mt-1 text-xs text-red-600">
@@ -334,33 +334,33 @@
                 <div class="md:col-span-2">
 
                     <label class="
-                                text-xs
-                                font-semibold
-                                uppercase
-                                tracking-wider
-                                text-slate-500
-                            ">
+                                    text-xs
+                                    font-semibold
+                                    uppercase
+                                    tracking-wider
+                                    text-slate-500
+                                ">
                         Rol *
                     </label>
 
                     <select wire:model="role" class="
-                                mt-2
-                                w-full
-                                rounded-2xl
-                                border
-                                border-slate-200
-                                bg-slate-50/60
-                                px-4
-                                py-3
-                                text-sm
-                                text-slate-900
-                                outline-none
-                                transition
-                                focus:border-blue-500
-                                focus:bg-white
-                                focus:ring-4
-                                focus:ring-blue-500/10
-                            ">
+                                    mt-2
+                                    w-full
+                                    rounded-2xl
+                                    border
+                                    border-slate-200
+                                    bg-slate-50/60
+                                    px-4
+                                    py-3
+                                    text-sm
+                                    text-slate-900
+                                    outline-none
+                                    transition
+                                    focus:border-blue-500
+                                    focus:bg-white
+                                    focus:ring-4
+                                    focus:ring-blue-500/10
+                                ">
 
                         <option value="">
                             Selecciona un rol
@@ -384,12 +384,12 @@
 
 
                     <div class="
-                                mt-3
-                                grid
-                                gap-2
-                                sm:grid-cols-2
-                                lg:grid-cols-5
-                            ">
+                                    mt-3
+                                    grid
+                                    gap-2
+                                    sm:grid-cols-2
+                                    lg:grid-cols-5
+                                ">
 
                         @foreach ([
                                 'ADMIN' => 'Acceso completo',
@@ -424,26 +424,26 @@
                             @endphp
 
                             <div class="
-                                            rounded-xl
-                                            {{ $roleColor }}
-                                            px-3
-                                            py-2.5
-                                        ">
+                                                    rounded-xl
+                                                    {{ $roleColor }}
+                                                    px-3
+                                                    py-2.5
+                                                ">
 
                                 <p class="
-                                                text-[10px]
-                                                font-bold
-                                                uppercase
-                                                tracking-wider
-                                            ">
+                                                        text-[10px]
+                                                        font-bold
+                                                        uppercase
+                                                        tracking-wider
+                                                    ">
                                     {{ $roleName }}
                                 </p>
 
                                 <p class="
-                                                mt-1
-                                                text-[10px]
-                                                opacity-80
-                                            ">
+                                                        mt-1
+                                                        text-[10px]
+                                                        opacity-80
+                                                    ">
                                     {{ $roleDescription }}
                                 </p>
 
@@ -461,93 +461,254 @@
 
                 <div>
 
-                    <label class="
-                                text-xs
-                                font-semibold
-                                uppercase
-                                tracking-wider
-                                text-slate-500
-                            ">
+                    <label for="password" class="
+                text-xs
+                font-semibold
+                uppercase
+                tracking-wider
+                text-slate-500
+            ">
                         Contraseña
-                        {{ $editingUserId ? '' : '*' }}
+
+                        @if (!$editingUserId)
+                            *
+                        @endif
                     </label>
 
-                    <input type="password" wire:model="password" autocomplete="new-password" placeholder="{{ $editingUserId
-            ? 'Sin cambios'
-            : 'Mínimo 8 caracteres'
-                            }}" class="
-                                mt-2
-                                w-full
-                                rounded-2xl
-                                border
-                                border-slate-200
-                                bg-slate-50/60
-                                px-4
-                                py-3
-                                text-sm
-                                outline-none
-                                transition
-                                placeholder:text-slate-400
-                                focus:border-blue-500
-                                focus:bg-white
-                                focus:ring-4
-                                focus:ring-blue-500/10
-                            ">
+
+                    <input id="password" type="password" wire:model="password" autocomplete="new-password" minlength="8"
+                        maxlength="128" @if (!$editingUserId) required @endif placeholder="{{ $editingUserId
+            ? 'Déjala vacía para conservar la actual'
+            : 'Crea una contraseña segura'
+            }}" class="
+                mt-2
+                w-full
+                rounded-2xl
+                border
+                border-slate-200
+                bg-slate-50/60
+                px-4
+                py-3
+                text-sm
+                text-slate-900
+                outline-none
+                transition
+                placeholder:text-slate-400
+                hover:border-slate-300
+                focus:border-blue-500
+                focus:bg-white
+                focus:ring-4
+                focus:ring-blue-500/10
+            ">
+
 
                     @if ($editingUserId)
 
-                        <p class="
-                                        mt-1.5
-                                        text-xs
-                                        text-slate-400
-                                    ">
-                            Déjala vacía para conservar
-                            la contraseña actual.
-                        </p>
+                            <p class="
+                            mt-2
+                            text-xs
+                            leading-5
+                            text-slate-400
+                        ">
+                                Déjala vacía para conservar la contraseña
+                                actual del usuario.
+                            </p>
 
                     @endif
 
+
                     @error('password')
-                        <p class="mt-1 text-xs text-red-600">
-                            {{ $message }}
-                        </p>
+
+                            <div class="
+                            mt-2
+                            flex
+                            items-start
+                            gap-2
+                            text-xs
+                            font-medium
+                            text-red-600
+                        ">
+
+                                <span class="
+                                flex
+                                h-5
+                                w-5
+                                shrink-0
+                                items-center
+                                justify-center
+                                rounded-full
+                                bg-red-100
+                                text-[10px]
+                                font-bold
+                            ">
+                                    !
+                                </span>
+
+                                <span>
+                                    {{ $message }}
+                                </span>
+
+                            </div>
+
                     @enderror
 
+
+                    {{-- REQUISITOS --}}
+
+                    <div class="
+                mt-4
+                rounded-2xl
+                border
+                border-blue-100
+                bg-blue-50/50
+                p-4
+            ">
+
+                        <div class="
+                    flex
+                    items-start
+                    gap-3
+                ">
+
+                            <div class="
+                        flex
+                        h-7
+                        w-7
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-lg
+                        bg-blue-100
+                        text-xs
+                        font-bold
+                        text-blue-700
+                    ">
+                                i
+                            </div>
+
+
+                            <div class="min-w-0">
+
+                                <p class="
+                            text-xs
+                            font-semibold
+                            text-blue-900
+                        ">
+                                    Requisitos de seguridad
+                                </p>
+
+
+                                <div class="
+                            mt-2
+                            grid
+                            gap-x-6
+                            gap-y-1.5
+                            text-xs
+                            leading-5
+                            text-blue-700
+                            sm:grid-cols-2
+                        ">
+
+                                    <span>
+                                        • Mínimo 8 caracteres
+                                    </span>
+
+                                    <span>
+                                        • Una letra mayúscula
+                                    </span>
+
+                                    <span>
+                                        • Una letra minúscula
+                                    </span>
+
+                                    <span>
+                                        • Al menos un número
+                                    </span>
+
+                                    <span>
+                                        • Al menos un símbolo
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
-
-
 
                 {{-- CONFIRMAR PASSWORD --}}
 
                 <div>
 
-                    <label class="
-                                text-xs
-                                font-semibold
-                                uppercase
-                                tracking-wider
-                                text-slate-500
-                            ">
+                    <label
+                        for="password_confirmation"
+                        class="
+                            text-xs
+                            font-semibold
+                            uppercase
+                            tracking-wider
+                            text-slate-500
+                        "
+                    >
                         Confirmar contraseña
+
+                        @if (! $editingUserId)
+                            *
+                        @endif
                     </label>
 
-                    <input type="password" wire:model="password_confirmation" autocomplete="new-password" class="
+
+                    <input
+                        id="password_confirmation"
+                        type="password"
+                        wire:model="password_confirmation"
+                        autocomplete="new-password"
+                        minlength="8"
+                        maxlength="128"
+                        @if (! $editingUserId)
+                            required
+                        @endif
+                        placeholder="Repite la contraseña"
+                        class="
+                            mt-2
+                            w-full
+                            rounded-2xl
+                            border
+                            border-slate-200
+                            bg-slate-50/60
+                            px-4
+                            py-3
+                            text-sm
+                            text-slate-900
+                            outline-none
+                            transition
+                            placeholder:text-slate-400
+                            hover:border-slate-300
+                            focus:border-blue-500
+                            focus:bg-white
+                            focus:ring-4
+                            focus:ring-blue-500/10
+                        "
+                    >
+
+
+                    @error('password_confirmation')
+
+                        <p
+                            class="
                                 mt-2
-                                w-full
-                                rounded-2xl
-                                border
-                                border-slate-200
-                                bg-slate-50/60
-                                px-4
-                                py-3
-                                text-sm
-                                outline-none
-                                transition
-                                focus:border-blue-500
-                                focus:bg-white
-                                focus:ring-4
-                                focus:ring-blue-500/10
-                            ">
+                                text-xs
+                                font-medium
+                                text-red-600
+                            "
+                        >
+                            {{ $message }}
+                        </p>
+
+                    @enderror
 
                 </div>
 
@@ -556,59 +717,59 @@
                 {{-- ACCIONES --}}
 
                 <div class="
-                            flex
-                            flex-col-reverse
-                            gap-3
-                            border-t
-                            border-slate-100
-                            pt-6
-                            md:col-span-2
-                            sm:flex-row
-                            sm:items-center
-                            sm:justify-end
-                        ">
+                                flex
+                                flex-col-reverse
+                                gap-3
+                                border-t
+                                border-slate-100
+                                pt-6
+                                md:col-span-2
+                                sm:flex-row
+                                sm:items-center
+                                sm:justify-end
+                            ">
 
                     <button type="button" wire:click="cancel" class="
-                                rounded-xl
-                                border
-                                border-slate-300
-                                bg-white
-                                px-5
-                                py-3
-                                text-sm
-                                font-semibold
-                                text-slate-700
-                                transition
-                                hover:bg-slate-50
-                            ">
+                                    rounded-xl
+                                    border
+                                    border-slate-300
+                                    bg-white
+                                    px-5
+                                    py-3
+                                    text-sm
+                                    font-semibold
+                                    text-slate-700
+                                    transition
+                                    hover:bg-slate-50
+                                ">
                         Cancelar
                     </button>
 
 
                     <button type="submit" wire:loading.attr="disabled" wire:target="save" class="
-                                inline-flex
-                                items-center
-                                justify-center
-                                rounded-xl
-                                bg-blue-600
-                                px-5
-                                py-3
-                                text-sm
-                                font-semibold
-                                text-white
-                                shadow-sm
-                                transition
-                                hover:bg-blue-700
-                                hover:shadow-md
-                                disabled:cursor-not-allowed
-                                disabled:opacity-50
-                            ">
+                                    inline-flex
+                                    items-center
+                                    justify-center
+                                    rounded-xl
+                                    bg-blue-600
+                                    px-5
+                                    py-3
+                                    text-sm
+                                    font-semibold
+                                    text-white
+                                    shadow-sm
+                                    transition
+                                    hover:bg-blue-700
+                                    hover:shadow-md
+                                    disabled:cursor-not-allowed
+                                    disabled:opacity-50
+                                ">
 
                         <span wire:loading.remove wire:target="save">
                             {{ $editingUserId
             ? 'Guardar cambios'
             : 'Crear usuario'
-                                }}
+                                    }}
                         </span>
 
                         <span wire:loading wire:target="save">
@@ -789,38 +950,38 @@
 
 
                                         <tr class="
-                                                    group
-                                                    transition
-                                                    hover:bg-slate-50/70
-                                                ">
+                                                                        group
+                                                                        transition
+                                                                        hover:bg-slate-50/70
+                                                                    ">
 
                                             {{-- USUARIO --}}
 
                                             <td class="
-                                                        px-6
-                                                        py-5
-                                                        lg:px-7
-                                                    ">
+                                                                            px-6
+                                                                            py-5
+                                                                            lg:px-7
+                                                                        ">
 
                                                 <div class="
-                                                            flex
-                                                            items-center
-                                                            gap-4
-                                                        ">
+                                                                                flex
+                                                                                items-center
+                                                                                gap-4
+                                                                            ">
 
                                                     <div class="
-                                                                flex
-                                                                h-11
-                                                                w-11
-                                                                shrink-0
-                                                                items-center
-                                                                justify-center
-                                                                rounded-2xl
-                                                                bg-blue-50
-                                                                text-sm
-                                                                font-bold
-                                                                text-blue-700
-                                                            ">
+                                                                                    flex
+                                                                                    h-11
+                                                                                    w-11
+                                                                                    shrink-0
+                                                                                    items-center
+                                                                                    justify-center
+                                                                                    rounded-2xl
+                                                                                    bg-blue-50
+                                                                                    text-sm
+                                                                                    font-bold
+                                                                                    text-blue-700
+                                                                                ">
                                                         {{ strtoupper(
                             substr(
                                 $user->name,
@@ -834,17 +995,17 @@
                                                     <div class="min-w-0">
 
                                                         <div class="
-                                                                    flex
-                                                                    items-center
-                                                                    gap-2
-                                                                ">
+                                                                                        flex
+                                                                                        items-center
+                                                                                        gap-2
+                                                                                    ">
 
                                                             <p class="
-                                                                        truncate
-                                                                        text-sm
-                                                                        font-semibold
-                                                                        text-slate-950
-                                                                    ">
+                                                                                            truncate
+                                                                                            text-sm
+                                                                                            font-semibold
+                                                                                            text-slate-950
+                                                                                        ">
                                                                 {{ $user->name }}
                                                             </p>
 
@@ -855,16 +1016,16 @@
                                                                 )
 
                                                                 <span class="
-                                                                                rounded-full
-                                                                                bg-blue-50
-                                                                                px-2
-                                                                                py-0.5
-                                                                                text-[9px]
-                                                                                font-semibold
-                                                                                uppercase
-                                                                                tracking-wider
-                                                                                text-blue-600
-                                                                            ">
+                                                                                                        rounded-full
+                                                                                                        bg-blue-50
+                                                                                                        px-2
+                                                                                                        py-0.5
+                                                                                                        text-[9px]
+                                                                                                        font-semibold
+                                                                                                        uppercase
+                                                                                                        tracking-wider
+                                                                                                        text-blue-600
+                                                                                                    ">
                                                                     Tú
                                                                 </span>
 
@@ -874,11 +1035,11 @@
 
 
                                                         <p class="
-                                                                    mt-1
-                                                                    truncate
-                                                                    text-xs
-                                                                    text-slate-500
-                                                                ">
+                                                                                        mt-1
+                                                                                        truncate
+                                                                                        text-xs
+                                                                                        text-slate-500
+                                                                                    ">
                                                             {{ $user->email }}
                                                         </p>
 
@@ -895,16 +1056,16 @@
                                             <td class="px-6 py-5">
 
                                                 <span class="
-                                                            inline-flex
-                                                            rounded-full
-                                                            px-3
-                                                            py-1.5
-                                                            text-xs
-                                                            font-semibold
-                                                            ring-1
-                                                            ring-inset
-                                                            {{ $roleStyle }}
-                                                        ">
+                                                                                inline-flex
+                                                                                rounded-full
+                                                                                px-3
+                                                                                py-1.5
+                                                                                text-xs
+                                                                                font-semibold
+                                                                                ring-1
+                                                                                ring-inset
+                                                                                {{ $roleStyle }}
+                                                                            ">
                                                     {{ $roleName }}
                                                 </span>
 
@@ -919,27 +1080,27 @@
                                                 @if ($user->active)
 
                                                     <span class="
-                                                                    inline-flex
-                                                                    items-center
-                                                                    gap-2
-                                                                    rounded-full
-                                                                    bg-emerald-50
-                                                                    px-3
-                                                                    py-1.5
-                                                                    text-xs
-                                                                    font-semibold
-                                                                    text-emerald-700
-                                                                    ring-1
-                                                                    ring-inset
-                                                                    ring-emerald-100
-                                                                ">
+                                                                                            inline-flex
+                                                                                            items-center
+                                                                                            gap-2
+                                                                                            rounded-full
+                                                                                            bg-emerald-50
+                                                                                            px-3
+                                                                                            py-1.5
+                                                                                            text-xs
+                                                                                            font-semibold
+                                                                                            text-emerald-700
+                                                                                            ring-1
+                                                                                            ring-inset
+                                                                                            ring-emerald-100
+                                                                                        ">
 
                                                         <span class="
-                                                                        h-1.5
-                                                                        w-1.5
-                                                                        rounded-full
-                                                                        bg-emerald-500
-                                                                    "></span>
+                                                                                                h-1.5
+                                                                                                w-1.5
+                                                                                                rounded-full
+                                                                                                bg-emerald-500
+                                                                                            "></span>
 
                                                         Activo
 
@@ -948,27 +1109,27 @@
                                                 @else
 
                                                     <span class="
-                                                                    inline-flex
-                                                                    items-center
-                                                                    gap-2
-                                                                    rounded-full
-                                                                    bg-slate-100
-                                                                    px-3
-                                                                    py-1.5
-                                                                    text-xs
-                                                                    font-semibold
-                                                                    text-slate-500
-                                                                    ring-1
-                                                                    ring-inset
-                                                                    ring-slate-200
-                                                                ">
+                                                                                            inline-flex
+                                                                                            items-center
+                                                                                            gap-2
+                                                                                            rounded-full
+                                                                                            bg-slate-100
+                                                                                            px-3
+                                                                                            py-1.5
+                                                                                            text-xs
+                                                                                            font-semibold
+                                                                                            text-slate-500
+                                                                                            ring-1
+                                                                                            ring-inset
+                                                                                            ring-slate-200
+                                                                                        ">
 
                                                         <span class="
-                                                                        h-1.5
-                                                                        w-1.5
-                                                                        rounded-full
-                                                                        bg-slate-400
-                                                                    "></span>
+                                                                                                h-1.5
+                                                                                                w-1.5
+                                                                                                rounded-full
+                                                                                                bg-slate-400
+                                                                                            "></span>
 
                                                         Inactivo
 
@@ -983,35 +1144,35 @@
                                             {{-- ACCIONES --}}
 
                                             <td class="
-                                                        px-6
-                                                        py-5
-                                                        lg:px-7
-                                                    ">
+                                                                            px-6
+                                                                            py-5
+                                                                            lg:px-7
+                                                                        ">
 
                                                 <div class="
-                                                            flex
-                                                            justify-end
-                                                            gap-2
-                                                        ">
+                                                                                flex
+                                                                                justify-end
+                                                                                gap-2
+                                                                            ">
 
                                                     <button type="button" wire:click="
-                                                                edit({{ $user->id }})
-                                                            " class="
-                                                                rounded-xl
-                                                                border
-                                                                border-slate-200
-                                                                bg-white
-                                                                px-3.5
-                                                                py-2.5
-                                                                text-xs
-                                                                font-semibold
-                                                                text-slate-700
-                                                                shadow-sm
-                                                                transition
-                                                                hover:border-blue-200
-                                                                hover:bg-blue-50
-                                                                hover:text-blue-700
-                                                            ">
+                                                                                    edit({{ $user->id }})
+                                                                                " class="
+                                                                                    rounded-xl
+                                                                                    border
+                                                                                    border-slate-200
+                                                                                    bg-white
+                                                                                    px-3.5
+                                                                                    py-2.5
+                                                                                    text-xs
+                                                                                    font-semibold
+                                                                                    text-slate-700
+                                                                                    shadow-sm
+                                                                                    transition
+                                                                                    hover:border-blue-200
+                                                                                    hover:bg-blue-50
+                                                                                    hover:text-blue-700
+                                                                                ">
                                                         Editar
                                                     </button>
 
@@ -1022,28 +1183,28 @@
                                                                             )
 
                                                                             <button type="button" wire:click="
-                                                                                            toggleActive(
-                                                                                                {{ $user->id }}
-                                                                                            )
-                                                                                        " wire:confirm="
-                                                                                            ¿Confirmas este cambio?
-                                                                                        " class="
-                                                                                            rounded-xl
-                                                                                            px-3.5
-                                                                                            py-2.5
-                                                                                            text-xs
-                                                                                            font-semibold
-                                                                                            transition
+                                                                                                                                        toggleActive(
+                                                                                                                                            {{ $user->id }}
+                                                                                                                                        )
+                                                                                                                                    " wire:confirm="
+                                                                                                                                        ¿Confirmas este cambio?
+                                                                                                                                    " class="
+                                                                                                                                        rounded-xl
+                                                                                                                                        px-3.5
+                                                                                                                                        py-2.5
+                                                                                                                                        text-xs
+                                                                                                                                        font-semibold
+                                                                                                                                        transition
 
-                                                                                            {{ $user->active
+                                                                                                                                        {{ $user->active
                                                         ? 'bg-red-50 text-red-700 hover:bg-red-100'
                                                         : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                                                                                            }}
-                                                                                        ">
+                                                                                                                                        }}
+                                                                                                                                    ">
                                                                                 {{ $user->active
                                                         ? 'Desactivar'
                                                         : 'Activar'
-                                                                                        }}
+                                                                                                                                    }}
                                                                             </button>
 
                                                     @endif
@@ -1060,24 +1221,24 @@
                         <tr>
 
                             <td colspan="4" class="
-                                        px-6
-                                        py-16
-                                        text-center
-                                    ">
+                                            px-6
+                                            py-16
+                                            text-center
+                                        ">
 
                                 <p class="
-                                            text-sm
-                                            font-semibold
-                                            text-slate-700
-                                        ">
+                                                text-sm
+                                                font-semibold
+                                                text-slate-700
+                                            ">
                                     No se encontraron usuarios
                                 </p>
 
                                 <p class="
-                                            mt-1
-                                            text-sm
-                                            text-slate-500
-                                        ">
+                                                mt-1
+                                                text-sm
+                                                text-slate-500
+                                            ">
                                     Intenta modificar la búsqueda.
                                 </p>
 
@@ -1143,24 +1304,24 @@
                         <article class="p-5">
 
                             <div class="
-                                        flex
-                                        items-start
-                                        gap-3
-                                    ">
+                                                    flex
+                                                    items-start
+                                                    gap-3
+                                                ">
 
                                 <div class="
-                                            flex
-                                            h-11
-                                            w-11
-                                            shrink-0
-                                            items-center
-                                            justify-center
-                                            rounded-2xl
-                                            bg-blue-50
-                                            text-sm
-                                            font-bold
-                                            text-blue-700
-                                        ">
+                                                        flex
+                                                        h-11
+                                                        w-11
+                                                        shrink-0
+                                                        items-center
+                                                        justify-center
+                                                        rounded-2xl
+                                                        bg-blue-50
+                                                        text-sm
+                                                        font-bold
+                                                        text-blue-700
+                                                    ">
                                     {{ strtoupper(
                     substr(
                         $user->name,
@@ -1174,16 +1335,16 @@
                                 <div class="min-w-0 flex-1">
 
                                     <div class="
-                                                flex
-                                                flex-wrap
-                                                items-center
-                                                gap-2
-                                            ">
+                                                            flex
+                                                            flex-wrap
+                                                            items-center
+                                                            gap-2
+                                                        ">
 
                                         <p class="
-                                                    font-semibold
-                                                    text-slate-950
-                                                ">
+                                                                font-semibold
+                                                                text-slate-950
+                                                            ">
                                             {{ $user->name }}
                                         </p>
 
@@ -1194,14 +1355,14 @@
                                             )
 
                                             <span class="
-                                                            rounded-full
-                                                            bg-blue-50
-                                                            px-2
-                                                            py-0.5
-                                                            text-[9px]
-                                                            font-semibold
-                                                            text-blue-600
-                                                        ">
+                                                                            rounded-full
+                                                                            bg-blue-50
+                                                                            px-2
+                                                                            py-0.5
+                                                                            text-[9px]
+                                                                            font-semibold
+                                                                            text-blue-600
+                                                                        ">
                                                 Tú
                                             </span>
 
@@ -1211,11 +1372,11 @@
 
 
                                     <p class="
-                                                mt-1
-                                                break-all
-                                                text-xs
-                                                text-slate-500
-                                            ">
+                                                            mt-1
+                                                            break-all
+                                                            text-xs
+                                                            text-slate-500
+                                                        ">
                                         {{ $user->email }}
                                     </p>
 
@@ -1226,20 +1387,20 @@
 
 
                             <div class="
-                                        mt-4
-                                        flex
-                                        flex-wrap
-                                        gap-2
-                                    ">
+                                                    mt-4
+                                                    flex
+                                                    flex-wrap
+                                                    gap-2
+                                                ">
 
                                 <span class="
-                                            rounded-full
-                                            px-3
-                                            py-1.5
-                                            text-xs
-                                            font-semibold
-                                            {{ $roleStyle }}
-                                        ">
+                                                        rounded-full
+                                                        px-3
+                                                        py-1.5
+                                                        text-xs
+                                                        font-semibold
+                                                        {{ $roleStyle }}
+                                                    ">
                                     {{ $roleName }}
                                 </span>
 
@@ -1247,28 +1408,28 @@
                                 @if ($user->active)
 
                                     <span class="
-                                                    rounded-full
-                                                    bg-emerald-50
-                                                    px-3
-                                                    py-1.5
-                                                    text-xs
-                                                    font-semibold
-                                                    text-emerald-700
-                                                ">
+                                                                    rounded-full
+                                                                    bg-emerald-50
+                                                                    px-3
+                                                                    py-1.5
+                                                                    text-xs
+                                                                    font-semibold
+                                                                    text-emerald-700
+                                                                ">
                                         ● Activo
                                     </span>
 
                                 @else
 
                                     <span class="
-                                                    rounded-full
-                                                    bg-slate-100
-                                                    px-3
-                                                    py-1.5
-                                                    text-xs
-                                                    font-semibold
-                                                    text-slate-500
-                                                ">
+                                                                    rounded-full
+                                                                    bg-slate-100
+                                                                    px-3
+                                                                    py-1.5
+                                                                    text-xs
+                                                                    font-semibold
+                                                                    text-slate-500
+                                                                ">
                                         ● Inactivo
                                     </span>
 
@@ -1279,25 +1440,25 @@
 
 
                             <div class="
-                                        mt-5
-                                        flex
-                                        gap-2
-                                    ">
+                                                    mt-5
+                                                    flex
+                                                    gap-2
+                                                ">
 
                                 <button type="button" wire:click="
-                                            edit({{ $user->id }})
-                                        " class="
-                                            flex-1
-                                            rounded-xl
-                                            border
-                                            border-slate-200
-                                            bg-white
-                                            px-4
-                                            py-2.5
-                                            text-sm
-                                            font-semibold
-                                            text-slate-700
-                                        ">
+                                                        edit({{ $user->id }})
+                                                    " class="
+                                                        flex-1
+                                                        rounded-xl
+                                                        border
+                                                        border-slate-200
+                                                        bg-white
+                                                        px-4
+                                                        py-2.5
+                                                        text-sm
+                                                        font-semibold
+                                                        text-slate-700
+                                                    ">
                                     Editar
                                 </button>
 
@@ -1308,28 +1469,28 @@
                                             )
 
                                             <button type="button" wire:click="
-                                                            toggleActive(
-                                                                {{ $user->id }}
-                                                            )
-                                                        " wire:confirm="
-                                                            ¿Confirmas este cambio?
-                                                        " class="
-                                                            flex-1
-                                                            rounded-xl
-                                                            px-4
-                                                            py-2.5
-                                                            text-sm
-                                                            font-semibold
+                                                                                    toggleActive(
+                                                                                        {{ $user->id }}
+                                                                                    )
+                                                                                " wire:confirm="
+                                                                                    ¿Confirmas este cambio?
+                                                                                " class="
+                                                                                    flex-1
+                                                                                    rounded-xl
+                                                                                    px-4
+                                                                                    py-2.5
+                                                                                    text-sm
+                                                                                    font-semibold
 
-                                                            {{ $user->active
+                                                                                    {{ $user->active
                                     ? 'bg-red-50 text-red-700'
                                     : 'bg-emerald-50 text-emerald-700'
-                                                            }}
-                                                        ">
+                                                                                    }}
+                                                                                ">
                                                 {{ $user->active
                                     ? 'Desactivar'
                                     : 'Activar'
-                                                        }}
+                                                                                }}
                                             </button>
 
                                 @endif
@@ -1342,16 +1503,16 @@
             @empty
 
                 <div class="
-                            px-6
-                            py-14
-                            text-center
-                        ">
+                                px-6
+                                py-14
+                                text-center
+                            ">
 
                     <p class="
-                                text-sm
-                                font-semibold
-                                text-slate-700
-                            ">
+                                    text-sm
+                                    font-semibold
+                                    text-slate-700
+                                ">
                         No se encontraron usuarios.
                     </p>
 
@@ -1370,12 +1531,12 @@
         @if ($users->hasPages())
 
             <div class="
-                        border-t
-                        border-slate-100
-                        bg-slate-50/40
-                        px-6
-                        py-4
-                    ">
+                            border-t
+                            border-slate-100
+                            bg-slate-50/40
+                            px-6
+                            py-4
+                        ">
                 {{ $users->links() }}
             </div>
 
