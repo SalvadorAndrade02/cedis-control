@@ -153,7 +153,7 @@
             <div class="
                             border-b
                             border-blue-100
-                            bg-gradient-to-r
+                            bg-linear-to-r
                             from-blue-50
                             via-white
                             to-white

@@ -193,37 +193,37 @@
         {{-- ========================================================= --}}
 
         <div class="
-                flex
-                flex-col
-                gap-3
-                sm:flex-row
-                sm:items-center
-                sm:justify-between
-            ">
+                        flex
+                        flex-col
+                        gap-3
+                        sm:flex-row
+                        sm:items-center
+                        sm:justify-between
+                    ">
 
             <a href="{{ route('units.index') }}" class="
-                    inline-flex
-                    w-fit
-                    items-center
-                    gap-2
-                    text-sm
-                    font-semibold
-                    text-slate-500
-                    transition
-                    hover:text-slate-950
-                ">
+                            inline-flex
+                            w-fit
+                            items-center
+                            gap-2
+                            text-sm
+                            font-semibold
+                            text-slate-500
+                            transition
+                            hover:text-slate-950
+                        ">
                 <span>←</span>
                 Volver a unidades
             </a>
 
 
             <p class="
-                    text-xs
-                    font-medium
-                    uppercase
-                    tracking-[0.14em]
-                    text-slate-400
-                ">
+                            text-xs
+                            font-medium
+                            uppercase
+                            tracking-[0.14em]
+                            text-slate-400
+                        ">
                 Expediente digital CEDIS
             </p>
 
@@ -236,89 +236,89 @@
         {{-- ========================================================= --}}
 
         <section class="
-                relative
-                overflow-hidden
-                rounded-3xl
-                bg-[#0B1220]
-                p-6
-                text-white
-                shadow-[0_18px_50px_rgba(15,23,42,0.16)]
-                lg:p-8
-            ">
+                        relative
+                        overflow-hidden
+                        rounded-3xl
+                        bg-[#0B1220]
+                        p-6
+                        text-white
+                        shadow-[0_18px_50px_rgba(15,23,42,0.16)]
+                        lg:p-8
+                    ">
 
             {{-- DECORACIÓN --}}
 
             <div class="
-                    pointer-events-none
-                    absolute
-                    -right-24
-                    -top-24
-                    h-72
-                    w-72
-                    rounded-full
-                    bg-blue-500/10
-                "></div>
+                            pointer-events-none
+                            absolute
+                            -right-24
+                            -top-24
+                            h-72
+                            w-72
+                            rounded-full
+                            bg-blue-500/10
+                        "></div>
 
             <div class="
-                    pointer-events-none
-                    absolute
-                    bottom-0
-                    right-20
-                    h-40
-                    w-40
-                    translate-y-20
-                    rounded-full
-                    bg-white/[0.03]
-                "></div>
+                            pointer-events-none
+                            absolute
+                            bottom-0
+                            right-20
+                            h-40
+                            w-40
+                            translate-y-20
+                            rounded-full
+                            bg-white/[0.03]
+                        "></div>
 
 
             <div class="
-                    relative
-                    flex
-                    flex-col
-                    gap-8
-                    xl:flex-row
-                    xl:items-start
-                    xl:justify-between
-                ">
+                            relative
+                            flex
+                            flex-col
+                            gap-8
+                            xl:flex-row
+                            xl:items-start
+                            xl:justify-between
+                        ">
 
                 {{-- INFORMACIÓN PRINCIPAL --}}
 
                 <div class="min-w-0">
 
                     <div class="
-                            flex
-                            flex-wrap
-                            items-center
-                            gap-3
-                        ">
+                                    flex
+                                    flex-wrap
+                                    items-center
+                                    gap-3
+                                ">
 
                         <span class="
-                                rounded-full
-                                bg-white/10
-                                px-3
-                                py-1.5
-                                text-[10px]
-                                font-semibold
-                                uppercase
-                                tracking-[0.18em]
-                                text-slate-300
-                            ">
+                                        rounded-full
+                                        bg-white/10
+                                        px-3
+                                        py-1.5
+                                        text-[10px]
+                                        font-semibold
+                                        uppercase
+                                        tracking-[0.18em]
+                                        text-slate-300
+                                    ">
                             {{ $unit->brand?->name ?? 'Unidad' }}
                         </span>
 
 
                         <span class="
-                                inline-flex
-                                rounded-full
-                                px-3
-                                py-1.5
-                                text-[10px]
-                                font-semibold
-                                uppercase
-                                tracking-wider
-                                {{ $unit->status->badgeClasses() }}
-                            ">
+                                        inline-flex
+                                        rounded-full
+                                        px-3
+                                        py-1.5
+                                        text-[10px]
+                                        font-semibold
+                                        uppercase
+                                        tracking-wider
+                                        {{ $unit->status->badgeClasses() }}
+                                    ">
                             {{ $unit->status->label() }}
                         </span>
 
@@ -326,27 +326,27 @@
 
 
                     <h1 class="
-                            mt-5
-                            text-3xl
-                            font-bold
-                            tracking-tight
-                            text-white
-                            sm:text-4xl
-                        ">
+                                    mt-5
+                                    text-3xl
+                                    font-bold
+                                    tracking-tight
+                                    text-white
+                                    sm:text-4xl
+                                ">
                         {{ $unit->model ?: 'Modelo sin identificar' }}
                     </h1>
 
 
                     <div class="
-                            mt-4
-                            flex
-                            flex-wrap
-                            items-center
-                            gap-x-5
-                            gap-y-2
-                            text-sm
-                            text-slate-400
-                        ">
+                                    mt-4
+                                    flex
+                                    flex-wrap
+                                    items-center
+                                    gap-x-5
+                                    gap-y-2
+                                    text-sm
+                                    text-slate-400
+                                ">
 
                         @if ($unit->year)
                             <span>
@@ -384,36 +384,36 @@
                     {{-- VIN --}}
 
                     <div class="
-                            mt-7
-                            inline-block
-                            max-w-full
-                            rounded-2xl
-                            border
-                            border-white/10
-                            bg-white/[0.05]
-                            px-5
-                            py-4
-                        ">
+                                    mt-7
+                                    inline-block
+                                    max-w-full
+                                    rounded-2xl
+                                    border
+                                    border-white/10
+                                    bg-white/[0.05]
+                                    px-5
+                                    py-4
+                                ">
 
                         <p class="
-                                text-[10px]
-                                font-semibold
-                                uppercase
-                                tracking-[0.16em]
-                                text-slate-500
-                            ">
+                                        text-[10px]
+                                        font-semibold
+                                        uppercase
+                                        tracking-[0.16em]
+                                        text-slate-500
+                                    ">
                             VIN
                         </p>
 
                         <p class="
-                                mt-1
-                                break-all
-                                font-mono
-                                text-lg
-                                font-semibold
-                                tracking-wider
-                                text-white
-                            ">
+                                        mt-1
+                                        break-all
+                                        font-mono
+                                        text-lg
+                                        font-semibold
+                                        tracking-wider
+                                        text-white
+                                    ">
                             {{ $unit->vin }}
                         </p>
 
@@ -425,13 +425,13 @@
                 {{-- ACCIONES --}}
 
                 <div class="
-                        flex
-                        shrink-0
-                        flex-col
-                        gap-3
-                        sm:flex-row
-                        xl:flex-col
-                    ">
+                                flex
+                                shrink-0
+                                flex-col
+                                gap-3
+                                sm:flex-row
+                                xl:flex-col
+                            ">
 
                     @if (
                                         $unit->status
@@ -443,23 +443,23 @@
                             'units.expedient.pdf',
                             $unit
                         ) }}" class="
-                                                inline-flex
-                                                items-center
-                                                justify-center
-                                                gap-2
-                                                rounded-xl
-                                                bg-blue-600
-                                                px-5
-                                                py-3
-                                                text-sm
-                                                font-semibold
-                                                text-white
-                                                shadow-sm
-                                                transition
-                                                hover:bg-blue-500
-                                                hover:shadow-md
-                                                active:scale-[.98]
-                                            ">
+                                                                                            inline-flex
+                                                                                            items-center
+                                                                                            justify-center
+                                                                                            gap-2
+                                                                                            rounded-xl
+                                                                                            bg-blue-600
+                                                                                            px-5
+                                                                                            py-3
+                                                                                            text-sm
+                                                                                            font-semibold
+                                                                                            text-white
+                                                                                            shadow-sm
+                                                                                            transition
+                                                                                            hover:bg-blue-500
+                                                                                            hover:shadow-md
+                                                                                            active:scale-[.98]
+                                                                                        ">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                                             stroke="currentColor" class="h-4 w-4">
@@ -475,23 +475,23 @@
                             'units.shipping-guide.pdf',
                             $unit
                         ) }}" class="
-                            inline-flex
-                            items-center
-                            justify-center
-                            gap-2
-                            rounded-xl
-                            border
-                            border-violet-200
-                            bg-violet-50
-                            px-4
-                            py-2.5
-                            text-sm
-                            font-semibold
-                            text-violet-700
-                            transition
-                            hover:border-violet-300
-                            hover:bg-violet-100
-                        ">
+                                                                        inline-flex
+                                                                        items-center
+                                                                        justify-center
+                                                                        gap-2
+                                                                        rounded-xl
+                                                                        border
+                                                                        border-violet-200
+                                                                        bg-violet-50
+                                                                        px-4
+                                                                        py-2.5
+                                                                        text-sm
+                                                                        font-semibold
+                                                                        text-violet-700
+                                                                        transition
+                                                                        hover:border-violet-300
+                                                                        hover:bg-violet-100
+                                                                    ">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
                                             stroke="currentColor" class="h-4 w-4">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -505,15 +505,15 @@
 
 
                     <div class="
-                            rounded-xl
-                            border
-                            border-white/10
-                            bg-white/[0.04]
-                            px-4
-                            py-3
-                            text-xs
-                            text-slate-400
-                        ">
+                                    rounded-xl
+                                    border
+                                    border-white/10
+                                    bg-white/[0.04]
+                                    px-4
+                                    py-3
+                                    text-xs
+                                    text-slate-400
+                                ">
                         {{ $statusVisual['label'] }}
                     </div>
 
@@ -530,42 +530,42 @@
         {{-- ========================================================= --}}
 
         <section class="
-                rounded-3xl
-                border
-                border-slate-200/80
-                bg-white
-                p-6
-                shadow-[0_8px_30px_rgba(15,23,42,0.04)]
-                lg:p-7
-            ">
+                        rounded-3xl
+                        border
+                        border-slate-200/80
+                        bg-white
+                        p-6
+                        shadow-[0_8px_30px_rgba(15,23,42,0.04)]
+                        lg:p-7
+                    ">
 
             <div>
 
                 <p class="
-                        text-xs
-                        font-semibold
-                        uppercase
-                        tracking-[0.16em]
-                        text-slate-400
-                    ">
+                                text-xs
+                                font-semibold
+                                uppercase
+                                tracking-[0.16em]
+                                text-slate-400
+                            ">
                     Trazabilidad
                 </p>
 
                 <h2 class="
-                        mt-1
-                        text-xl
-                        font-semibold
-                        tracking-tight
-                        text-slate-950
-                    ">
+                                mt-1
+                                text-xl
+                                font-semibold
+                                tracking-tight
+                                text-slate-950
+                            ">
                     Progreso del expediente
                 </h2>
 
                 <p class="
-                        mt-1
-                        text-sm
-                        text-slate-500
-                    ">
+                                mt-1
+                                text-sm
+                                text-slate-500
+                            ">
                     Seguimiento de las tres etapas operativas
                     principales de la unidad.
                 </p>
@@ -574,11 +574,11 @@
 
 
             <div class="
-                    mt-6
-                    grid
-                    gap-4
-                    lg:grid-cols-3
-                ">
+                            mt-6
+                            grid
+                            gap-4
+                            lg:grid-cols-3
+                        ">
 
                 @foreach (
                             \App\Enums\MilestoneStage::cases()
@@ -606,49 +606,49 @@
 
 
                         <article class="
-                                    relative
-                                    overflow-hidden
-                                    rounded-2xl
-                                    border
-                                    p-5
-                                    {{ $completed
+                                                                relative
+                                                                overflow-hidden
+                                                                rounded-2xl
+                                                                border
+                                                                p-5
+                                                                {{ $completed
                     ? $visual['border'] . ' ' . $visual['soft']
                     : 'border-slate-200 bg-white'
-                                    }}
-                                ">
+                                                                }}
+                                                            ">
 
                             <div class="
-                                        flex
-                                        items-start
-                                        justify-between
-                                        gap-4
-                                    ">
+                                                                    flex
+                                                                    items-start
+                                                                    justify-between
+                                                                    gap-4
+                                                                ">
 
                                 <div class="
-                                            flex
-                                            items-center
-                                            gap-3
-                                        ">
+                                                                        flex
+                                                                        items-center
+                                                                        gap-3
+                                                                    ">
 
                                     <div class="
-                                                flex
-                                                h-10
-                                                w-10
-                                                shrink-0
-                                                items-center
-                                                justify-center
-                                                rounded-xl
-                                                {{ $completed
+                                                                            flex
+                                                                            h-10
+                                                                            w-10
+                                                                            shrink-0
+                                                                            items-center
+                                                                            justify-center
+                                                                            rounded-xl
+                                                                            {{ $completed
                     ? $visual['soft']
                     : 'bg-slate-100'
-                                                }}
-                                                {{ $completed
+                                                                            }}
+                                                                            {{ $completed
                     ? $visual['text']
                     : 'text-slate-500'
-                                                }}
-                                                text-xs
-                                                font-bold
-                                            ">
+                                                                            }}
+                                                                            text-xs
+                                                                            font-bold
+                                                                        ">
                                         {{ $visual['number'] }}
                                     </div>
 
@@ -656,20 +656,20 @@
                                     <div>
 
                                         <p class="
-                                                    text-xs
-                                                    font-semibold
-                                                    uppercase
-                                                    tracking-wider
-                                                    text-slate-400
-                                                ">
+                                                                                text-xs
+                                                                                font-semibold
+                                                                                uppercase
+                                                                                tracking-wider
+                                                                                text-slate-400
+                                                                            ">
                                             Etapa
                                         </p>
 
                                         <h3 class="
-                                                    mt-1
-                                                    font-semibold
-                                                    text-slate-950
-                                                ">
+                                                                                mt-1
+                                                                                font-semibold
+                                                                                text-slate-950
+                                                                            ">
                                             {{ $stage->label() }}
                                         </h3>
 
@@ -681,20 +681,20 @@
                                 @if ($milestone)
 
                                             <span class="
-                                                            rounded-full
-                                                            px-2.5
-                                                            py-1
-                                                            text-xs
-                                                            font-semibold
-                                                            {{ $milestone
+                                                                                                                            rounded-full
+                                                                                                                            px-2.5
+                                                                                                                            py-1
+                                                                                                                            text-xs
+                                                                                                                            font-semibold
+                                                                                                                            {{ $milestone
                                     ->status
                                     ->badgeClasses()
-                                                            }}
-                                                        ">
+                                                                                                                            }}
+                                                                                                                        ">
                                                 {{ $milestone
                                     ->status
                                     ->label()
-                                                        }}
+                                                                                                                        }}
                                             </span>
 
                                 @endif
@@ -705,33 +705,33 @@
                             @if ($milestone)
 
                                     <div class="
-                                                    mt-5
-                                                    flex
-                                                    items-end
-                                                    justify-between
-                                                    gap-4
-                                                ">
+                                                                                                            mt-5
+                                                                                                            flex
+                                                                                                            items-end
+                                                                                                            justify-between
+                                                                                                            gap-4
+                                                                                                        ">
 
                                         <div>
 
                                             <p class="
-                                                            text-xs
-                                                            text-slate-500
-                                                        ">
+                                                                                                                    text-xs
+                                                                                                                    text-slate-500
+                                                                                                                ">
                                                 Evidencias
                                             </p>
 
                                             <p class="
-                                                            mt-1
-                                                            text-2xl
-                                                            font-bold
-                                                            tracking-tight
-                                                            text-slate-950
-                                                        ">
+                                                                                                                    mt-1
+                                                                                                                    text-2xl
+                                                                                                                    font-bold
+                                                                                                                    tracking-tight
+                                                                                                                    text-slate-950
+                                                                                                                ">
                                                 {{ $milestone
                                 ->evidences
                                 ->count()
-                                                        }}
+                                                                                                                }}
                                             </p>
 
                                         </div>
@@ -741,19 +741,21 @@
 
                                                     <div class="text-right">
 
-                                                        <p class="
-                                                                            text-xs
-                                                                            text-slate-400
-                                                                        ">
+                                                        <p
+                                                            class="
+                                                                                                                                                                                text-xs
+                                                                                                                                                                                text-slate-400
+                                                                                                                                                                            ">
                                                             Completado
                                                         </p>
 
-                                                        <p class="
-                                                                            mt-1
-                                                                            text-xs
-                                                                            font-medium
-                                                                            text-slate-700
-                                                                        ">
+                                                        <p
+                                                            class="
+                                                                                                                                                                                mt-1
+                                                                                                                                                                                text-xs
+                                                                                                                                                                                font-medium
+                                                                                                                                                                                text-slate-700
+                                                                                                                                                                            ">
                                                             {{ \App\Support\DateHelper::format(
                                                 $milestone->completed_at
                                             ) }}
@@ -772,29 +774,31 @@
                                         )
 
                                         <div class="
-                                                            mt-4
-                                                            border-t
-                                                            border-slate-200/70
-                                                            pt-4
-                                                        ">
+                                                                                                                                                mt-4
+                                                                                                                                                border-t
+                                                                                                                                                border-slate-200/70
+                                                                                                                                                pt-4
+                                                                                                                                            ">
 
-                                            <p class="
-                                                                text-xs
-                                                                text-slate-400
-                                                            ">
+                                            <p
+                                                class="
+                                                                                                                                                    text-xs
+                                                                                                                                                    text-slate-400
+                                                                                                                                                ">
                                                 Responsable
                                             </p>
 
-                                            <p class="
-                                                                mt-1
-                                                                text-sm
-                                                                font-semibold
-                                                                text-slate-800
-                                                            ">
+                                            <p
+                                                class="
+                                                                                                                                                    mt-1
+                                                                                                                                                    text-sm
+                                                                                                                                                    font-semibold
+                                                                                                                                                    text-slate-800
+                                                                                                                                                ">
                                                 {{ $milestone->completed_by_name
                                         ?? $milestone->completedBy?->name
                                         ?? '—'
-                                                            }}
+                                                                                                                                                }}
                                             </p>
 
                                         </div>
@@ -818,59 +822,59 @@
         {{-- ========================================================= --}}
 
         <div class="
-                grid
-                gap-6
-                xl:grid-cols-2
-            ">
+                        grid
+                        gap-6
+                        xl:grid-cols-2
+                    ">
 
             {{-- INFORMACIÓN DE UNIDAD --}}
 
             <section class="
-                    overflow-hidden
-                    rounded-3xl
-                    border
-                    border-slate-200/80
-                    bg-white
-                    shadow-[0_8px_30px_rgba(15,23,42,0.04)]
-                ">
+                            overflow-hidden
+                            rounded-3xl
+                            border
+                            border-slate-200/80
+                            bg-white
+                            shadow-[0_8px_30px_rgba(15,23,42,0.04)]
+                        ">
 
                 <div class="
-                        flex
-                        items-center
-                        gap-4
-                        border-b
-                        border-slate-100
-                        px-6
-                        py-5
-                    ">
+                                flex
+                                items-center
+                                gap-4
+                                border-b
+                                border-slate-100
+                                px-6
+                                py-5
+                            ">
 
                     <div class="
-                            flex
-                            h-11
-                            w-11
-                            items-center
-                            justify-center
-                            rounded-2xl
-                            bg-slate-100
-                            text-slate-700
-                        ">
+                                    flex
+                                    h-11
+                                    w-11
+                                    items-center
+                                    justify-center
+                                    rounded-2xl
+                                    bg-slate-100
+                                    text-slate-700
+                                ">
                         ◇
                     </div>
 
                     <div>
 
                         <h2 class="
-                                font-semibold
-                                text-slate-950
-                            ">
+                                        font-semibold
+                                        text-slate-950
+                                    ">
                             Información de la unidad
                         </h2>
 
                         <p class="
-                                mt-0.5
-                                text-sm
-                                text-slate-500
-                            ">
+                                        mt-0.5
+                                        text-sm
+                                        text-slate-500
+                                    ">
                             Datos generales del expediente.
                         </p>
 
@@ -880,12 +884,12 @@
 
 
                 <dl class="
-                        grid
-                        gap-x-8
-                        gap-y-6
-                        p-6
-                        sm:grid-cols-2
-                    ">
+                                grid
+                                gap-x-8
+                                gap-y-6
+                                p-6
+                                sm:grid-cols-2
+                            ">
 
                     @foreach ([
                             'Marca' => $unit->brand?->name,
@@ -900,21 +904,21 @@
                         <div>
 
                             <dt class="
-                                        text-[10px]
-                                        font-semibold
-                                        uppercase
-                                        tracking-[0.12em]
-                                        text-slate-400
-                                    ">
+                                                        text-[10px]
+                                                        font-semibold
+                                                        uppercase
+                                                        tracking-[0.12em]
+                                                        text-slate-400
+                                                    ">
                                 {{ $label }}
                             </dt>
 
                             <dd class="
-                                        mt-1.5
-                                        text-sm
-                                        font-semibold
-                                        text-slate-900
-                                    ">
+                                                        mt-1.5
+                                                        text-sm
+                                                        font-semibold
+                                                        text-slate-900
+                                                    ">
                                 {{ $value ?: '—' }}
                             </dd>
 
@@ -926,21 +930,21 @@
                     <div>
 
                         <dt class="
-                                text-[10px]
-                                font-semibold
-                                uppercase
-                                tracking-[0.12em]
-                                text-slate-400
-                            ">
+                                        text-[10px]
+                                        font-semibold
+                                        uppercase
+                                        tracking-[0.12em]
+                                        text-slate-400
+                                    ">
                             Fecha de registro
                         </dt>
 
                         <dd class="
-                                mt-1.5
-                                text-sm
-                                font-semibold
-                                text-slate-900
-                            ">
+                                        mt-1.5
+                                        text-sm
+                                        font-semibold
+                                        text-slate-900
+                                    ">
                             {{ \App\Support\DateHelper::format(
         $unit->created_at
     ) }}
@@ -956,51 +960,51 @@
             {{-- DOCUMENTOS --}}
 
             <section class="
-                    overflow-hidden
-                    rounded-3xl
-                    border
-                    border-slate-200/80
-                    bg-white
-                    shadow-[0_8px_30px_rgba(15,23,42,0.04)]
-                ">
+                            overflow-hidden
+                            rounded-3xl
+                            border
+                            border-slate-200/80
+                            bg-white
+                            shadow-[0_8px_30px_rgba(15,23,42,0.04)]
+                        ">
 
                 <div class="
-                        flex
-                        items-center
-                        gap-4
-                        border-b
-                        border-slate-100
-                        px-6
-                        py-5
-                    ">
+                                flex
+                                items-center
+                                gap-4
+                                border-b
+                                border-slate-100
+                                px-6
+                                py-5
+                            ">
 
                     <div class="
-                            flex
-                            h-11
-                            w-11
-                            items-center
-                            justify-center
-                            rounded-2xl
-                            bg-blue-50
-                            text-blue-600
-                        ">
+                                    flex
+                                    h-11
+                                    w-11
+                                    items-center
+                                    justify-center
+                                    rounded-2xl
+                                    bg-blue-50
+                                    text-blue-600
+                                ">
                         ↓
                     </div>
 
                     <div>
 
                         <h2 class="
-                                font-semibold
-                                text-slate-950
-                            ">
+                                        font-semibold
+                                        text-slate-950
+                                    ">
                             Documentos de origen
                         </h2>
 
                         <p class="
-                                mt-0.5
-                                text-sm
-                                text-slate-500
-                            ">
+                                        mt-0.5
+                                        text-sm
+                                        text-slate-500
+                                    ">
                             CFDI y representación documental asociada.
                         </p>
 
@@ -1012,10 +1016,10 @@
                 <div class="space-y-5 p-6">
 
                     <div class="
-                            grid
-                            gap-3
-                            sm:grid-cols-2
-                        ">
+                                    grid
+                                    gap-3
+                                    sm:grid-cols-2
+                                ">
 
                         @if ($xmlDocument)
 
@@ -1023,52 +1027,52 @@
                                 'documents.download',
                                 $xmlDocument
                             ) }}" class="
-                                                        group
-                                                        rounded-2xl
-                                                        border
-                                                        border-blue-100
-                                                        bg-blue-50/40
-                                                        p-4
-                                                        transition
-                                                        hover:border-blue-300
-                                                        hover:bg-blue-50
-                                                    ">
+                                                                                                            group
+                                                                                                            rounded-2xl
+                                                                                                            border
+                                                                                                            border-blue-100
+                                                                                                            bg-blue-50/40
+                                                                                                            p-4
+                                                                                                            transition
+                                                                                                            hover:border-blue-300
+                                                                                                            hover:bg-blue-50
+                                                                                                        ">
 
                                                 <div class="
-                                                            flex
-                                                            items-center
-                                                            justify-between
-                                                            gap-3
-                                                        ">
+                                                                                                                flex
+                                                                                                                items-center
+                                                                                                                justify-between
+                                                                                                                gap-3
+                                                                                                            ">
 
                                                     <span class="
-                                                                rounded-lg
-                                                                bg-blue-100
-                                                                px-2.5
-                                                                py-1
-                                                                text-xs
-                                                                font-bold
-                                                                text-blue-700
-                                                            ">
+                                                                                                                    rounded-lg
+                                                                                                                    bg-blue-100
+                                                                                                                    px-2.5
+                                                                                                                    py-1
+                                                                                                                    text-xs
+                                                                                                                    font-bold
+                                                                                                                    text-blue-700
+                                                                                                                ">
                                                         XML
                                                     </span>
 
                                                     <span class="
-                                                                text-xs
-                                                                text-blue-500
-                                                            ">
+                                                                                                                    text-xs
+                                                                                                                    text-blue-500
+                                                                                                                ">
                                                         Descargar →
                                                     </span>
 
                                                 </div>
 
                                                 <p class="
-                                                            mt-4
-                                                            truncate
-                                                            text-sm
-                                                            font-semibold
-                                                            text-slate-900
-                                                        ">
+                                                                                                                mt-4
+                                                                                                                truncate
+                                                                                                                text-sm
+                                                                                                                font-semibold
+                                                                                                                text-slate-900
+                                                                                                            ">
                                                     {{ $xmlDocument->original_filename }}
                                                 </p>
 
@@ -1083,52 +1087,52 @@
                                 'documents.download',
                                 $pdfDocument
                             ) }}" class="
-                                                        group
-                                                        rounded-2xl
-                                                        border
-                                                        border-red-100
-                                                        bg-red-50/40
-                                                        p-4
-                                                        transition
-                                                        hover:border-red-300
-                                                        hover:bg-red-50
-                                                    ">
+                                                                                                            group
+                                                                                                            rounded-2xl
+                                                                                                            border
+                                                                                                            border-red-100
+                                                                                                            bg-red-50/40
+                                                                                                            p-4
+                                                                                                            transition
+                                                                                                            hover:border-red-300
+                                                                                                            hover:bg-red-50
+                                                                                                        ">
 
                                                 <div class="
-                                                            flex
-                                                            items-center
-                                                            justify-between
-                                                            gap-3
-                                                        ">
+                                                                                                                flex
+                                                                                                                items-center
+                                                                                                                justify-between
+                                                                                                                gap-3
+                                                                                                            ">
 
                                                     <span class="
-                                                                rounded-lg
-                                                                bg-red-100
-                                                                px-2.5
-                                                                py-1
-                                                                text-xs
-                                                                font-bold
-                                                                text-red-700
-                                                            ">
+                                                                                                                    rounded-lg
+                                                                                                                    bg-red-100
+                                                                                                                    px-2.5
+                                                                                                                    py-1
+                                                                                                                    text-xs
+                                                                                                                    font-bold
+                                                                                                                    text-red-700
+                                                                                                                ">
                                                         PDF
                                                     </span>
 
                                                     <span class="
-                                                                text-xs
-                                                                text-red-500
-                                                            ">
+                                                                                                                    text-xs
+                                                                                                                    text-red-500
+                                                                                                                ">
                                                         Descargar →
                                                     </span>
 
                                                 </div>
 
                                                 <p class="
-                                                            mt-4
-                                                            truncate
-                                                            text-sm
-                                                            font-semibold
-                                                            text-slate-900
-                                                        ">
+                                                                                                                mt-4
+                                                                                                                truncate
+                                                                                                                text-sm
+                                                                                                                font-semibold
+                                                                                                                text-slate-900
+                                                                                                            ">
                                                     {{ $pdfDocument->original_filename }}
                                                 </p>
 
@@ -1142,35 +1146,35 @@
                     @if ($invoice)
 
                                     <div class="
-                                                rounded-2xl
-                                                bg-slate-50
-                                                p-5
-                                            ">
+                                                                                            rounded-2xl
+                                                                                            bg-slate-50
+                                                                                            p-5
+                                                                                        ">
 
                                         <dl class="
-                                                    grid
-                                                    gap-5
-                                                    sm:grid-cols-2
-                                                ">
+                                                                                                grid
+                                                                                                gap-5
+                                                                                                sm:grid-cols-2
+                                                                                            ">
 
                                             <div>
 
                                                 <dt class="
-                                                            text-[10px]
-                                                            font-semibold
-                                                            uppercase
-                                                            tracking-wider
-                                                            text-slate-400
-                                                        ">
+                                                                                                        text-[10px]
+                                                                                                        font-semibold
+                                                                                                        uppercase
+                                                                                                        tracking-wider
+                                                                                                        text-slate-400
+                                                                                                    ">
                                                     Factura
                                                 </dt>
 
                                                 <dd class="
-                                                            mt-1
-                                                            text-sm
-                                                            font-semibold
-                                                            text-slate-900
-                                                        ">
+                                                                                                        mt-1
+                                                                                                        text-sm
+                                                                                                        font-semibold
+                                                                                                        text-slate-900
+                                                                                                    ">
                                                     {{ $invoice->series }}
                                                     {{ $invoice->folio }}
                                                 </dd>
@@ -1181,21 +1185,21 @@
                                             <div>
 
                                                 <dt class="
-                                                            text-[10px]
-                                                            font-semibold
-                                                            uppercase
-                                                            tracking-wider
-                                                            text-slate-400
-                                                        ">
+                                                                                                        text-[10px]
+                                                                                                        font-semibold
+                                                                                                        uppercase
+                                                                                                        tracking-wider
+                                                                                                        text-slate-400
+                                                                                                    ">
                                                     Total
                                                 </dt>
 
                                                 <dd class="
-                                                            mt-1
-                                                            text-sm
-                                                            font-semibold
-                                                            text-slate-900
-                                                        ">
+                                                                                                        mt-1
+                                                                                                        text-sm
+                                                                                                        font-semibold
+                                                                                                        text-slate-900
+                                                                                                    ">
                                                     {{ $invoice->currency }}
 
                                                     {{ number_format(
@@ -1210,22 +1214,22 @@
                                             <div class="sm:col-span-2">
 
                                                 <dt class="
-                                                            text-[10px]
-                                                            font-semibold
-                                                            uppercase
-                                                            tracking-wider
-                                                            text-slate-400
-                                                        ">
+                                                                                                        text-[10px]
+                                                                                                        font-semibold
+                                                                                                        uppercase
+                                                                                                        tracking-wider
+                                                                                                        text-slate-400
+                                                                                                    ">
                                                     UUID
                                                 </dt>
 
                                                 <dd class="
-                                                            mt-1
-                                                            break-all
-                                                            font-mono
-                                                            text-xs
-                                                            text-slate-600
-                                                        ">
+                                                                                                        mt-1
+                                                                                                        break-all
+                                                                                                        font-mono
+                                                                                                        text-xs
+                                                                                                        text-slate-600
+                                                                                                    ">
                                                     {{ $invoice->uuid }}
                                                 </dd>
 
@@ -1252,53 +1256,53 @@
         @if ($assemblyWorkSession)
 
             <section class="
-                        overflow-hidden
-                        rounded-3xl
-                        border
-                        border-amber-100
-                        bg-white
-                        shadow-[0_8px_30px_rgba(15,23,42,0.04)]
-                    ">
+                                            overflow-hidden
+                                            rounded-3xl
+                                            border
+                                            border-amber-100
+                                            bg-white
+                                            shadow-[0_8px_30px_rgba(15,23,42,0.04)]
+                                        ">
 
                 <div class="
-                            flex
-                            flex-col
-                            gap-4
-                            border-b
-                            border-amber-100
-                            bg-gradient-to-r
-                            from-amber-50
-                            to-white
-                            px-6
-                            py-5
-                            sm:flex-row
-                            sm:items-center
-                            sm:justify-between
-                            lg:px-7
-                        ">
+                                                flex
+                                                flex-col
+                                                gap-4
+                                                border-b
+                                                border-amber-100
+                                                bg-gradient-to-r
+                                                from-amber-50
+                                                to-white
+                                                px-6
+                                                py-5
+                                                sm:flex-row
+                                                sm:items-center
+                                                sm:justify-between
+                                                lg:px-7
+                                            ">
 
                     <div>
 
                         <div class="
-                                    flex
-                                    items-center
-                                    gap-2
-                                ">
+                                                        flex
+                                                        items-center
+                                                        gap-2
+                                                    ">
 
                             <span class="
-                                        h-2.5
-                                        w-2.5
-                                        rounded-full
-                                        bg-amber-500
-                                    "></span>
+                                                            h-2.5
+                                                            w-2.5
+                                                            rounded-full
+                                                            bg-amber-500
+                                                        "></span>
 
                             <p class="
-                                        text-xs
-                                        font-semibold
-                                        uppercase
-                                        tracking-[0.14em]
-                                        text-amber-700
-                                    ">
+                                                            text-xs
+                                                            font-semibold
+                                                            uppercase
+                                                            tracking-[0.14em]
+                                                            text-amber-700
+                                                        ">
                                 Control de armado
                             </p>
 
@@ -1306,12 +1310,12 @@
 
 
                         <h2 class="
-                                    mt-2
-                                    text-xl
-                                    font-semibold
-                                    tracking-tight
-                                    text-slate-950
-                                ">
+                                                        mt-2
+                                                        text-xl
+                                                        font-semibold
+                                                        tracking-tight
+                                                        text-slate-950
+                                                    ">
                             Registro de tiempo de armado
                         </h2>
 
@@ -1319,21 +1323,21 @@
 
 
                     <span class="
-                                w-fit
-                                rounded-full
-                                px-3
-                                py-1.5
-                                text-xs
-                                font-semibold
-                                {{ $assemblyWorkSession
+                                                    w-fit
+                                                    rounded-full
+                                                    px-3
+                                                    py-1.5
+                                                    text-xs
+                                                    font-semibold
+                                                    {{ $assemblyWorkSession
                 ->status
                 ->badgeClasses()
-                                }}
-                            ">
+                                                    }}
+                                                ">
                         {{ $assemblyWorkSession
                 ->status
                 ->label()
-                            }}
+                                                }}
                     </span>
 
                 </div>
@@ -1344,47 +1348,47 @@
                     {{-- MÉTRICAS --}}
 
                     <div class="
-                                grid
-                                gap-4
-                                md:grid-cols-3
-                            ">
+                                                    grid
+                                                    gap-4
+                                                    md:grid-cols-3
+                                                ">
 
                         <article class="
-                                    rounded-2xl
-                                    border
-                                    border-blue-100
-                                    bg-blue-50/50
-                                    p-5
-                                ">
+                                                        rounded-2xl
+                                                        border
+                                                        border-blue-100
+                                                        bg-blue-50/50
+                                                        p-5
+                                                    ">
 
                             <p class="
-                                        text-xs
-                                        font-semibold
-                                        uppercase
-                                        tracking-wider
-                                        text-blue-600
-                                    ">
+                                                            text-xs
+                                                            font-semibold
+                                                            uppercase
+                                                            tracking-wider
+                                                            text-blue-600
+                                                        ">
                                 Tiempo efectivo
                             </p>
 
                             <p class="
-                                        mt-3
-                                        font-mono
-                                        text-3xl
-                                        font-bold
-                                        tracking-tight
-                                        text-blue-900
-                                    ">
+                                                            mt-3
+                                                            font-mono
+                                                            text-3xl
+                                                            font-bold
+                                                            tracking-tight
+                                                            text-blue-900
+                                                        ">
                                 {{ \App\Support\DurationHelper::format(
                 $assemblyEffectiveSeconds
             ) }}
                             </p>
 
                             <p class="
-                                        mt-2
-                                        text-xs
-                                        text-blue-600
-                                    ">
+                                                            mt-2
+                                                            text-xs
+                                                            text-blue-600
+                                                        ">
                                 Tiempo real dedicado al armado.
                             </p>
 
@@ -1392,41 +1396,41 @@
 
 
                         <article class="
-                                    rounded-2xl
-                                    border
-                                    border-amber-100
-                                    bg-amber-50/50
-                                    p-5
-                                ">
+                                                        rounded-2xl
+                                                        border
+                                                        border-amber-100
+                                                        bg-amber-50/50
+                                                        p-5
+                                                    ">
 
                             <p class="
-                                        text-xs
-                                        font-semibold
-                                        uppercase
-                                        tracking-wider
-                                        text-amber-700
-                                    ">
+                                                            text-xs
+                                                            font-semibold
+                                                            uppercase
+                                                            tracking-wider
+                                                            text-amber-700
+                                                        ">
                                 Tiempo pausado
                             </p>
 
                             <p class="
-                                        mt-3
-                                        font-mono
-                                        text-3xl
-                                        font-bold
-                                        tracking-tight
-                                        text-amber-900
-                                    ">
+                                                            mt-3
+                                                            font-mono
+                                                            text-3xl
+                                                            font-bold
+                                                            tracking-tight
+                                                            text-amber-900
+                                                        ">
                                 {{ \App\Support\DurationHelper::format(
                 $assemblyPausedSeconds
             ) }}
                             </p>
 
                             <p class="
-                                        mt-2
-                                        text-xs
-                                        text-amber-700
-                                    ">
+                                                            mt-2
+                                                            text-xs
+                                                            text-amber-700
+                                                        ">
                                 Tiempo excluido del proceso.
                             </p>
 
@@ -1434,41 +1438,41 @@
 
 
                         <article class="
-                                    rounded-2xl
-                                    border
-                                    border-slate-200
-                                    bg-slate-50
-                                    p-5
-                                ">
+                                                        rounded-2xl
+                                                        border
+                                                        border-slate-200
+                                                        bg-slate-50
+                                                        p-5
+                                                    ">
 
                             <p class="
-                                        text-xs
-                                        font-semibold
-                                        uppercase
-                                        tracking-wider
-                                        text-slate-500
-                                    ">
+                                                            text-xs
+                                                            font-semibold
+                                                            uppercase
+                                                            tracking-wider
+                                                            text-slate-500
+                                                        ">
                                 Tiempo transcurrido
                             </p>
 
                             <p class="
-                                        mt-3
-                                        font-mono
-                                        text-3xl
-                                        font-bold
-                                        tracking-tight
-                                        text-slate-950
-                                    ">
+                                                            mt-3
+                                                            font-mono
+                                                            text-3xl
+                                                            font-bold
+                                                            tracking-tight
+                                                            text-slate-950
+                                                        ">
                                 {{ \App\Support\DurationHelper::format(
                 $calendarSeconds
             ) }}
                             </p>
 
                             <p class="
-                                        mt-2
-                                        text-xs
-                                        text-slate-500
-                                    ">
+                                                            mt-2
+                                                            text-xs
+                                                            text-slate-500
+                                                        ">
                                 Inicio hasta finalización.
                             </p>
 
@@ -1480,16 +1484,16 @@
                     {{-- SESIÓN --}}
 
                     <div class="
-                                grid
-                                gap-5
-                                rounded-2xl
-                                border
-                                border-slate-200
-                                bg-white
-                                p-5
-                                sm:grid-cols-2
-                                xl:grid-cols-4
-                            ">
+                                                    grid
+                                                    gap-5
+                                                    rounded-2xl
+                                                    border
+                                                    border-slate-200
+                                                    bg-white
+                                                    p-5
+                                                    sm:grid-cols-2
+                                                    xl:grid-cols-4
+                                                ">
 
                         @foreach ([
                                 'Inicio' =>
@@ -1516,21 +1520,21 @@
                             <div>
 
                                 <p class="
-                                                text-[10px]
-                                                font-semibold
-                                                uppercase
-                                                tracking-wider
-                                                text-slate-400
-                                            ">
+                                                                            text-[10px]
+                                                                            font-semibold
+                                                                            uppercase
+                                                                            tracking-wider
+                                                                            text-slate-400
+                                                                        ">
                                     {{ $label }}
                                 </p>
 
                                 <p class="
-                                                mt-1.5
-                                                text-sm
-                                                font-semibold
-                                                text-slate-900
-                                            ">
+                                                                            mt-1.5
+                                                                            text-sm
+                                                                            font-semibold
+                                                                            text-slate-900
+                                                                        ">
                                     {{ $value }}
                                 </p>
 
@@ -1546,26 +1550,26 @@
                     <div>
 
                         <div class="
-                                    flex
-                                    items-center
-                                    justify-between
-                                    gap-4
-                                ">
+                                                        flex
+                                                        items-center
+                                                        justify-between
+                                                        gap-4
+                                                    ">
 
                             <div>
 
                                 <h3 class="
-                                            font-semibold
-                                            text-slate-950
-                                        ">
+                                                                font-semibold
+                                                                text-slate-950
+                                                            ">
                                     Historial de pausas
                                 </h3>
 
                                 <p class="
-                                            mt-1
-                                            text-sm
-                                            text-slate-500
-                                        ">
+                                                                mt-1
+                                                                text-sm
+                                                                text-slate-500
+                                                            ">
                                     Interrupciones registradas durante
                                     el proceso de armado.
                                 </p>
@@ -1574,18 +1578,18 @@
 
 
                             <span class="
-                                        rounded-full
-                                        bg-slate-100
-                                        px-3
-                                        py-1
-                                        text-xs
-                                        font-semibold
-                                        text-slate-600
-                                    ">
+                                                            rounded-full
+                                                            bg-slate-100
+                                                            px-3
+                                                            py-1
+                                                            text-xs
+                                                            font-semibold
+                                                            text-slate-600
+                                                        ">
                                 {{ $assemblyWorkSession
                 ->pauses
                 ->count()
-                                    }}
+                                                        }}
                                 pausa(s)
                             </span>
 
@@ -1593,12 +1597,12 @@
 
 
                         <div class="
-                                    mt-4
-                                    overflow-hidden
-                                    rounded-2xl
-                                    border
-                                    border-slate-200
-                                ">
+                                                        mt-4
+                                                        overflow-hidden
+                                                        rounded-2xl
+                                                        border
+                                                        border-slate-200
+                                                    ">
 
                             @forelse (
                                                 $assemblyWorkSession
@@ -1628,41 +1632,41 @@
 
 
                                             <article class="
-                                                            border-b
-                                                            border-slate-100
-                                                            p-5
-                                                            last:border-b-0
-                                                        ">
+                                                                                                                        border-b
+                                                                                                                        border-slate-100
+                                                                                                                        p-5
+                                                                                                                        last:border-b-0
+                                                                                                                    ">
 
                                                 <div class="
-                                                                flex
-                                                                flex-col
-                                                                gap-4
-                                                                lg:flex-row
-                                                                lg:items-start
-                                                                lg:justify-between
-                                                            ">
+                                                                                                                            flex
+                                                                                                                            flex-col
+                                                                                                                            gap-4
+                                                                                                                            lg:flex-row
+                                                                                                                            lg:items-start
+                                                                                                                            lg:justify-between
+                                                                                                                        ">
 
                                                     <div>
 
                                                         <p class="
-                                                                        font-semibold
-                                                                        text-slate-950
-                                                                    ">
+                                                                                                                                    font-semibold
+                                                                                                                                    text-slate-950
+                                                                                                                                ">
                                                             {{ $pause
                                     ->reason
                                     ->label()
-                                                                    }}
+                                                                                                                                }}
                                                         </p>
 
 
                                                         @if ($pause->notes)
 
                                                             <p class="
-                                                                                mt-1
-                                                                                text-sm
-                                                                                text-slate-500
-                                                                            ">
+                                                                                                                                                mt-1
+                                                                                                                                                text-sm
+                                                                                                                                                text-slate-500
+                                                                                                                                            ">
                                                                 {{ $pause->notes }}
                                                             </p>
 
@@ -1670,14 +1674,14 @@
 
 
                                                         <div class="
-                                                                        mt-3
-                                                                        flex
-                                                                        flex-wrap
-                                                                        gap-x-5
-                                                                        gap-y-2
-                                                                        text-xs
-                                                                        text-slate-500
-                                                                    ">
+                                                                                                                                    mt-3
+                                                                                                                                    flex
+                                                                                                                                    flex-wrap
+                                                                                                                                    gap-x-5
+                                                                                                                                    gap-y-2
+                                                                                                                                    text-xs
+                                                                                                                                    text-slate-500
+                                                                                                                                ">
 
                                                             <span>
                                                                 Pausa:
@@ -1710,7 +1714,7 @@
                                                                 Por:
                                                                 {{ $pause->paused_by_name
                                     ?? '—'
-                                                                        }}
+                                                                                                                                    }}
                                                             </span>
 
 
@@ -1729,16 +1733,16 @@
 
 
                                                     <div class="
-                                                                    shrink-0
-                                                                    rounded-xl
-                                                                    bg-slate-100
-                                                                    px-4
-                                                                    py-2
-                                                                    font-mono
-                                                                    text-sm
-                                                                    font-semibold
-                                                                    text-slate-700
-                                                                ">
+                                                                                                                                shrink-0
+                                                                                                                                rounded-xl
+                                                                                                                                bg-slate-100
+                                                                                                                                px-4
+                                                                                                                                py-2
+                                                                                                                                font-mono
+                                                                                                                                text-sm
+                                                                                                                                font-semibold
+                                                                                                                                text-slate-700
+                                                                                                                            ">
                                                         {{ \App\Support\DurationHelper::format(
                                     $pauseDuration
                                 ) }}
@@ -1751,24 +1755,24 @@
                             @empty
 
                                 <div class="
-                                                px-5
-                                                py-10
-                                                text-center
-                                            ">
+                                                                        px-5
+                                                                        py-10
+                                                                        text-center
+                                                                    ">
 
                                     <p class="
-                                                    text-sm
-                                                    font-medium
-                                                    text-slate-600
-                                                ">
+                                                                            text-sm
+                                                                            font-medium
+                                                                            text-slate-600
+                                                                        ">
                                         Sin pausas registradas
                                     </p>
 
                                     <p class="
-                                                    mt-1
-                                                    text-sm
-                                                    text-slate-400
-                                                ">
+                                                                            mt-1
+                                                                            text-sm
+                                                                            text-slate-400
+                                                                        ">
                                         El armado se realizó de forma continua.
                                     </p>
 
@@ -1786,6 +1790,598 @@
 
         @endif
 
+        {{-- ========================================================= --}}
+        {{-- TRASLADO --}}
+        {{-- ========================================================= --}}
+
+        @can('transfers.view')
+
+            <livewire:units.transfer-assignment-modal :unit-id="$unit->id" :key="'transfer-assignment-' . $unit->id" />
+
+        @endcan
+
+
+
+        {{-- ========================================================= --}}
+        {{-- COMBUSTIBLE --}}
+        {{-- ========================================================= --}}
+
+        @can('fuel.view')
+
+            @php
+
+                $fuelLoads =
+                    $unit
+                        ->fuelLoads()
+                        ->with([
+                            'transferAssignment',
+                            'registeredBy',
+                        ])
+                        ->orderByDesc('fueled_at')
+                        ->get();
+
+            @endphp
+
+
+            <section class="
+                    overflow-hidden
+                    rounded-3xl
+                    border
+                    border-slate-200/80
+                    bg-white
+                    shadow-[0_8px_30px_rgba(15,23,42,0.04)]
+                ">
+
+                {{-- HEADER --}}
+
+                <div class="
+                        flex
+                        flex-col
+                        gap-4
+                        border-b
+                        border-slate-100
+                        px-6
+                        py-5
+                        sm:flex-row
+                        sm:items-center
+                        sm:justify-between
+                        lg:px-7
+                    ">
+
+                    <div>
+
+                        <div class="
+                                flex
+                                items-center
+                                gap-2
+                            ">
+
+                            <span class="
+                                    h-2.5
+                                    w-2.5
+                                    rounded-full
+                                    bg-teal-500
+                                "></span>
+
+                            <p class="
+                                    text-xs
+                                    font-semibold
+                                    uppercase
+                                    tracking-[0.14em]
+                                    text-teal-700
+                                ">
+                                Traslado
+                            </p>
+
+                        </div>
+
+
+                        <h2 class="
+                                mt-2
+                                text-xl
+                                font-semibold
+                                tracking-tight
+                                text-slate-950
+                            ">
+                            Combustible
+                        </h2>
+
+
+                        <p class="
+                                mt-1
+                                text-sm
+                                text-slate-500
+                            ">
+                            Registro de carga de gasolina y evidencia del ticket.
+                        </p>
+
+                    </div>
+
+
+                    @if ($fuelLoads->isNotEmpty())
+
+                        <span class="
+                                    inline-flex
+                                    w-fit
+                                    items-center
+                                    gap-2
+                                    rounded-full
+                                    bg-emerald-50
+                                    px-3
+                                    py-1.5
+                                    text-xs
+                                    font-semibold
+                                    text-emerald-700
+                                ">
+                            <span class="
+                                        h-2
+                                        w-2
+                                        rounded-full
+                                        bg-emerald-500
+                                    "></span>
+
+                            Registrado
+                        </span>
+
+                    @else
+
+                        <span class="
+                                    inline-flex
+                                    w-fit
+                                    items-center
+                                    gap-2
+                                    rounded-full
+                                    bg-amber-50
+                                    px-3
+                                    py-1.5
+                                    text-xs
+                                    font-semibold
+                                    text-amber-700
+                                ">
+                            <span class="
+                                        h-2
+                                        w-2
+                                        rounded-full
+                                        bg-amber-500
+                                    "></span>
+
+                            Pendiente
+                        </span>
+
+                    @endif
+
+                </div>
+
+
+
+                {{-- CONTENIDO --}}
+
+                <div class="
+                        p-6
+                        lg:p-7
+                    ">
+
+                    @forelse ($fuelLoads as $fuelLoad)
+
+                            @php
+
+                                $hasFuel =
+                                    (float) $fuelLoad->amount > 0;
+
+                            @endphp
+
+
+                            <article class="
+                                        rounded-2xl
+                                        border
+
+                                        {{
+                            $hasFuel
+                            ? 'border-emerald-100 bg-emerald-50/30'
+                            : 'border-amber-100 bg-amber-50/40'
+                                        }}
+
+                                        p-5
+                                    ">
+
+                                {{-- ESTADO + MONTO --}}
+
+                                <div class="
+                                            flex
+                                            flex-col
+                                            gap-5
+                                            sm:flex-row
+                                            sm:items-start
+                                            sm:justify-between
+                                        ">
+
+                                    <div>
+
+                                        @if ($hasFuel)
+
+                                            <span class="
+                                                            inline-flex
+                                                            rounded-full
+                                                            bg-emerald-100
+                                                            px-3
+                                                            py-1
+                                                            text-xs
+                                                            font-semibold
+                                                            text-emerald-700
+                                                        ">
+                                                Carga realizada
+                                            </span>
+
+                                        @else
+
+                                            <span class="
+                                                            inline-flex
+                                                            rounded-full
+                                                            bg-amber-100
+                                                            px-3
+                                                            py-1
+                                                            text-xs
+                                                            font-semibold
+                                                            text-amber-800
+                                                        ">
+                                                Sin carga de gasolina
+                                            </span>
+
+                                        @endif
+
+
+                                        <p class="
+                                                    mt-4
+                                                    text-xs
+                                                    font-semibold
+                                                    uppercase
+                                                    tracking-wider
+                                                    text-slate-400
+                                                ">
+                                            Importe
+                                        </p>
+
+
+                                        <p class="
+                                                    mt-1
+                                                    text-3xl
+                                                    font-bold
+                                                    tracking-tight
+                                                    text-slate-950
+                                                ">
+                                            ${{ number_format(
+                            (float) $fuelLoad->amount,
+                            2
+                        ) }}
+                                        </p>
+
+                                    </div>
+
+
+                                    <div class="
+                                                grid
+                                                gap-4
+                                                text-sm
+                                                sm:min-w-[260px]
+                                            ">
+
+                                        {{-- FECHA --}}
+
+                                        <div>
+
+                                            <p class="
+                                                        text-[10px]
+                                                        font-semibold
+                                                        uppercase
+                                                        tracking-wider
+                                                        text-slate-400
+                                                    ">
+                                                Registrado
+                                            </p>
+
+                                            <p class="
+                                                        mt-1
+                                                        font-semibold
+                                                        text-slate-800
+                                                    ">
+                                                {{ \App\Support\DateHelper::format(
+                            $fuelLoad->fueled_at
+                        ) }}
+                                            </p>
+
+                                        </div>
+
+
+                                        {{-- RESPONSABLE --}}
+
+                                        <div>
+
+                                            <p class="
+                                                        text-[10px]
+                                                        font-semibold
+                                                        uppercase
+                                                        tracking-wider
+                                                        text-slate-400
+                                                    ">
+                                                Registrado por
+                                            </p>
+
+                                            <p class="
+                                                        mt-1
+                                                        font-semibold
+                                                        text-slate-800
+                                                    ">
+                                                {{
+                            $fuelLoad->registered_by_name
+                            ?? $fuelLoad->registeredBy?->name
+                            ?? '—'
+                                                    }}
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                {{-- MOTIVO $0 --}}
+
+                                @if (
+                                        !$hasFuel
+                                        && $fuelLoad->no_fuel_reason
+                                    )
+
+                                    <div class="
+                                                    mt-5
+                                                    rounded-xl
+                                                    border
+                                                    border-amber-200
+                                                    bg-white
+                                                    p-4
+                                                ">
+
+                                        <p class="
+                                                        text-[10px]
+                                                        font-semibold
+                                                        uppercase
+                                                        tracking-wider
+                                                        text-amber-700
+                                                    ">
+                                            Motivo de no carga
+                                        </p>
+
+                                        <p class="
+                                                        mt-1
+                                                        text-sm
+                                                        font-semibold
+                                                        text-slate-900
+                                                    ">
+                                            {{ $fuelLoad
+                                    ->no_fuel_reason
+                                    ->label()
+                                                    }}
+                                        </p>
+
+
+                                        @if ($fuelLoad->reason_notes)
+
+                                            <p class="
+                                                                mt-2
+                                                                whitespace-pre-line
+                                                                text-sm
+                                                                leading-6
+                                                                text-slate-600
+                                                            ">
+                                                {{ $fuelLoad->reason_notes }}
+                                            </p>
+
+                                        @endif
+
+                                    </div>
+
+                                @endif
+
+
+
+                                {{-- TICKET --}}
+
+                                @if (
+                                            $fuelLoad->ticket_storage_path
+                                        )
+
+                                        <div class="
+                                                        mt-5
+                                                        flex
+                                                        flex-col
+                                                        gap-3
+                                                        border-t
+                                                        border-slate-200/70
+                                                        pt-5
+                                                        sm:flex-row
+                                                        sm:items-center
+                                                        sm:justify-between
+                                                    ">
+
+                                            <div>
+
+                                                <p class="
+                                                                text-xs
+                                                                font-semibold
+                                                                text-slate-900
+                                                            ">
+                                                    Ticket de gasolina
+                                                </p>
+
+                                                <p class="
+                                                                mt-1
+                                                                max-w-md
+                                                                truncate
+                                                                text-xs
+                                                                text-slate-500
+                                                            ">
+                                                    {{
+                                        $fuelLoad
+                                            ->ticket_original_filename
+                                        ?: 'Evidencia de combustible'
+                                                            }}
+                                                </p>
+
+                                            </div>
+
+
+                                            <a href="{{ route(
+                                        'fuel.ticket',
+                                        $fuelLoad
+                                    ) }}" target="_blank" rel="noopener noreferrer" class="
+                                                            inline-flex
+                                                            items-center
+                                                            justify-center
+                                                            gap-2
+                                                            rounded-xl
+                                                            border
+                                                            border-teal-200
+                                                            bg-white
+                                                            px-4
+                                                            py-2.5
+                                                            text-sm
+                                                            font-semibold
+                                                            text-teal-700
+                                                            shadow-sm
+                                                            transition
+                                                            hover:border-teal-300
+                                                            hover:bg-teal-50
+                                                        ">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="1.8" class="h-4 w-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.25 12s3.75-6 9.75-6 9.75 6 9.75 6-3.75 6-9.75 6-9.75-6-9.75-6Z" />
+
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg>
+
+                                                Ver ticket
+
+                                            </a>
+
+                                        </div>
+
+                                @endif
+
+
+
+                                {{-- OBSERVACIONES --}}
+
+                                @if ($fuelLoad->observations)
+
+                                    <div class="
+                                                    mt-5
+                                                    border-t
+                                                    border-slate-200/70
+                                                    pt-5
+                                                ">
+
+                                        <p class="
+                                                        text-[10px]
+                                                        font-semibold
+                                                        uppercase
+                                                        tracking-wider
+                                                        text-slate-400
+                                                    ">
+                                            Observaciones
+                                        </p>
+
+                                        <p class="
+                                                        mt-2
+                                                        whitespace-pre-line
+                                                        text-sm
+                                                        leading-6
+                                                        text-slate-700
+                                                    ">
+                                            {{ $fuelLoad->observations }}
+                                        </p>
+
+                                    </div>
+
+                                @endif
+
+                            </article>
+
+
+                            @unless ($loop->last)
+
+                                <div class="
+                                                my-5
+                                                border-t
+                                                border-slate-100
+                                            "></div>
+
+                            @endunless
+
+
+                    @empty
+
+                        <div class="
+                                    flex
+                                    flex-col
+                                    items-center
+                                    justify-center
+                                    rounded-2xl
+                                    border
+                                    border-dashed
+                                    border-slate-300
+                                    bg-slate-50
+                                    px-6
+                                    py-10
+                                    text-center
+                                ">
+
+                            <div class="
+                                        flex
+                                        h-11
+                                        w-11
+                                        items-center
+                                        justify-center
+                                        rounded-full
+                                        bg-slate-100
+                                        text-slate-500
+                                    ">
+                                ⛽
+                            </div>
+
+
+                            <p class="
+                                        mt-3
+                                        font-semibold
+                                        text-slate-800
+                                    ">
+                                Combustible pendiente
+                            </p>
+
+
+                            <p class="
+                                        mt-1
+                                        max-w-md
+                                        text-sm
+                                        leading-6
+                                        text-slate-500
+                                    ">
+                                El trasladista todavía no ha registrado
+                                información de combustible para esta unidad.
+                            </p>
+
+                        </div>
+
+                    @endforelse
+
+                </div>
+
+            </section>
+
+        @endcan
+
 
 
         {{-- ========================================================= --}}
@@ -1801,46 +2397,46 @@
             )
 
             <section class="
-                        overflow-hidden
-                        rounded-3xl
-                        border
-                        border-slate-200/80
-                        bg-white
-                        shadow-[0_8px_30px_rgba(15,23,42,0.04)]
-                    ">
+                                        overflow-hidden
+                                        rounded-3xl
+                                        border
+                                        border-slate-200/80
+                                        bg-white
+                                        shadow-[0_8px_30px_rgba(15,23,42,0.04)]
+                                    ">
 
                 <div class="
-                            border-b
-                            border-slate-100
-                            px-6
-                            py-5
-                            lg:px-7
-                        ">
+                                            border-b
+                                            border-slate-100
+                                            px-6
+                                            py-5
+                                            lg:px-7
+                                        ">
 
                     <p class="
-                                text-xs
-                                font-semibold
-                                uppercase
-                                tracking-[0.16em]
-                                text-blue-600
-                            ">
+                                                text-xs
+                                                font-semibold
+                                                uppercase
+                                                tracking-[0.16em]
+                                                text-blue-600
+                                            ">
                         Evidencia visual
                     </p>
 
                     <h2 class="
-                                mt-1
-                                text-xl
-                                font-semibold
-                                text-slate-950
-                            ">
+                                                mt-1
+                                                text-xl
+                                                font-semibold
+                                                text-slate-950
+                                            ">
                         Evidencias del expediente
                     </h2>
 
                     <p class="
-                                mt-1
-                                text-sm
-                                text-slate-500
-                            ">
+                                                mt-1
+                                                text-sm
+                                                text-slate-500
+                                            ">
                         Registro fotográfico asociado a cada etapa
                         del proceso de la unidad.
                     </p>
@@ -1879,32 +2475,32 @@
                                 {{-- CABECERA ETAPA --}}
 
                                 <div class="
-                                                    flex
-                                                    flex-col
-                                                    gap-4
-                                                    sm:flex-row
-                                                    sm:items-center
-                                                    sm:justify-between
-                                                ">
+                                                                                            flex
+                                                                                            flex-col
+                                                                                            gap-4
+                                                                                            sm:flex-row
+                                                                                            sm:items-center
+                                                                                            sm:justify-between
+                                                                                        ">
 
                                     <div class="
-                                                        flex
-                                                        items-center
-                                                        gap-3
-                                                    ">
+                                                                                                flex
+                                                                                                items-center
+                                                                                                gap-3
+                                                                                            ">
 
                                         <div class="
-                                                            flex
-                                                            h-10
-                                                            w-10
-                                                            items-center
-                                                            justify-center
-                                                            rounded-xl
-                                                            {{ $visual['soft'] }}
-                                                            {{ $visual['text'] }}
-                                                            text-xs
-                                                            font-bold
-                                                        ">
+                                                                                                    flex
+                                                                                                    h-10
+                                                                                                    w-10
+                                                                                                    items-center
+                                                                                                    justify-center
+                                                                                                    rounded-xl
+                                                                                                    {{ $visual['soft'] }}
+                                                                                                    {{ $visual['text'] }}
+                                                                                                    text-xs
+                                                                                                    font-bold
+                                                                                                ">
                                             {{ $visual['number'] }}
                                         </div>
 
@@ -1912,24 +2508,24 @@
                                         <div>
 
                                             <h3 class="
-                                                                font-semibold
-                                                                text-slate-950
-                                                            ">
+                                                                                                        font-semibold
+                                                                                                        text-slate-950
+                                                                                                    ">
                                                 {{ $milestone
                                 ->stage
                                 ->label()
-                                                            }}
+                                                                                                    }}
                                             </h3>
 
                                             <div class="
-                                                                mt-1
-                                                                flex
-                                                                flex-wrap
-                                                                gap-x-2
-                                                                gap-y-1
-                                                                text-xs
-                                                                text-slate-500
-                                                            ">
+                                                                                                        mt-1
+                                                                                                        flex
+                                                                                                        flex-wrap
+                                                                                                        gap-x-2
+                                                                                                        gap-y-1
+                                                                                                        text-xs
+                                                                                                        text-slate-500
+                                                                                                    ">
 
                                                 @if ($milestone->completed_at)
 
@@ -1955,7 +2551,7 @@
                                                                     {{ $milestone->completed_by_name
                                                     ?? $milestone->completedBy?->name
                                                     ?? '—'
-                                                                                    }}
+                                                                                                                                                                            }}
                                                                 </span>
 
                                                 @endif
@@ -1968,19 +2564,19 @@
 
 
                                     <span class="
-                                                        w-fit
-                                                        rounded-full
-                                                        bg-slate-100
-                                                        px-3
-                                                        py-1
-                                                        text-xs
-                                                        font-semibold
-                                                        text-slate-600
-                                                    ">
+                                                                                                w-fit
+                                                                                                rounded-full
+                                                                                                bg-slate-100
+                                                                                                px-3
+                                                                                                py-1
+                                                                                                text-xs
+                                                                                                font-semibold
+                                                                                                text-slate-600
+                                                                                            ">
                                         {{ $milestone
                                 ->evidences
                                 ->count()
-                                                    }}
+                                                                                            }}
                                         evidencia(s)
                                     </span>
 
@@ -1990,14 +2586,14 @@
                                 {{-- GALERÍA --}}
 
                                 <div class="
-                                                    mt-5
-                                                    grid
-                                                    grid-cols-2
-                                                    gap-3
-                                                    sm:grid-cols-3
-                                                    lg:grid-cols-4
-                                                    xl:grid-cols-5
-                                                ">
+                                                                                            mt-5
+                                                                                            grid
+                                                                                            grid-cols-2
+                                                                                            gap-3
+                                                                                            sm:grid-cols-3
+                                                                                            lg:grid-cols-4
+                                                                                            xl:grid-cols-5
+                                                                                        ">
 
                                     @foreach (
                                                 $milestone->evidences
@@ -2008,15 +2604,15 @@
                                             'evidences.show',
                                             $evidence
                                         ) }}" target="_blank" class="
-                                                                    group
-                                                                    relative
-                                                                    overflow-hidden
-                                                                    rounded-2xl
-                                                                    border
-                                                                    border-slate-200
-                                                                    bg-slate-100
-                                                                    shadow-sm
-                                                                ">
+                                                                                                                                            group
+                                                                                                                                            relative
+                                                                                                                                            overflow-hidden
+                                                                                                                                            rounded-2xl
+                                                                                                                                            border
+                                                                                                                                            border-slate-200
+                                                                                                                                            bg-slate-100
+                                                                                                                                            shadow-sm
+                                                                                                                                        ">
 
                                                 @if (
                                                             $evidence->type
@@ -2026,58 +2622,62 @@
                                                         <img src="{{ route(
                                                         'evidences.show',
                                                         $evidence
-                                                    ) }}" alt="Evidencia" loading="lazy" class="
-                                                                                    aspect-square
-                                                                                    w-full
-                                                                                    object-cover
-                                                                                    transition
-                                                                                    duration-300
-                                                                                    group-hover:scale-105
-                                                                                ">
+                                                    ) }}"
+                                                            alt="Evidencia" loading="lazy"
+                                                            class="
+                                                                                                                                                                                                    aspect-square
+                                                                                                                                                                                                    w-full
+                                                                                                                                                                                                    object-cover
+                                                                                                                                                                                                    transition
+                                                                                                                                                                                                    duration-300
+                                                                                                                                                                                                    group-hover:scale-105
+                                                                                                                                                                                                ">
 
                                                 @else
 
-                                                    <div class="
-                                                                                flex
-                                                                                aspect-square
-                                                                                items-center
-                                                                                justify-center
-                                                                                p-4
-                                                                                text-center
-                                                                                text-sm
-                                                                                text-slate-500
-                                                                            ">
+                                                    <div
+                                                        class="
+                                                                                                                                                                                        flex
+                                                                                                                                                                                        aspect-square
+                                                                                                                                                                                        items-center
+                                                                                                                                                                                        justify-center
+                                                                                                                                                                                        p-4
+                                                                                                                                                                                        text-center
+                                                                                                                                                                                        text-sm
+                                                                                                                                                                                        text-slate-500
+                                                                                                                                                                                    ">
                                                         {{ $evidence
                                                     ->type
                                                     ->value
-                                                                            }}
+                                                                                                                                                                                    }}
                                                     </div>
 
                                                 @endif
 
 
                                                 <div class="
-                                                                        absolute
-                                                                        inset-x-0
-                                                                        bottom-0
-                                                                        bg-gradient-to-t
-                                                                        from-black/80
-                                                                        via-black/30
-                                                                        to-transparent
-                                                                        p-3
-                                                                        pt-12
-                                                                    ">
+                                                                                                                                                absolute
+                                                                                                                                                inset-x-0
+                                                                                                                                                bottom-0
+                                                                                                                                                bg-gradient-to-t
+                                                                                                                                                from-black/80
+                                                                                                                                                via-black/30
+                                                                                                                                                to-transparent
+                                                                                                                                                p-3
+                                                                                                                                                pt-12
+                                                                                                                                            ">
 
-                                                    <p class="
-                                                                            truncate
-                                                                            text-xs
-                                                                            font-medium
-                                                                            text-white
-                                                                        ">
+                                                    <p
+                                                        class="
+                                                                                                                                                    truncate
+                                                                                                                                                    text-xs
+                                                                                                                                                    font-medium
+                                                                                                                                                    text-white
+                                                                                                                                                ">
                                                         {{ $evidence
                                             ->original_filename
                                             ?? 'Evidencia'
-                                                                        }}
+                                                                                                                                                }}
                                                     </p>
 
                                                 </div>
@@ -2094,28 +2694,28 @@
                                 @if ($milestone->observations)
 
                                     <div class="
-                                                            mt-5
-                                                            rounded-2xl
-                                                            bg-slate-50
-                                                            p-5
-                                                        ">
+                                                                                                        mt-5
+                                                                                                        rounded-2xl
+                                                                                                        bg-slate-50
+                                                                                                        p-5
+                                                                                                    ">
 
                                         <p class="
-                                                                text-[10px]
-                                                                font-semibold
-                                                                uppercase
-                                                                tracking-wider
-                                                                text-slate-400
-                                                            ">
+                                                                                                            text-[10px]
+                                                                                                            font-semibold
+                                                                                                            uppercase
+                                                                                                            tracking-wider
+                                                                                                            text-slate-400
+                                                                                                        ">
                                             Observaciones
                                         </p>
 
                                         <p class="
-                                                                mt-2
-                                                                text-sm
-                                                                leading-6
-                                                                text-slate-700
-                                                            ">
+                                                                                                            mt-2
+                                                                                                            text-sm
+                                                                                                            leading-6
+                                                                                                            text-slate-700
+                                                                                                        ">
                                             {{ $milestone->observations }}
                                         </p>
 
@@ -2133,32 +2733,32 @@
                                     )
 
                                     <div class="
-                                                            mt-5
-                                                            rounded-2xl
-                                                            border
-                                                            border-violet-100
-                                                            bg-violet-50/40
-                                                            p-5
-                                                        ">
+                                                                                                            mt-5
+                                                                                                            rounded-2xl
+                                                                                                            border
+                                                                                                            border-violet-100
+                                                                                                            bg-violet-50/40
+                                                                                                            p-5
+                                                                                                        ">
 
                                         <p class="
-                                                                text-[10px]
-                                                                font-semibold
-                                                                uppercase
-                                                                tracking-wider
-                                                                text-violet-600
-                                                            ">
+                                                                                                                text-[10px]
+                                                                                                                font-semibold
+                                                                                                                uppercase
+                                                                                                                tracking-wider
+                                                                                                                text-violet-600
+                                                                                                            ">
                                             Datos de entrega
                                         </p>
 
 
                                         <dl class="
-                                                                mt-4
-                                                                grid
-                                                                gap-5
-                                                                sm:grid-cols-2
-                                                                lg:grid-cols-3
-                                                            ">
+                                                                                                                mt-4
+                                                                                                                grid
+                                                                                                                gap-5
+                                                                                                                sm:grid-cols-2
+                                                                                                                lg:grid-cols-3
+                                                                                                            ">
 
                                             @foreach ([
                                                     'Transportadora' =>
@@ -2193,21 +2793,21 @@
                                                     <div>
 
                                                         <dt class="
-                                                                                        text-[10px]
-                                                                                        font-semibold
-                                                                                        uppercase
-                                                                                        tracking-wider
-                                                                                        text-slate-400
-                                                                                    ">
+                                                                                                                                                    text-[10px]
+                                                                                                                                                    font-semibold
+                                                                                                                                                    uppercase
+                                                                                                                                                    tracking-wider
+                                                                                                                                                    text-slate-400
+                                                                                                                                                ">
                                                             {{ $label }}
                                                         </dt>
 
                                                         <dd class="
-                                                                                        mt-1
-                                                                                        text-sm
-                                                                                        font-semibold
-                                                                                        text-slate-900
-                                                                                    ">
+                                                                                                                                                    mt-1
+                                                                                                                                                    text-sm
+                                                                                                                                                    font-semibold
+                                                                                                                                                    text-slate-900
+                                                                                                                                                ">
                                                             {{ $value }}
                                                         </dd>
 
@@ -2229,9 +2829,9 @@
                             @unless ($loop->last)
 
                                 <div class="
-                                                        border-t
-                                                        border-slate-100
-                                                    "></div>
+                                                                                                    border-t
+                                                                                                    border-slate-100
+                                                                                                "></div>
 
                             @endunless
 
@@ -2296,46 +2896,46 @@
         {{-- ========================================================= --}}
 
         <section class="
-                overflow-hidden
-                rounded-3xl
-                border
-                border-slate-200/80
-                bg-white
-                shadow-[0_8px_30px_rgba(15,23,42,0.04)]
-            ">
+                        overflow-hidden
+                        rounded-3xl
+                        border
+                        border-slate-200/80
+                        bg-white
+                        shadow-[0_8px_30px_rgba(15,23,42,0.04)]
+                    ">
 
             <div class="
-                    border-b
-                    border-slate-100
-                    px-6
-                    py-5
-                    lg:px-7
-                ">
+                            border-b
+                            border-slate-100
+                            px-6
+                            py-5
+                            lg:px-7
+                        ">
 
                 <p class="
-                        text-xs
-                        font-semibold
-                        uppercase
-                        tracking-[0.16em]
-                        text-slate-400
-                    ">
+                                text-xs
+                                font-semibold
+                                uppercase
+                                tracking-[0.16em]
+                                text-slate-400
+                            ">
                     Auditoría
                 </p>
 
                 <h2 class="
-                        mt-1
-                        text-xl
-                        font-semibold
-                        text-slate-950
-                    ">
+                                mt-1
+                                text-xl
+                                font-semibold
+                                text-slate-950
+                            ">
                     Historial del expediente
                 </h2>
 
                 <p class="
-                        mt-1
-                        text-sm
-                        text-slate-500
-                    ">
+                                mt-1
+                                text-sm
+                                text-slate-500
+                            ">
                     Registro cronológico de las acciones
                     realizadas sobre la unidad.
                 </p>
@@ -2354,46 +2954,46 @@
                                     )
 
                                     <article class="
-                                                relative
-                                                border-l
-                                                border-slate-200
-                                                pb-7
-                                                pl-8
-                                                last:border-transparent
-                                                last:pb-0
-                                            ">
+                                                                                            relative
+                                                                                            border-l
+                                                                                            border-slate-200
+                                                                                            pb-7
+                                                                                            pl-8
+                                                                                            last:border-transparent
+                                                                                            last:pb-0
+                                                                                        ">
 
                                         <div class="
-                                                    absolute
-                                                    -left-[5px]
-                                                    top-1
-                                                    h-2.5
-                                                    w-2.5
-                                                    rounded-full
-                                                    border-2
-                                                    border-white
-                                                    bg-blue-500
-                                                    ring-2
-                                                    ring-blue-100
-                                                "></div>
+                                                                                                absolute
+                                                                                                -left-[5px]
+                                                                                                top-1
+                                                                                                h-2.5
+                                                                                                w-2.5
+                                                                                                rounded-full
+                                                                                                border-2
+                                                                                                border-white
+                                                                                                bg-blue-500
+                                                                                                ring-2
+                                                                                                ring-blue-100
+                                                                                            "></div>
 
 
                                         <div class="
-                                                    flex
-                                                    flex-col
-                                                    gap-2
-                                                    sm:flex-row
-                                                    sm:items-start
-                                                    sm:justify-between
-                                                ">
+                                                                                                flex
+                                                                                                flex-col
+                                                                                                gap-2
+                                                                                                sm:flex-row
+                                                                                                sm:items-start
+                                                                                                sm:justify-between
+                                                                                            ">
 
                                             <div>
 
                                                 <p class="
-                                                            text-sm
-                                                            font-semibold
-                                                            text-slate-950
-                                                        ">
+                                                                                                        text-sm
+                                                                                                        font-semibold
+                                                                                                        text-slate-950
+                                                                                                    ">
                                                     {{ $event->title }}
                                                 </p>
 
@@ -2401,12 +3001,12 @@
                                                 @if ($event->description)
 
                                                     <p class="
-                                                                    mt-1
-                                                                    max-w-3xl
-                                                                    text-sm
-                                                                    leading-6
-                                                                    text-slate-500
-                                                                ">
+                                                                                                                    mt-1
+                                                                                                                    max-w-3xl
+                                                                                                                    text-sm
+                                                                                                                    leading-6
+                                                                                                                    text-slate-500
+                                                                                                                ">
                                                         {{ $event->description }}
                                                     </p>
 
@@ -2416,16 +3016,16 @@
 
 
                                             <div class="
-                                                        shrink-0
-                                                        text-left
-                                                        sm:text-right
-                                                    ">
+                                                                                                    shrink-0
+                                                                                                    text-left
+                                                                                                    sm:text-right
+                                                                                                ">
 
                                                 <p class="
-                                                            text-xs
-                                                            font-medium
-                                                            text-slate-500
-                                                        ">
+                                                                                                        text-xs
+                                                                                                        font-medium
+                                                                                                        text-slate-500
+                                                                                                    ">
                                                     {{ \App\Support\DateHelper::format(
                             $event->created_at
                         ) }}
@@ -2437,15 +3037,16 @@
                                                                         || $event->performedBy
                                                                     )
 
-                                                                    <p class="
-                                                                                    mt-1
-                                                                                    text-xs
-                                                                                    text-slate-400
-                                                                                ">
+                                                                    <p
+                                                                        class="
+                                                                                                                                                                                            mt-1
+                                                                                                                                                                                            text-xs
+                                                                                                                                                                                            text-slate-400
+                                                                                                                                                                                        ">
                                                                         {{ $event->performed_by_name
                                                     ?? $event->performedBy?->name
                                                     ?? '—'
-                                                                                }}
+                                                                                                                                                                                        }}
                                                                     </p>
 
                                                 @endif
@@ -2459,15 +3060,15 @@
                     @empty
 
                         <div class="
-                                    py-10
-                                    text-center
-                                ">
+                                                py-10
+                                                text-center
+                                            ">
 
                             <p class="
-                                        text-sm
-                                        font-medium
-                                        text-slate-600
-                                    ">
+                                                    text-sm
+                                                    font-medium
+                                                    text-slate-600
+                                                ">
                                 No existe actividad registrada.
                             </p>
 
@@ -2490,51 +3091,51 @@
         @can('units.delete')
 
             <section class="
-                        rounded-3xl
-                        border
-                        border-red-100
-                        bg-gradient-to-r
-                        from-red-50/60
-                        to-white
-                        p-6
-                        shadow-[0_8px_30px_rgba(15,23,42,0.03)]
-                    ">
+                                    rounded-3xl
+                                    border
+                                    border-red-100
+                                    bg-gradient-to-r
+                                    from-red-50/60
+                                    to-white
+                                    p-6
+                                    shadow-[0_8px_30px_rgba(15,23,42,0.03)]
+                                ">
 
                 <div class="
-                            flex
-                            flex-col
-                            gap-5
-                            lg:flex-row
-                            lg:items-center
-                            lg:justify-between
-                        ">
+                                        flex
+                                        flex-col
+                                        gap-5
+                                        lg:flex-row
+                                        lg:items-center
+                                        lg:justify-between
+                                    ">
 
                     <div>
 
                         <p class="
-                                    text-xs
-                                    font-semibold
-                                    uppercase
-                                    tracking-[0.14em]
-                                    text-red-600
-                                ">
+                                                text-xs
+                                                font-semibold
+                                                uppercase
+                                                tracking-[0.14em]
+                                                text-red-600
+                                            ">
                             Zona administrativa
                         </p>
 
                         <h2 class="
-                                    mt-1
-                                    font-semibold
-                                    text-slate-950
-                                ">
+                                                mt-1
+                                                font-semibold
+                                                text-slate-950
+                                            ">
                             Gestión del expediente
                         </h2>
 
                         <p class="
-                                    mt-1
-                                    max-w-2xl
-                                    text-sm
-                                    text-slate-500
-                                ">
+                                                mt-1
+                                                max-w-2xl
+                                                text-sm
+                                                text-slate-500
+                                            ">
                             Las acciones realizadas aquí afectan
                             la disponibilidad del expediente dentro
                             del flujo operativo.

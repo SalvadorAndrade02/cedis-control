@@ -7,6 +7,8 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\EvidenceController;
 use App\Http\Controllers\UnitExpedientPdfController;
 use App\Http\Controllers\ShippingGuidePdfController;
+use App\Models\UnitTransferAssignment;
+use App\Http\Controllers\FuelTicketController;
 
 Route::middleware('guest')
     ->group(function () {
@@ -146,5 +148,50 @@ Route::middleware('auth')
             ])
             ->name(
                 'units.shipping-guide.pdf'
+            );
+
+        Route::view(
+            '/my-transfers',
+            'transfers.my-transfers'
+        )
+            ->middleware([
+                'auth',
+                'can:transfers.view',
+            ])
+            ->name(
+                'transfers.mine'
+            );
+
+        Route::get(
+            '/my-transfers/{assignment}/fuel',
+            function (UnitTransferAssignment $assignment) {
+
+                return view(
+                    'fuel.create',
+                    [
+                        'assignment' =>
+                            $assignment,
+                    ]
+                );
+            }
+        )
+            ->middleware([
+                'auth',
+                'can:fuel.create',
+            ])
+            ->name(
+                'fuel.create'
+            );
+
+        Route::get(
+            '/fuel-loads/{fuelLoad}/ticket',
+            FuelTicketController::class
+        )
+            ->middleware([
+                'auth',
+                'can:fuel.view',
+            ])
+            ->name(
+                'fuel.ticket'
             );
     });

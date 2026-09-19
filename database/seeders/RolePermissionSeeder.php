@@ -11,156 +11,313 @@ class RolePermissionSeeder extends Seeder
 {
     public function run(): void
     {
+        /*
+        |--------------------------------------------------------------------------
+        | LIMPIAR CACHÉ DE SPATIE
+        |--------------------------------------------------------------------------
+        |
+        | Spatie conserva permisos en caché.
+        | Limpiamos antes y después del seeder para asegurarnos
+        | de que los permisos nuevos sean reconocidos.
+        |
+        */
+
         app(
             PermissionRegistrar::class
         )->forgetCachedPermissions();
 
+
         /*
         |--------------------------------------------------------------------------
-        | Permisos
+        | PERMISOS
         |--------------------------------------------------------------------------
         */
 
         $permissions = [
 
-            // Unidades
+            /*
+             * Unidades.
+             */
             'units.view',
+            'units.delete',
+            'units.restore',
 
-            // Importaciones
+
+            /*
+             * Importaciones.
+             */
             'imports.manage',
 
-            // Llegada
+
+            /*
+             * Llegada.
+             */
             'arrival.view',
             'arrival.complete',
 
-            // Armado
+
+            /*
+             * Armado.
+             */
             'assembly.view',
             'assembly.complete',
 
-            // Entrega
+
+            /*
+             * Entrega.
+             */
             'delivery.view',
             'delivery.complete',
 
-            // Evidencias
+
+            /*
+             * Evidencias.
+             */
             'evidences.view',
 
-            // Administración
+
+            /*
+             * Administración.
+             */
             'users.manage',
             'catalogs.manage',
-
-            // Reportes
-            'reports.view',
-
-            // Correcciones
             'corrections.manage',
 
-            'units.delete',
-            'units.restore',
+
+            /*
+             * Reportes.
+             */
+            'reports.view',
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | TRASLADOS
+            |--------------------------------------------------------------------------
+            */
+
+            /*
+             * Consultar asignaciones de traslado.
+             */
+            'transfers.view',
+
+            /*
+             * Asignar/reasignar una unidad
+             * a un trasladista.
+             */
+            'transfers.assign',
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | COMBUSTIBLE
+            |--------------------------------------------------------------------------
+            */
+
+            /*
+             * Consultar registros de gasolina.
+             */
+            'fuel.view',
+
+            /*
+             * Registrar una carga o
+             * una salida sin carga.
+             */
+            'fuel.create',
         ];
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | CREAR PERMISOS
+        |--------------------------------------------------------------------------
+        */
+
         foreach ($permissions as $permission) {
+
             Permission::firstOrCreate([
-                'name' => $permission,
-                'guard_name' => 'web',
+                'name' =>
+                    $permission,
+
+                'guard_name' =>
+                    'web',
             ]);
         }
 
 
         /*
         |--------------------------------------------------------------------------
-        | ADMIN
+        | CONFIGURACIÓN DE ROLES
         |--------------------------------------------------------------------------
         */
 
-        $admin = Role::firstOrCreate([
-            'name' => 'ADMIN',
-            'guard_name' => 'web',
-        ]);
+        $roles = [
 
-        $admin->syncPermissions(
-            Permission::all()
-        );
+            /*
+            |--------------------------------------------------------------------------
+            | ADMIN
+            |--------------------------------------------------------------------------
+            |
+            | Acceso completo.
+            |
+            */
+
+            'ADMIN' =>
+                $permissions,
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | RECEPCIÓN
+            |--------------------------------------------------------------------------
+            */
+
+            'RECEPCION' => [
+
+                'units.view',
+
+                'arrival.view',
+                'arrival.complete',
+
+                'evidences.view',
+            ],
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | ARMADO
+            |--------------------------------------------------------------------------
+            */
+
+            'ARMADO' => [
+
+                'units.view',
+
+                'assembly.view',
+                'assembly.complete',
+
+                'evidences.view',
+            ],
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | ENTREGA
+            |--------------------------------------------------------------------------
+            |
+            | Este rol puede decidir qué trasladista
+            | recibirá una unidad.
+            |
+            | Además puede consultar si ya existe
+            | información de combustible.
+            |
+            */
+
+            'ENTREGA' => [
+
+                'units.view',
+
+                'delivery.view',
+                'delivery.complete',
+
+                'evidences.view',
+
+                'transfers.view',
+                'transfers.assign',
+
+                'fuel.view',
+            ],
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | SUPERVISOR
+            |--------------------------------------------------------------------------
+            |
+            | Consulta operación pero no modifica
+            | asignaciones ni registra gasolina.
+            |
+            */
+
+            'SUPERVISOR' => [
+
+                'units.view',
+
+                'arrival.view',
+                'assembly.view',
+                'delivery.view',
+
+                'evidences.view',
+
+                'reports.view',
+
+                'transfers.view',
+
+                'fuel.view',
+            ],
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | TRASLADISTA
+            |--------------------------------------------------------------------------
+            |
+            | IMPORTANTE:
+            |
+            | No otorgamos units.view porque actualmente
+            | ese permiso permite consultar TODAS las unidades.
+            |
+            | El nuevo módulo mostrará exclusivamente las
+            | asignaciones que pertenezcan al usuario conectado.
+            |
+            */
+
+            'TRASLADISTA' => [
+
+                'transfers.view',
+
+                'fuel.view',
+                'fuel.create',
+            ],
+        ];
 
 
         /*
         |--------------------------------------------------------------------------
-        | RECEPCIÓN
+        | CREAR / ACTUALIZAR ROLES
         |--------------------------------------------------------------------------
         */
 
-        $reception = Role::firstOrCreate([
-            'name' => 'RECEPCION',
-            'guard_name' => 'web',
-        ]);
+        foreach (
+            $roles
+            as $roleName => $rolePermissions
+        ) {
 
-        $reception->syncPermissions([
-            'units.view',
-            'arrival.view',
-            'arrival.complete',
-            'evidences.view',
-        ]);
+            $role =
+                Role::firstOrCreate([
+                    'name' =>
+                        $roleName,
+
+                    'guard_name' =>
+                        'web',
+                ]);
+
+
+            /*
+             * syncPermissions garantiza que el rol
+             * tenga exactamente estos permisos.
+             */
+            $role->syncPermissions(
+                $rolePermissions
+            );
+        }
 
 
         /*
         |--------------------------------------------------------------------------
-        | ARMADO
+        | LIMPIAR CACHÉ NUEVAMENTE
         |--------------------------------------------------------------------------
         */
-
-        $assembly = Role::firstOrCreate([
-            'name' => 'ARMADO',
-            'guard_name' => 'web',
-        ]);
-
-        $assembly->syncPermissions([
-            'units.view',
-            'assembly.view',
-            'assembly.complete',
-            'evidences.view',
-        ]);
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | ENTREGA
-        |--------------------------------------------------------------------------
-        */
-
-        $delivery = Role::firstOrCreate([
-            'name' => 'ENTREGA',
-            'guard_name' => 'web',
-        ]);
-
-        $delivery->syncPermissions([
-            'units.view',
-            'delivery.view',
-            'delivery.complete',
-            'evidences.view',
-        ]);
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | SUPERVISOR
-        |--------------------------------------------------------------------------
-        */
-
-        $supervisor = Role::firstOrCreate([
-            'name' => 'SUPERVISOR',
-            'guard_name' => 'web',
-        ]);
-
-        $supervisor->syncPermissions([
-            'units.view',
-
-            'arrival.view',
-            'assembly.view',
-            'delivery.view',
-
-            'evidences.view',
-
-            'reports.view',
-        ]);
 
         app(
             PermissionRegistrar::class

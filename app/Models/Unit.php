@@ -77,4 +77,44 @@ class Unit extends Model
             'deleted_by'
         );
     }
+
+    /*
+|--------------------------------------------------------------------------
+| ASIGNACIONES DE TRASLADO
+|--------------------------------------------------------------------------
+*/
+
+    public function transferAssignments(): HasMany
+    {
+        return $this->hasMany(
+            UnitTransferAssignment::class
+        );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CARGAS DE GASOLINA
+    |--------------------------------------------------------------------------
+    */
+
+    public function fuelLoads(): HasMany
+    {
+        return $this->hasMany(
+            UnitFuelLoad::class
+        );
+    }
+
+    public function activeTransferAssignment()
+    {
+        return $this
+            ->hasOne(
+                UnitTransferAssignment::class
+            )
+            ->where(
+                'status',
+                \App\Enums\TransferAssignmentStatus::ASSIGNED->value
+            )
+            ->latestOfMany();
+    }
 }

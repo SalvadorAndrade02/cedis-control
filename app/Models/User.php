@@ -10,8 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['name', 'email', 'password','active',])]
+#[Fillable(['name', 'email', 'password', 'active',])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -30,5 +31,49 @@ class User extends Authenticatable
             'password' => 'hashed',
             'active' => 'boolean',
         ];
+    }
+
+    /*
+|--------------------------------------------------------------------------
+| UNIDADES ASIGNADAS COMO TRASLADISTA
+|--------------------------------------------------------------------------
+*/
+
+    public function transferAssignments(): HasMany
+    {
+        return $this->hasMany(
+            UnitTransferAssignment::class,
+            'transporter_user_id'
+        );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | ASIGNACIONES REALIZADAS
+    |--------------------------------------------------------------------------
+    */
+
+    public function transferAssignmentsCreated(): HasMany
+    {
+        return $this->hasMany(
+            UnitTransferAssignment::class,
+            'assigned_by'
+        );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CARGAS DE GASOLINA REGISTRADAS
+    |--------------------------------------------------------------------------
+    */
+
+    public function fuelLoadsRegistered(): HasMany
+    {
+        return $this->hasMany(
+            UnitFuelLoad::class,
+            'registered_by'
+        );
     }
 }

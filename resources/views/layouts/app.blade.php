@@ -277,35 +277,35 @@
 
                                     <a href="{{ route('units.index') }}"
                                         class="
-                                                                                                                                                                                                                                group
-                                                                                                                                                                                                                                flex
-                                                                                                                                                                                                                                items-center
-                                                                                                                                                                                                                                gap-3
-                                                                                                                                                                                                                                rounded-xl
-                                                                                                                                                                                                                                border-l-2
-                                                                                                                                                                                                                                px-3
-                                                                                                                                                                                                                                py-3
-                                                                                                                                                                                                                                text-sm
-                                                                                                                                                                                                                                font-medium
-                                                                                                                                                                                                                                transition-all
+                                                                                                                                                                                                                                                                group
+                                                                                                                                                                                                                                                                flex
+                                                                                                                                                                                                                                                                items-center
+                                                                                                                                                                                                                                                                gap-3
+                                                                                                                                                                                                                                                                rounded-xl
+                                                                                                                                                                                                                                                                border-l-2
+                                                                                                                                                                                                                                                                px-3
+                                                                                                                                                                                                                                                                py-3
+                                                                                                                                                                                                                                                                text-sm
+                                                                                                                                                                                                                                                                font-medium
+                                                                                                                                                                                                                                                                transition-all
 
-                                                                                                                                                                                                                                {{ request()->routeIs('units.*')
+                                                                                                                                                                                                                                                                {{ request()->routeIs('units.*')
                         ? 'border-blue-400 bg-white/10 text-white'
                         : 'border-transparent text-slate-300 hover:bg-white/5 hover:text-white'
-                                                                                                                                                                                                                                }}
-                                                                                                                                                                                                                            ">
+                                                                                                                                                                                                                                                                }}
+                                                                                                                                                                                                                                                            ">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
                                             stroke="currentColor"
                                             class="
-                                                                                                                                                                                                                                    h-5
-                                                                                                                                                                                                                                    w-5
-                                                                                                                                                                                                                                    shrink-0
-                                                                                                                                                                                                                                    {{ request()->routeIs('units.*')
+                                                                                                                                                                                                                                                                    h-5
+                                                                                                                                                                                                                                                                    w-5
+                                                                                                                                                                                                                                                                    shrink-0
+                                                                                                                                                                                                                                                                    {{ request()->routeIs('units.*')
                         ? 'text-blue-400'
                         : 'text-slate-500 group-hover:text-slate-300'
-                                                                                                                                                                                                                                    }}
-                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                    }}
+                                                                                                                                                                                                                                                                ">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M8.25 18.75a1.5 1.5 0 1 1-3 0m13.5 0a1.5 1.5 0 1 1-3 0M3.75 15.75V9.621a2.25 2.25 0 0 1 .659-1.591l2.371-2.371A2.25 2.25 0 0 1 8.371 5h6.879a2.25 2.25 0 0 1 2.25 2.25v1.5h.879a2.25 2.25 0 0 1 1.591.659l.621.621a2.25 2.25 0 0 1 .659 1.591v4.129H3.75Z" />
                                         </svg>
@@ -325,35 +325,35 @@
 
                                     <a href="{{ route('imports.index') }}"
                                         class="
-                                                                                                                                                                                                                                group
-                                                                                                                                                                                                                                flex
-                                                                                                                                                                                                                                items-center
-                                                                                                                                                                                                                                gap-3
-                                                                                                                                                                                                                                rounded-xl
-                                                                                                                                                                                                                                border-l-2
-                                                                                                                                                                                                                                px-3
-                                                                                                                                                                                                                                py-3
-                                                                                                                                                                                                                                text-sm
-                                                                                                                                                                                                                                font-medium
-                                                                                                                                                                                                                                transition-all
+                                                                                                                                                                                                                                                                group
+                                                                                                                                                                                                                                                                flex
+                                                                                                                                                                                                                                                                items-center
+                                                                                                                                                                                                                                                                gap-3
+                                                                                                                                                                                                                                                                rounded-xl
+                                                                                                                                                                                                                                                                border-l-2
+                                                                                                                                                                                                                                                                px-3
+                                                                                                                                                                                                                                                                py-3
+                                                                                                                                                                                                                                                                text-sm
+                                                                                                                                                                                                                                                                font-medium
+                                                                                                                                                                                                                                                                transition-all
 
-                                                                                                                                                                                                                                {{ request()->routeIs('imports.*')
+                                                                                                                                                                                                                                                                {{ request()->routeIs('imports.*')
                         ? 'border-blue-400 bg-white/10 text-white'
                         : 'border-transparent text-slate-300 hover:bg-white/5 hover:text-white'
-                                                                                                                                                                                                                                }}
-                                                                                                                                                                                                                            ">
+                                                                                                                                                                                                                                                                }}
+                                                                                                                                                                                                                                                            ">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
                                             stroke="currentColor"
                                             class="
-                                                                                                                                                                                                                                    h-5
-                                                                                                                                                                                                                                    w-5
-                                                                                                                                                                                                                                    shrink-0
-                                                                                                                                                                                                                                    {{ request()->routeIs('imports.*')
+                                                                                                                                                                                                                                                                    h-5
+                                                                                                                                                                                                                                                                    w-5
+                                                                                                                                                                                                                                                                    shrink-0
+                                                                                                                                                                                                                                                                    {{ request()->routeIs('imports.*')
                         ? 'text-blue-400'
                         : 'text-slate-500 group-hover:text-slate-300'
-                                                                                                                                                                                                                                    }}
-                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                    }}
+                                                                                                                                                                                                                                                                ">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M12 16.5V3m0 13.5-4.5-4.5m4.5 4.5 4.5-4.5M4.5 15v3.75A2.25 2.25 0 0 0 6.75 21h10.5a2.25 2.25 0 0 0 2.25-2.25V15" />
                                         </svg>
@@ -376,24 +376,25 @@
                 @canany([
                         'arrival.view',
                         'assembly.view',
-                        'delivery.view'
+                        'delivery.view',
+                        'transfers.view'
                     ])
 
                     <div class="
-                                                                            my-6
-                                                                            border-t
-                                                                            border-white/10
-                                                                        "></div>
+                                                                                    my-6
+                                                                                    border-t
+                                                                                    border-white/10
+                                                                                "></div>
 
                     <p class="
-                                                                            mb-2
-                                                                            px-3
-                                                                            text-[10px]
-                                                                            font-semibold
-                                                                            uppercase
-                                                                            tracking-[0.18em]
-                                                                            text-slate-500
-                                                                        ">
+                                                                                    mb-2
+                                                                                    px-3
+                                                                                    text-[10px]
+                                                                                    font-semibold
+                                                                                    uppercase
+                                                                                    tracking-[0.18em]
+                                                                                    text-slate-500
+                                                                                ">
                         Operación
                     </p>
 
@@ -409,31 +410,31 @@
 
                                     <a href="{{ route('operations.arrivals') }}"
                                         class="
-                                                                                                                                                                                                                                group
-                                                                                                                                                                                                                                flex
-                                                                                                                                                                                                                                items-center
-                                                                                                                                                                                                                                gap-3
-                                                                                                                                                                                                                                rounded-xl
-                                                                                                                                                                                                                                border-l-2
-                                                                                                                                                                                                                                px-3
-                                                                                                                                                                                                                                py-3
-                                                                                                                                                                                                                                text-sm
-                                                                                                                                                                                                                                font-medium
-                                                                                                                                                                                                                                transition-all
+                                                                                                                                                                                                                                                                group
+                                                                                                                                                                                                                                                                flex
+                                                                                                                                                                                                                                                                items-center
+                                                                                                                                                                                                                                                                gap-3
+                                                                                                                                                                                                                                                                rounded-xl
+                                                                                                                                                                                                                                                                border-l-2
+                                                                                                                                                                                                                                                                px-3
+                                                                                                                                                                                                                                                                py-3
+                                                                                                                                                                                                                                                                text-sm
+                                                                                                                                                                                                                                                                font-medium
+                                                                                                                                                                                                                                                                transition-all
 
-                                                                                                                                                                                                                                {{ request()->routeIs('operations.arrivals')
+                                                                                                                                                                                                                                                                {{ request()->routeIs('operations.arrivals')
                         ? 'border-blue-400 bg-white/10 text-white'
                         : 'border-transparent text-slate-300 hover:bg-white/5 hover:text-white'
-                                                                                                                                                                                                                                }}
-                                                                                                                                                                                                                            ">
+                                                                                                                                                                                                                                                                }}
+                                                                                                                                                                                                                                                            ">
 
                                         <span
                                             class="
-                                                                                                                                                                                                                                    h-2
-                                                                                                                                                                                                                                    w-2
-                                                                                                                                                                                                                                    rounded-full
-                                                                                                                                                                                                                                    bg-blue-400
-                                                                                                                                                                                                                                "></span>
+                                                                                                                                                                                                                                                                    h-2
+                                                                                                                                                                                                                                                                    w-2
+                                                                                                                                                                                                                                                                    rounded-full
+                                                                                                                                                                                                                                                                    bg-blue-400
+                                                                                                                                                                                                                                                                "></span>
 
                                         Llegadas
 
@@ -448,31 +449,31 @@
 
                                     <a href="{{ route('operations.assemblies') }}"
                                         class="
-                                                                                                                                                                                                                                group
-                                                                                                                                                                                                                                flex
-                                                                                                                                                                                                                                items-center
-                                                                                                                                                                                                                                gap-3
-                                                                                                                                                                                                                                rounded-xl
-                                                                                                                                                                                                                                border-l-2
-                                                                                                                                                                                                                                px-3
-                                                                                                                                                                                                                                py-3
-                                                                                                                                                                                                                                text-sm
-                                                                                                                                                                                                                                font-medium
-                                                                                                                                                                                                                                transition-all
+                                                                                                                                                                                                                                                                group
+                                                                                                                                                                                                                                                                flex
+                                                                                                                                                                                                                                                                items-center
+                                                                                                                                                                                                                                                                gap-3
+                                                                                                                                                                                                                                                                rounded-xl
+                                                                                                                                                                                                                                                                border-l-2
+                                                                                                                                                                                                                                                                px-3
+                                                                                                                                                                                                                                                                py-3
+                                                                                                                                                                                                                                                                text-sm
+                                                                                                                                                                                                                                                                font-medium
+                                                                                                                                                                                                                                                                transition-all
 
-                                                                                                                                                                                                                                {{ request()->routeIs('operations.assemblies')
+                                                                                                                                                                                                                                                                {{ request()->routeIs('operations.assemblies')
                         ? 'border-amber-400 bg-white/10 text-white'
                         : 'border-transparent text-slate-300 hover:bg-white/5 hover:text-white'
-                                                                                                                                                                                                                                }}
-                                                                                                                                                                                                                            ">
+                                                                                                                                                                                                                                                                }}
+                                                                                                                                                                                                                                                            ">
 
                                         <span
                                             class="
-                                                                                                                                                                                                                                    h-2
-                                                                                                                                                                                                                                    w-2
-                                                                                                                                                                                                                                    rounded-full
-                                                                                                                                                                                                                                    bg-amber-400
-                                                                                                                                                                                                                                "></span>
+                                                                                                                                                                                                                                                                    h-2
+                                                                                                                                                                                                                                                                    w-2
+                                                                                                                                                                                                                                                                    rounded-full
+                                                                                                                                                                                                                                                                    bg-amber-400
+                                                                                                                                                                                                                                                                "></span>
 
                                         Armados
 
@@ -487,37 +488,85 @@
 
                                     <a href="{{ route('operations.deliveries') }}"
                                         class="
-                                                                                                                                                                                                                                group
-                                                                                                                                                                                                                                flex
-                                                                                                                                                                                                                                items-center
-                                                                                                                                                                                                                                gap-3
-                                                                                                                                                                                                                                rounded-xl
-                                                                                                                                                                                                                                border-l-2
-                                                                                                                                                                                                                                px-3
-                                                                                                                                                                                                                                py-3
-                                                                                                                                                                                                                                text-sm
-                                                                                                                                                                                                                                font-medium
-                                                                                                                                                                                                                                transition-all
+                                                                                                                                                                                                                                                                group
+                                                                                                                                                                                                                                                                flex
+                                                                                                                                                                                                                                                                items-center
+                                                                                                                                                                                                                                                                gap-3
+                                                                                                                                                                                                                                                                rounded-xl
+                                                                                                                                                                                                                                                                border-l-2
+                                                                                                                                                                                                                                                                px-3
+                                                                                                                                                                                                                                                                py-3
+                                                                                                                                                                                                                                                                text-sm
+                                                                                                                                                                                                                                                                font-medium
+                                                                                                                                                                                                                                                                transition-all
 
-                                                                                                                                                                                                                                {{ request()->routeIs('operations.deliveries')
+                                                                                                                                                                                                                                                                {{ request()->routeIs('operations.deliveries')
                         ? 'border-emerald-400 bg-white/10 text-white'
                         : 'border-transparent text-slate-300 hover:bg-white/5 hover:text-white'
-                                                                                                                                                                                                                                }}
-                                                                                                                                                                                                                            ">
+                                                                                                                                                                                                                                                                }}
+                                                                                                                                                                                                                                                            ">
 
                                         <span
                                             class="
-                                                                                                                                                                                                                                    h-2
-                                                                                                                                                                                                                                    w-2
-                                                                                                                                                                                                                                    rounded-full
-                                                                                                                                                                                                                                    bg-emerald-400
-                                                                                                                                                                                                                                "></span>
+                                                                                                                                                                                                                                                                    h-2
+                                                                                                                                                                                                                                                                    w-2
+                                                                                                                                                                                                                                                                    rounded-full
+                                                                                                                                                                                                                                                                    bg-emerald-400
+                                                                                                                                                                                                                                                                "></span>
 
                                         Entregas
 
                                     </a>
 
                     @endcan
+
+                    {{-- MIS TRASLADOS --}}
+
+                    @role('TRASLADISTA')
+
+                    <a href="{{ route('transfers.mine') }}" class="
+            group
+            flex
+            items-center
+            gap-3
+            rounded-xl
+            border-l-2
+            px-3
+            py-3
+            text-sm
+            font-medium
+            transition-all
+
+            {{
+    request()->routeIs('transfers.mine')
+    ? 'border-teal-400 bg-white/10 text-white'
+    : 'border-transparent text-slate-300 hover:bg-white/5 hover:text-white'
+            }}
+        ">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
+                            stroke="currentColor" class="
+                h-5
+                w-5
+                shrink-0
+
+                {{
+    request()->routeIs('transfers.mine')
+    ? 'text-teal-400'
+    : 'text-slate-500 group-hover:text-slate-300'
+                }}
+            ">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 13.5V9.75a1.5 1.5 0 0 1 1.5-1.5h8.25a1.5 1.5 0 0 1 1.5 1.5v3.75m0 0h2.25l2.25 2.25v2.25h-1.5m-3-4.5v4.5m0 0H8.25m6.75 0a1.5 1.5 0 1 0 3 0m-9.75 0a1.5 1.5 0 1 0-3 0m3 0H5.25" />
+                        </svg>
+
+                        <span>
+                            Mis traslados
+                        </span>
+
+                    </a>
+
+                    @endrole
 
                 </div>
 
@@ -533,20 +582,20 @@
                     ])
 
                     <div class="
-                                                                            my-6
-                                                                            border-t
-                                                                            border-white/10
-                                                                        "></div>
+                                                                                    my-6
+                                                                                    border-t
+                                                                                    border-white/10
+                                                                                "></div>
 
                     <p class="
-                                                                            mb-2
-                                                                            px-3
-                                                                            text-[10px]
-                                                                            font-semibold
-                                                                            uppercase
-                                                                            tracking-[0.18em]
-                                                                            text-slate-500
-                                                                        ">
+                                                                                    mb-2
+                                                                                    px-3
+                                                                                    text-[10px]
+                                                                                    font-semibold
+                                                                                    uppercase
+                                                                                    tracking-[0.18em]
+                                                                                    text-slate-500
+                                                                                ">
                         Administración
                     </p>
 
@@ -562,32 +611,32 @@
 
                                     <a href="{{ route('admin.users') }}"
                                         class="
-                                                                                                                                                                                                                                group
-                                                                                                                                                                                                                                flex
-                                                                                                                                                                                                                                items-center
-                                                                                                                                                                                                                                gap-3
-                                                                                                                                                                                                                                rounded-xl
-                                                                                                                                                                                                                                border-l-2
-                                                                                                                                                                                                                                px-3
-                                                                                                                                                                                                                                py-3
-                                                                                                                                                                                                                                text-sm
-                                                                                                                                                                                                                                font-medium
-                                                                                                                                                                                                                                transition-all
+                                                                                                                                                                                                                                                                group
+                                                                                                                                                                                                                                                                flex
+                                                                                                                                                                                                                                                                items-center
+                                                                                                                                                                                                                                                                gap-3
+                                                                                                                                                                                                                                                                rounded-xl
+                                                                                                                                                                                                                                                                border-l-2
+                                                                                                                                                                                                                                                                px-3
+                                                                                                                                                                                                                                                                py-3
+                                                                                                                                                                                                                                                                text-sm
+                                                                                                                                                                                                                                                                font-medium
+                                                                                                                                                                                                                                                                transition-all
 
-                                                                                                                                                                                                                                {{ request()->routeIs('admin.users')
+                                                                                                                                                                                                                                                                {{ request()->routeIs('admin.users')
                         ? 'border-blue-400 bg-white/10 text-white'
                         : 'border-transparent text-slate-300 hover:bg-white/5 hover:text-white'
-                                                                                                                                                                                                                                }}
-                                                                                                                                                                                                                            ">
+                                                                                                                                                                                                                                                                }}
+                                                                                                                                                                                                                                                            ">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
                                             stroke="currentColor"
                                             class="
-                                                                                                                                                                                                                                    h-5
-                                                                                                                                                                                                                                    w-5
-                                                                                                                                                                                                                                    text-slate-500
-                                                                                                                                                                                                                                    group-hover:text-slate-300
-                                                                                                                                                                                                                                ">
+                                                                                                                                                                                                                                                                    h-5
+                                                                                                                                                                                                                                                                    w-5
+                                                                                                                                                                                                                                                                    text-slate-500
+                                                                                                                                                                                                                                                                    group-hover:text-slate-300
+                                                                                                                                                                                                                                                                ">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766v-.106a6.375 6.375 0 0 1 11.964-3.07M12 6.75a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
                                         </svg>
@@ -604,35 +653,35 @@
                     @can('reports.view')
 
                                     <a href="{{ route('reports.assembly') }}" class="
-                            group
-                            flex
-                            items-center
-                            gap-3
-                            rounded-xl
-                            border-l-2
-                            px-3
-                            py-3
-                            text-sm
-                            font-medium
-                            transition-all
+                                                            group
+                                                            flex
+                                                            items-center
+                                                            gap-3
+                                                            rounded-xl
+                                                            border-l-2
+                                                            px-3
+                                                            py-3
+                                                            text-sm
+                                                            font-medium
+                                                            transition-all
 
-                            {{ request()->routeIs('reports.*')
+                                                            {{ request()->routeIs('reports.*')
                         ? 'border-amber-400 bg-white/10 text-white'
                         : 'border-transparent text-slate-300 hover:bg-white/5 hover:text-white'
-                            }}
-                        ">
+                                                            }}
+                                                        ">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7"
                                             stroke="currentColor" class="
-                                h-5
-                                w-5
-                                shrink-0
+                                                                h-5
+                                                                w-5
+                                                                shrink-0
 
-                                {{ request()->routeIs('reports.*')
+                                                                {{ request()->routeIs('reports.*')
                         ? 'text-amber-400'
                         : 'text-slate-500 group-hover:text-slate-300'
-                                }}
-                            ">
+                                                                }}
+                                                            ">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M3.75 3v18h16.5M7.5 16.5v-5.25m4.5 5.25V7.5m4.5 9V10.5" />
                                         </svg>
@@ -948,30 +997,30 @@
                     @if (session('success'))
 
                         <div class="
-                                                                                mb-6
-                                                                                flex
-                                                                                items-start
-                                                                                gap-3
-                                                                                rounded-2xl
-                                                                                border
-                                                                                border-emerald-200
-                                                                                bg-emerald-50
-                                                                                px-5
-                                                                                py-4
-                                                                                shadow-sm
-                                                                            ">
+                                                                                        mb-6
+                                                                                        flex
+                                                                                        items-start
+                                                                                        gap-3
+                                                                                        rounded-2xl
+                                                                                        border
+                                                                                        border-emerald-200
+                                                                                        bg-emerald-50
+                                                                                        px-5
+                                                                                        py-4
+                                                                                        shadow-sm
+                                                                                    ">
 
                             <div class="
-                                                                                    flex
-                                                                                    h-8
-                                                                                    w-8
-                                                                                    shrink-0
-                                                                                    items-center
-                                                                                    justify-center
-                                                                                    rounded-full
-                                                                                    bg-emerald-100
-                                                                                    text-emerald-700
-                                                                                ">
+                                                                                            flex
+                                                                                            h-8
+                                                                                            w-8
+                                                                                            shrink-0
+                                                                                            items-center
+                                                                                            justify-center
+                                                                                            rounded-full
+                                                                                            bg-emerald-100
+                                                                                            text-emerald-700
+                                                                                        ">
                                 ✓
                             </div>
 
@@ -979,18 +1028,18 @@
                             <div>
 
                                 <p class="
-                                                                                        text-sm
-                                                                                        font-semibold
-                                                                                        text-emerald-900
-                                                                                    ">
+                                                                                                text-sm
+                                                                                                font-semibold
+                                                                                                text-emerald-900
+                                                                                            ">
                                     Operación realizada correctamente
                                 </p>
 
                                 <p class="
-                                                                                        mt-1
-                                                                                        text-sm
-                                                                                        text-emerald-700
-                                                                                    ">
+                                                                                                mt-1
+                                                                                                text-sm
+                                                                                                text-emerald-700
+                                                                                            ">
                                     {{ session('success') }}
                                 </p>
 
@@ -1006,30 +1055,30 @@
                     @if (session('error'))
 
                         <div class="
-                                                                                mb-6
-                                                                                flex
-                                                                                items-start
-                                                                                gap-3
-                                                                                rounded-2xl
-                                                                                border
-                                                                                border-red-200
-                                                                                bg-red-50
-                                                                                px-5
-                                                                                py-4
-                                                                                shadow-sm
-                                                                            ">
+                                                                                        mb-6
+                                                                                        flex
+                                                                                        items-start
+                                                                                        gap-3
+                                                                                        rounded-2xl
+                                                                                        border
+                                                                                        border-red-200
+                                                                                        bg-red-50
+                                                                                        px-5
+                                                                                        py-4
+                                                                                        shadow-sm
+                                                                                    ">
 
                             <div class="
-                                                                                    flex
-                                                                                    h-8
-                                                                                    w-8
-                                                                                    shrink-0
-                                                                                    items-center
-                                                                                    justify-center
-                                                                                    rounded-full
-                                                                                    bg-red-100
-                                                                                    text-red-700
-                                                                                ">
+                                                                                            flex
+                                                                                            h-8
+                                                                                            w-8
+                                                                                            shrink-0
+                                                                                            items-center
+                                                                                            justify-center
+                                                                                            rounded-full
+                                                                                            bg-red-100
+                                                                                            text-red-700
+                                                                                        ">
                                 !
                             </div>
 
@@ -1037,18 +1086,18 @@
                             <div>
 
                                 <p class="
-                                                                                        text-sm
-                                                                                        font-semibold
-                                                                                        text-red-900
-                                                                                    ">
+                                                                                                text-sm
+                                                                                                font-semibold
+                                                                                                text-red-900
+                                                                                            ">
                                     No fue posible completar la operación
                                 </p>
 
                                 <p class="
-                                                                                        mt-1
-                                                                                        text-sm
-                                                                                        text-red-700
-                                                                                    ">
+                                                                                                mt-1
+                                                                                                text-sm
+                                                                                                text-red-700
+                                                                                            ">
                                     {{ session('error') }}
                                 </p>
 
