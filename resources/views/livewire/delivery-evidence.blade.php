@@ -7,31 +7,31 @@
     @if ($errorMessage)
 
         <div class="
-                    flex
-                    items-start
-                    gap-3
-                    rounded-2xl
-                    border
-                    border-red-200
-                    bg-red-50
-                    px-5
-                    py-4
-                    text-sm
-                    text-red-700
-                ">
-
-            <div class="
                         flex
-                        h-8
-                        w-8
-                        shrink-0
-                        items-center
-                        justify-center
-                        rounded-full
-                        bg-red-100
-                        font-bold
+                        items-start
+                        gap-3
+                        rounded-2xl
+                        border
+                        border-red-200
+                        bg-red-50
+                        px-5
+                        py-4
+                        text-sm
                         text-red-700
                     ">
+
+            <div class="
+                            flex
+                            h-8
+                            w-8
+                            shrink-0
+                            items-center
+                            justify-center
+                            rounded-full
+                            bg-red-100
+                            font-bold
+                            text-red-700
+                        ">
                 !
             </div>
 
@@ -200,10 +200,10 @@
                     @if ($unit->year)
 
                         <p class="
-                                    mt-1
-                                    text-sm
-                                    text-slate-500
-                                ">
+                                        mt-1
+                                        text-sm
+                                        text-slate-500
+                                    ">
                             Modelo {{ $unit->year }}
 
                             @if ($unit->exterior_color)
@@ -348,11 +348,11 @@
                         @error('carrierName')
 
                             <p class="
-                                        mt-1
-                                        text-xs
-                                        font-medium
-                                        text-red-600
-                                    ">
+                                            mt-1
+                                            text-xs
+                                            font-medium
+                                            text-red-600
+                                        ">
                                 {{ $message }}
                             </p>
 
@@ -376,35 +376,18 @@
                             Operador *
                         </label>
 
-                        <input type="text" wire:model="operatorName" placeholder="Nombre completo" class="
-                                mt-2
-                                w-full
-                                rounded-2xl
-                                border
-                                border-slate-200
-                                bg-slate-50/60
-                                px-4
-                                py-3
-                                text-sm
-                                text-slate-900
-                                outline-none
-                                transition
-                                placeholder:text-slate-400
-                                hover:border-slate-300
-                                focus:border-violet-500
-                                focus:bg-white
-                                focus:ring-4
-                                focus:ring-violet-500/10
-                            ">
+                        <input type="text" wire:model="operatorName" wire:input="markOperatorAsManual"
+                            placeholder="Nombre del operador"
+                            class="block w-full rounded-xl border-slate-300 text-sm shadow-sm focus:border-violet-500 focus:ring-violet-500">
 
                         @error('operatorName')
 
                             <p class="
-                                        mt-1
-                                        text-xs
-                                        font-medium
-                                        text-red-600
-                                    ">
+                                            mt-1
+                                            text-xs
+                                            font-medium
+                                            text-red-600
+                                        ">
                                 {{ $message }}
                             </p>
 
@@ -453,11 +436,11 @@
                         @error('operatorIdentification')
 
                             <p class="
-                                        mt-1
-                                        text-xs
-                                        font-medium
-                                        text-red-600
-                                    ">
+                                            mt-1
+                                            text-xs
+                                            font-medium
+                                            text-red-600
+                                        ">
                                 {{ $message }}
                             </p>
 
@@ -505,11 +488,11 @@
                         @error('operatorPhone')
 
                             <p class="
-                                        mt-1
-                                        text-xs
-                                        font-medium
-                                        text-red-600
-                                    ">
+                                            mt-1
+                                            text-xs
+                                            font-medium
+                                            text-red-600
+                                        ">
                                 {{ $message }}
                             </p>
 
@@ -563,11 +546,11 @@
                         @error('vehiclePlate')
 
                             <p class="
-                                        mt-1
-                                        text-xs
-                                        font-medium
-                                        text-red-600
-                                    ">
+                                            mt-1
+                                            text-xs
+                                            font-medium
+                                            text-red-600
+                                        ">
                                 {{ $message }}
                             </p>
 
@@ -615,11 +598,11 @@
                         @error('vehicleNumber')
 
                             <p class="
-                                        mt-1
-                                        text-xs
-                                        font-medium
-                                        text-red-600
-                                    ">
+                                            mt-1
+                                            text-xs
+                                            font-medium
+                                            text-red-600
+                                        ">
                                 {{ $message }}
                             </p>
 
@@ -668,11 +651,11 @@
                         @error('transportType')
 
                             <p class="
-                                        mt-1
-                                        text-xs
-                                        font-medium
-                                        text-red-600
-                                    ">
+                                            mt-1
+                                            text-xs
+                                            font-medium
+                                            text-red-600
+                                        ">
                                 {{ $message }}
                             </p>
 
@@ -846,11 +829,11 @@
                 @error('photos')
 
                     <p class="
-                                mt-2
-                                text-sm
-                                font-medium
-                                text-red-600
-                            ">
+                                    mt-2
+                                    text-sm
+                                    font-medium
+                                    text-red-600
+                                ">
                         {{ $message }}
                     </p>
 
@@ -860,11 +843,11 @@
                 @error('photos.*')
 
                     <p class="
-                                mt-2
-                                text-sm
-                                font-medium
-                                text-red-600
-                            ">
+                                    mt-2
+                                    text-sm
+                                    font-medium
+                                    text-red-600
+                                ">
                         {{ $message }}
                     </p>
 
@@ -883,28 +866,28 @@
                 <div>
 
                     <div class="
-                                mb-4
-                                flex
-                                items-center
-                                justify-between
-                                gap-4
-                            ">
+                                    mb-4
+                                    flex
+                                    items-center
+                                    justify-between
+                                    gap-4
+                                ">
 
                         <div>
 
                             <p class="
-                                        text-sm
-                                        font-semibold
-                                        text-slate-900
-                                    ">
+                                            text-sm
+                                            font-semibold
+                                            text-slate-900
+                                        ">
                                 Fotografías seleccionadas
                             </p>
 
                             <p class="
-                                        mt-0.5
-                                        text-xs
-                                        text-slate-500
-                                    ">
+                                            mt-0.5
+                                            text-xs
+                                            text-slate-500
+                                        ">
                                 Revisa las imágenes antes
                                 de confirmar la entrega.
                             </p>
@@ -913,14 +896,14 @@
 
 
                         <span class="
-                                    rounded-full
-                                    bg-violet-50
-                                    px-3
-                                    py-1
-                                    text-xs
-                                    font-semibold
-                                    text-violet-700
-                                ">
+                                        rounded-full
+                                        bg-violet-50
+                                        px-3
+                                        py-1
+                                        text-xs
+                                        font-semibold
+                                        text-violet-700
+                                    ">
                             {{ count($photos) }}
                             seleccionada(s)
                         </span>
@@ -929,13 +912,13 @@
 
 
                     <div class="
-                                grid
-                                grid-cols-2
-                                gap-3
-                                sm:grid-cols-3
-                                lg:grid-cols-4
-                                xl:grid-cols-5
-                            ">
+                                    grid
+                                    grid-cols-2
+                                    gap-3
+                                    sm:grid-cols-3
+                                    lg:grid-cols-4
+                                    xl:grid-cols-5
+                                ">
 
                         @foreach (
                                 $photos
@@ -943,67 +926,67 @@
                             )
 
                             <div class="
-                                            group
-                                            relative
-                                            overflow-hidden
-                                            rounded-2xl
-                                            border
-                                            border-slate-200
-                                            bg-slate-100
-                                            shadow-sm
-                                        ">
+                                                    group
+                                                    relative
+                                                    overflow-hidden
+                                                    rounded-2xl
+                                                    border
+                                                    border-slate-200
+                                                    bg-slate-100
+                                                    shadow-sm
+                                                ">
 
                                 <img src="{{ $photo->temporaryUrl() }}" alt="Evidencia de entrega" class="
-                                                aspect-square
-                                                w-full
-                                                object-cover
-                                            ">
+                                                        aspect-square
+                                                        w-full
+                                                        object-cover
+                                                    ">
 
 
                                 <div class="
-                                                pointer-events-none
-                                                absolute
-                                                inset-x-0
-                                                bottom-0
-                                                h-16
-                                                bg-gradient-to-t
-                                                from-black/70
-                                                to-transparent
-                                            "></div>
+                                                        pointer-events-none
+                                                        absolute
+                                                        inset-x-0
+                                                        bottom-0
+                                                        h-16
+                                                        bg-gradient-to-t
+                                                        from-black/70
+                                                        to-transparent
+                                                    "></div>
 
 
                                 <button type="button" wire:click="
-                                                removePhoto({{ $index }})
-                                            " title="Eliminar fotografía" class="
-                                                absolute
-                                                right-2
-                                                top-2
-                                                flex
-                                                h-8
-                                                w-8
-                                                items-center
-                                                justify-center
-                                                rounded-full
-                                                bg-black/70
-                                                text-sm
-                                                font-bold
-                                                text-white
-                                                shadow-sm
-                                                transition
-                                                hover:bg-red-600
-                                            ">
+                                                        removePhoto({{ $index }})
+                                                    " title="Eliminar fotografía" class="
+                                                        absolute
+                                                        right-2
+                                                        top-2
+                                                        flex
+                                                        h-8
+                                                        w-8
+                                                        items-center
+                                                        justify-center
+                                                        rounded-full
+                                                        bg-black/70
+                                                        text-sm
+                                                        font-bold
+                                                        text-white
+                                                        shadow-sm
+                                                        transition
+                                                        hover:bg-red-600
+                                                    ">
                                     ×
                                 </button>
 
 
                                 <p class="
-                                                absolute
-                                                bottom-2
-                                                left-3
-                                                text-[10px]
-                                                font-medium
-                                                text-white
-                                            ">
+                                                        absolute
+                                                        bottom-2
+                                                        left-3
+                                                        text-[10px]
+                                                        font-medium
+                                                        text-white
+                                                    ">
                                     Evidencia {{ $index + 1 }}
                                 </p>
 
@@ -1100,11 +1083,11 @@
                 @error('observations')
 
                     <p class="
-                                mt-1
-                                text-xs
-                                font-medium
-                                text-red-600
-                            ">
+                                    mt-1
+                                    text-xs
+                                    font-medium
+                                    text-red-600
+                                ">
                         {{ $message }}
                     </p>
 

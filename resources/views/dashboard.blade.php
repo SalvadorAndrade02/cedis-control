@@ -4,6 +4,12 @@
 
 @section('content')
 
+        @if ($isTransporterDashboard ?? false)
+
+            @include('dashboard.trasladista')
+
+        @else
+
 <div class="space-y-8">
 
     {{-- HEADER --}}
@@ -48,5 +54,5 @@
     <livewire:dashboard-overview />
 
 </div>
-
+@endif
 @endsection

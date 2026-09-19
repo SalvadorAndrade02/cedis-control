@@ -789,7 +789,7 @@
                             <div class="value">
                                 {{ $fieldLabels[$field]
                     ?? $field
-                                                                    }}
+                                                                                            }}
                             </div>
                         </td>
 
@@ -803,7 +803,7 @@
                             <div>
                                 {{ $change['original']
                     ?? '—'
-                                                                    }}
+                                                                                            }}
                             </div>
 
                             <div class="small muted" style="margin-top: 5px;">
@@ -813,7 +813,7 @@
                             <div class="value">
                                 {{ $change['final']
                     ?? '—'
-                                                                    }}
+                                                                                            }}
                             </div>
 
                         </td>
@@ -871,7 +871,7 @@
                                     {{ $event->performed_by_name
                     ?? $event->performedBy?->name
                     ?? 'Sistema'
-                                                                                    }}
+                                                                                                                        }}
 
                                 </span>
 
@@ -968,7 +968,7 @@
                         $milestone->completed_at
                     )
                     : '—'
-                                                                    }}
+                                                                                            }}
 
                             </div>
                         </td>
@@ -989,7 +989,7 @@
                                 {{ $milestone->completed_by_name
                     ?? $milestone->completedBy?->name
                     ?? '—'
-                                                                    }}
+                                                                                            }}
 
                             </div>
 
@@ -1005,7 +1005,7 @@
                                 {{ $milestone
                     ->evidences
                     ->count()
-                                                                    }}
+                                                                                            }}
                             </div>
 
                         </td>
@@ -1086,7 +1086,7 @@
                                 $assemblySession->started_at
                             )
                             : '—'
-                                                                    }}
+                                                                                                        }}
 
                                 </div>
 
@@ -1106,7 +1106,7 @@
                                 $assemblySession->completed_at
                             )
                             : '—'
-                                                                    }}
+                                                                                                        }}
 
                                 </div>
 
@@ -1124,9 +1124,9 @@
                                 </div>
 
                                 <div class="value" style="
-                                                                        font-size: 14px;
-                                                                        color: #1d4ed8;
-                                                                    ">
+                                                                                                            font-size: 14px;
+                                                                                                            color: #1d4ed8;
+                                                                                                        ">
                                     {{ \App\Support\DurationHelper::format(
                             $assemblyEffectiveSeconds
                         ) }}
@@ -1142,9 +1142,9 @@
                                 </div>
 
                                 <div class="value" style="
-                                                                        font-size: 14px;
-                                                                        color: #b45309;
-                                                                    ">
+                                                                                                            font-size: 14px;
+                                                                                                            color: #b45309;
+                                                                                                        ">
                                     {{ \App\Support\DurationHelper::format(
                             $assemblyPausedSeconds
                         ) }}
@@ -1182,7 +1182,7 @@
                                     {{ $assemblySession
                             ->status
                             ->label()
-                                                                    }}
+                                                                                                        }}
                                 </div>
 
                             </td>
@@ -1202,7 +1202,7 @@
                                     {{ $assemblySession
                             ->started_by_name
                             ?? '—'
-                                                                    }}
+                                                                                                        }}
                                 </div>
 
                             </td>
@@ -1218,7 +1218,7 @@
                                     {{ $assemblySession
                             ->completed_by_name
                             ?? '—'
-                                                                    }}
+                                                                                                        }}
                                 </div>
 
                             </td>
@@ -1273,41 +1273,44 @@
 
 
                         <div class="avoid-break" style="
-                                                                                margin-bottom: 12px;
-                                                                                border: 1px solid #e2e8f0;
-                                                                                padding: 12px;
-                                                                                background: #f8fafc;
-                                                                            ">
+                                                                                                                                margin-bottom: 12px;
+                                                                                                                                border: 1px solid #e2e8f0;
+                                                                                                                                padding: 12px;
+                                                                                                                                background: #f8fafc;
+                                                                                                                            ">
 
                             <table style="
-                                                                                    width: 100%;
-                                                                                    border-collapse: collapse;
-                                                                                ">
+                                                                                                                                    width: 100%;
+                                                                                                                                    border-collapse: collapse;
+                                                                                                                                ">
 
                                 <tr>
 
-                                    <td colspan="2" style="
-                                                                                            padding-bottom: 9px;
-                                                                                        ">
+                                    <td colspan="2"
+                                        style="
+                                                                                                                                            padding-bottom: 9px;
+                                                                                                                                        ">
 
-                                        <strong style="
-                                                                                                font-size: 11px;
-                                                                                                color: #0f172a;
-                                                                                            ">
+                                        <strong
+                                            style="
+                                                                                                                                                font-size: 11px;
+                                                                                                                                                color: #0f172a;
+                                                                                                                                            ">
                                             {{ $pause
                                     ->reason
                                     ->label()
-                                                                                            }}
+                                                                                                                                            }}
                                         </strong>
 
 
-                                        <span style="
-                                                                                                float: right;
-                                                                                                font-family: monospace;
-                                                                                                font-size: 10px;
-                                                                                                font-weight: bold;
-                                                                                                color: #92400e;
-                                                                                            ">
+                                        <span
+                                            style="
+                                                                                                                                                float: right;
+                                                                                                                                                font-family: monospace;
+                                                                                                                                                font-size: 10px;
+                                                                                                                                                font-weight: bold;
+                                                                                                                                                color: #92400e;
+                                                                                                                                            ">
                                             {{ \App\Support\DurationHelper::format(
                                     (int) $pauseDurationSeconds
                                 ) }}
@@ -1320,11 +1323,12 @@
 
                                 <tr>
 
-                                    <td style="
-                                                                                            width: 50%;
-                                                                                            padding-right: 8px;
-                                                                                            vertical-align: top;
-                                                                                        ">
+                                    <td
+                                        style="
+                                                                                                                                            width: 50%;
+                                                                                                                                            padding-right: 8px;
+                                                                                                                                            vertical-align: top;
+                                                                                                                                        ">
 
                                         <div class="label">
                                             Inicio de pausa
@@ -1339,10 +1343,11 @@
                                     </td>
 
 
-                                    <td style="
-                                                                                            width: 50%;
-                                                                                            vertical-align: top;
-                                                                                        ">
+                                    <td
+                                        style="
+                                                                                                                                            width: 50%;
+                                                                                                                                            vertical-align: top;
+                                                                                                                                        ">
 
                                         <div class="label">
                                             Reanudación
@@ -1371,11 +1376,12 @@
 
                                 <tr>
 
-                                    <td style="
-                                                                                            padding-top: 10px;
-                                                                                            padding-right: 8px;
-                                                                                            vertical-align: top;
-                                                                                        ">
+                                    <td
+                                        style="
+                                                                                                                                            padding-top: 10px;
+                                                                                                                                            padding-right: 8px;
+                                                                                                                                            vertical-align: top;
+                                                                                                                                        ">
 
                                         <div class="label">
                                             Pausado por
@@ -1385,16 +1391,17 @@
                                             {{ $pause
                                     ->paused_by_name
                                     ?? '—'
-                                                                                            }}
+                                                                                                                                            }}
                                         </div>
 
                                     </td>
 
 
-                                    <td style="
-                                                                                            padding-top: 10px;
-                                                                                            vertical-align: top;
-                                                                                        ">
+                                    <td
+                                        style="
+                                                                                                                                            padding-top: 10px;
+                                                                                                                                            vertical-align: top;
+                                                                                                                                        ">
 
                                         <div class="label">
                                             Reanudado por
@@ -1404,7 +1411,7 @@
                                             {{ $pause
                                     ->resumed_by_name
                                     ?? '—'
-                                                                                            }}
+                                                                                                                                            }}
                                         </div>
 
                                     </td>
@@ -1416,9 +1423,10 @@
 
                                     <tr>
 
-                                        <td colspan="2" style="
-                                                                                                                padding-top: 10px;
-                                                                                                            ">
+                                        <td colspan="2"
+                                            style="
+                                                                                                                                                                            padding-top: 10px;
+                                                                                                                                                                        ">
 
                                             <div class="label">
                                                 Observaciones de la pausa
@@ -1476,7 +1484,7 @@
                             ->carrier
                                 ?->name
                             ?? '—'
-                                                                                            }}
+                                                                                                                                }}
                                 </div>
                             </td>
 
@@ -1490,7 +1498,7 @@
                             ->carrierDelivery
                             ->operator_name
                             ?? '—'
-                                                                                            }}
+                                                                                                                                }}
                                 </div>
                             </td>
 
@@ -1509,7 +1517,7 @@
                             ->carrierDelivery
                             ->vehicle_plate
                             ?? '—'
-                                                                                            }}
+                                                                                                                                }}
                                 </div>
                             </td>
 
@@ -1523,7 +1531,7 @@
                             ->carrierDelivery
                             ->vehicle_number
                             ?? '—'
-                                                                                            }}
+                                                                                                                                }}
                                 </div>
                             </td>
 
@@ -1542,7 +1550,7 @@
                             ->carrierDelivery
                             ->operator_phone
                             ?? '—'
-                                                                                            }}
+                                                                                                                                }}
                                 </div>
                             </td>
 
@@ -1556,7 +1564,7 @@
                             ->carrierDelivery
                             ->transport_type
                             ?? '—'
-                                                                                            }}
+                                                                                                                                }}
                                 </div>
                             </td>
 
@@ -1613,17 +1621,17 @@
                                             $evidenceImages[
                                                 $evidence->id
                                             ]
-                                                                                                                                            }}"
+                                                                                                                                                                                                        }}"
                                             class="photo">
 
                                     @else
 
                                         <div class="box"
                                             style="
-                                                                                                                                                height: 205px;
-                                                                                                                                                text-align: center;
-                                                                                                                                                padding-top: 85px;
-                                                                                                                                            ">
+                                                                                                                                                                                                            height: 205px;
+                                                                                                                                                                                                            text-align: center;
+                                                                                                                                                                                                            padding-top: 85px;
+                                                                                                                                                                                                        ">
                                             Evidencia no disponible
                                         </div>
 
@@ -1679,16 +1687,725 @@
 
     @endforeach
 
+    {{-- ========================================================= --}}
+    {{-- 8. TRASLADO Y COMBUSTIBLE --}}
+    {{-- ========================================================= --}}
 
+    @php
+
+        /*
+        |--------------------------------------------------------------------------
+        | TRASLADO FINAL
+        |--------------------------------------------------------------------------
+        |
+        | Al generar el expediente la unidad ya está COMPLETED,
+        | por lo que activeTransferAssignment ya no existe.
+        |
+        | Buscamos la asignación que realmente terminó el traslado.
+        |
+        */
+
+        $transferAssignment =
+            $unit
+                ->transferAssignments()
+                ->where(
+                    'status',
+                    \App\Enums\TransferAssignmentStatus::COMPLETED->value
+                )
+                ->latest('completed_at')
+                ->latest('id')
+                ->first();
+
+
+        /*
+         * Compatibilidad con expedientes cerrados antes
+         * de incorporar el cierre automático del traslado.
+         */
+        if (!$transferAssignment) {
+
+            $transferAssignment =
+                $unit
+                    ->transferAssignments()
+                    ->where(
+                        'status',
+                        '!=',
+                        \App\Enums\TransferAssignmentStatus::CANCELLED->value
+                    )
+                    ->latest('id')
+                    ->first();
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | HISTORIAL DE ASIGNACIONES
+        |--------------------------------------------------------------------------
+        */
+
+        $transferHistory =
+            $unit
+                ->transferAssignments()
+                ->orderBy('assigned_at')
+                ->get();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | COMBUSTIBLE
+        |--------------------------------------------------------------------------
+        |
+        | Preferimos la carga perteneciente al traslado final.
+        |
+        */
+
+        $fuelLoad =
+            $transferAssignment
+                    ?->fuelLoads()
+                ->latest('fueled_at')
+                ->first();
+
+
+        /*
+         * Fallback para registros históricos.
+         */
+        if (!$fuelLoad) {
+
+            $fuelLoad =
+                $unit
+                    ->fuelLoads()
+                    ->latest('fueled_at')
+                    ->first();
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | IMAGEN DEL TICKET
+        |--------------------------------------------------------------------------
+        |
+        | DomPDF puede trabajar con Data URI.
+        |
+        */
+
+        $fuelTicketImage = null;
+
+
+        if (
+            $fuelLoad
+            && $fuelLoad->ticket_storage_disk
+            && $fuelLoad->ticket_storage_path
+        ) {
+
+            try {
+
+                $ticketDisk =
+                    \Illuminate\Support\Facades\Storage::disk(
+                        $fuelLoad->ticket_storage_disk
+                    );
+
+
+                if (
+                    $ticketDisk->exists(
+                        $fuelLoad->ticket_storage_path
+                    )
+                ) {
+
+                    $ticketMime =
+                        $fuelLoad->ticket_mime_type
+                        ?: 'image/jpeg';
+
+
+                    /*
+                     * HEIC / HEIF normalmente no pueden ser renderizados
+                     * directamente por DomPDF.
+                     */
+                    $renderableTicketMimeTypes = [
+                        'image/jpeg',
+                        'image/jpg',
+                        'image/png',
+                        'image/webp',
+                    ];
+
+
+                    if (
+                        in_array(
+                            $ticketMime,
+                            $renderableTicketMimeTypes,
+                            true
+                        )
+                    ) {
+
+                        $ticketContents =
+                            $ticketDisk->get(
+                                $fuelLoad->ticket_storage_path
+                            );
+
+
+                        $fuelTicketImage =
+                            'data:'
+                            . $ticketMime
+                            . ';base64,'
+                            . base64_encode(
+                                $ticketContents
+                            );
+                    }
+                }
+
+            } catch (\Throwable $exception) {
+
+                /*
+                 * El PDF debe seguir generándose aunque
+                 * la evidencia física no esté disponible.
+                 */
+                $fuelTicketImage = null;
+            }
+        }
+
+    @endphp
+
+
+    <div class="page-break">
+
+        <h2 class="section-title">
+            8. Traslado y combustible
+        </h2>
+
+
+        {{-- ===================================================== --}}
+        {{-- TRASLADO --}}
+        {{-- ===================================================== --}}
+
+        <h3 class="sub-title">
+            Responsable de traslado
+        </h3>
+
+
+        @if ($transferAssignment)
+
+            <table class="data-table">
+
+                <tr>
+
+                    <td>
+
+                        <div class="label">
+                            Trasladista
+                        </div>
+
+                        <div class="value">
+                            {{ $transferAssignment->transporter_name }}
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="label">
+                            Estado del traslado
+                        </div>
+
+                        <div class="value">
+                            {{ $transferAssignment->status->label() }}
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+
+                        <div class="label">
+                            Origen
+                        </div>
+
+                        <div class="value">
+                            {{ $transferAssignment->origin_name ?: 'CEDIS' }}
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="label">
+                            Destino
+                        </div>
+
+                        <div class="value">
+                            {{ $transferAssignment->destination_name ?: '—' }}
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+
+                        <div class="label">
+                            Fecha de asignación
+                        </div>
+
+                        <div class="value">
+
+                            {{ $transferAssignment->assigned_at
+            ? \App\Support\DateHelper::format(
+                $transferAssignment->assigned_at
+            )
+            : '—'
+                                    }}
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="label">
+                            Finalización del traslado
+                        </div>
+
+                        <div class="value">
+
+                            {{ $transferAssignment->completed_at
+            ? \App\Support\DateHelper::format(
+                $transferAssignment->completed_at
+            )
+            : '—'
+                                    }}
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+
+                        <div class="label">
+                            Asignado por
+                        </div>
+
+                        <div class="value">
+                            {{ $transferAssignment->assigned_by_name ?: '—' }}
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="label">
+                            Responsable registrado
+                        </div>
+
+                        <div class="value">
+                            {{ $transferAssignment->transporter_name }}
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+
+            @if ($transferAssignment->notes)
+
+                <div class="box" style="
+                                            margin-top: 15px;
+                                            line-height: 1.6;
+                                        ">
+
+                    <div class="label">
+                        Observaciones del traslado
+                    </div>
+
+                    {{ $transferAssignment->notes }}
+
+                </div>
+
+            @endif
+
+
+        @else
+
+            <div class="box">
+                No existe información de asignación de traslado para esta unidad.
+            </div>
+
+        @endif
+
+
+
+        {{-- ===================================================== --}}
+        {{-- HISTORIAL DE REASIGNACIONES --}}
+        {{-- ===================================================== --}}
+
+        @if ($transferHistory->count() > 1)
+
+            <h3 class="sub-title" style="margin-top: 25px;">
+                Historial de responsables
+            </h3>
+
+
+            <table class="timeline-table">
+
+                @foreach ($transferHistory as $transfer)
+
+                    <tr>
+
+                        <td style="width: 25%;">
+
+                            {{ $transfer->assigned_at
+                    ? \App\Support\DateHelper::format(
+                        $transfer->assigned_at
+                    )
+                    : '—'
+                                                }}
+
+                        </td>
+
+
+                        <td style="width: 45%;">
+
+                            <strong>
+                                {{ $transfer->transporter_name }}
+                            </strong>
+
+                            <br>
+
+                            <span class="muted">
+
+                                {{ $transfer->origin_name ?: 'CEDIS' }}
+
+                                →
+
+                                {{ $transfer->destination_name ?: '—' }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td style="width: 30%;">
+
+                            <strong>
+                                {{ $transfer->status->label() }}
+                            </strong>
+
+
+                            @if ($transfer->cancelled_at)
+
+                                        <br>
+
+                                        <span class="muted small">
+                                            Cancelado:
+                                            {{ \App\Support\DateHelper::format(
+                                    $transfer->cancelled_at
+                                ) }}
+                                        </span>
+
+                            @endif
+
+
+                            @if ($transfer->completed_at)
+
+                                        <br>
+
+                                        <span class="muted small">
+                                            Finalizado:
+                                            {{ \App\Support\DateHelper::format(
+                                    $transfer->completed_at
+                                ) }}
+                                        </span>
+
+                            @endif
+
+                        </td>
+
+                    </tr>
+
+                @endforeach
+
+            </table>
+
+        @endif
+
+
+
+        {{-- ===================================================== --}}
+        {{-- COMBUSTIBLE --}}
+        {{-- ===================================================== --}}
+
+        <h3 class="sub-title" style="margin-top: 30px;">
+            Registro de combustible
+        </h3>
+
+
+        @if ($fuelLoad)
+
+                @php
+
+                    $fuelWasLoaded =
+                        (float) $fuelLoad->amount > 0;
+
+                @endphp
+
+
+                <table class="data-table">
+
+                    <tr>
+
+                        <td>
+
+                            <div class="label">
+                                Resultado
+                            </div>
+
+                            <div class="value">
+
+                                {{ $fuelWasLoaded
+                ? 'Carga de gasolina realizada'
+                : 'Sin carga de gasolina'
+                                                }}
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="label">
+                                Importe
+                            </div>
+
+                            <div class="value" style="
+                                                    font-size: 14px;
+                                                    color:
+                                                        {{ $fuelWasLoaded
+                ? '#047857'
+                : '#b45309'
+                                                        }};
+                                                ">
+                                ${{ number_format(
+                (float) $fuelLoad->amount,
+                2
+            ) }}
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+
+                            <div class="label">
+                                Registrado por
+                            </div>
+
+                            <div class="value">
+                                {{ $fuelLoad->registered_by_name ?: '—' }}
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="label">
+                                Fecha y hora
+                            </div>
+
+                            <div class="value">
+
+                                {{ $fuelLoad->fueled_at
+                ? \App\Support\DateHelper::format(
+                    $fuelLoad->fueled_at
+                )
+                : '—'
+                                                }}
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    @if (
+                            !$fuelWasLoaded
+                            && $fuelLoad->no_fuel_reason
+                        )
+
+                        <tr>
+
+                            <td colspan="2">
+
+                                <div class="label">
+                                    Motivo de no carga
+                                </div>
+
+                                <div class="value">
+                                    {{ $fuelLoad
+                        ->no_fuel_reason
+                        ->label()
+                                                                }}
+                                </div>
+
+
+                                @if ($fuelLoad->reason_notes)
+
+                                    <div style="
+                                                                                    margin-top: 6px;
+                                                                                    color: #64748b;
+                                                                                ">
+                                        {{ $fuelLoad->reason_notes }}
+                                    </div>
+
+                                @endif
+
+                            </td>
+
+                        </tr>
+
+                    @endif
+
+
+                    @if ($fuelLoad->observations)
+
+                        <tr>
+
+                            <td colspan="2">
+
+                                <div class="label">
+                                    Observaciones
+                                </div>
+
+                                <div>
+                                    {{ $fuelLoad->observations }}
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    @endif
+
+                </table>
+
+
+
+                {{-- ================================================= --}}
+                {{-- TICKET --}}
+                {{-- ================================================= --}}
+
+                @if ($fuelLoad->ticket_storage_path)
+
+                    <h3 class="sub-title" style="margin-top: 25px;">
+                        Ticket de gasolina
+                    </h3>
+
+
+                    @if ($fuelTicketImage)
+
+                        <div class="avoid-break" style="
+                                                                        width: 100%;
+                                                                        border: 1px solid #e2e8f0;
+                                                                        padding: 10px;
+                                                                        background: #f8fafc;
+                                                                    ">
+
+                            <img src="{{ $fuelTicketImage }}" style="
+                                                                            display: block;
+                                                                            width: 100%;
+                                                                            max-height: 430px;
+                                                                            object-fit: contain;
+                                                                        ">
+
+
+                            <div class="photo-caption">
+
+                                {{ $fuelLoad->ticket_original_filename
+                                ?: 'Ticket de gasolina'
+                                                                        }}
+
+                                @if ($fuelLoad->fueled_at)
+
+                                    <br>
+
+                                    {{ \App\Support\DateHelper::format(
+                                        $fuelLoad->fueled_at
+                                    ) }}
+
+                                @endif
+
+                            </div>
+
+                        </div>
+
+
+                    @else
+
+                        <div class="box">
+
+                            Ticket registrado:
+
+                            <strong>
+                                {{ $fuelLoad->ticket_original_filename
+                                ?: 'Archivo de evidencia'
+                                                                        }}
+                            </strong>
+
+                            <br>
+
+                            <span class="muted small">
+
+                                El archivo se encuentra registrado
+                                en el expediente, pero su formato
+                                no pudo incrustarse en el PDF.
+
+                            </span>
+
+                        </div>
+
+                    @endif
+
+                @endif
+
+
+        @else
+
+            <div class="box">
+                No existe información de combustible registrada para esta unidad.
+            </div>
+
+        @endif
+
+    </div>
 
     {{-- ========================================================= --}}
-    {{-- 8. HISTORIAL --}}
+    {{-- 9. HISTORIAL --}}
     {{-- ========================================================= --}}
 
     <div class="page-break">
 
         <h2 class="section-title">
-            8. Historial del expediente
+            9. Historial del expediente
         </h2>
 
 
@@ -1722,7 +2439,7 @@
                                 {{ $event->performed_by_name
                     ?? $event->performedBy?->name
                     ?? 'Sistema'
-                                                                                }}
+                                                                                                                    }}
 
                                 @if ($event->description)
 
@@ -1743,11 +2460,11 @@
 
 
         {{-- ===================================================== --}}
-        {{-- 9. CIERRE --}}
+        {{-- 10. CIERRE --}}
         {{-- ===================================================== --}}
 
         <h2 class="section-title" style="margin-top: 40px;">
-            9. Cierre del expediente
+            10. Cierre del expediente
         </h2>
 
 
@@ -1851,45 +2568,49 @@
 
             @if ($assemblySessionForSummary)
 
-                        <tr>
+                        <table class="data-table">
 
-                            <td>
+                            <tr>
 
-                                <div class="label">
-                                    Tiempo efectivo de armado
-                                </div>
+                                <td>
 
-                                <div class="value">
+                                    <div class="label">
+                                        Tiempo efectivo de armado
+                                    </div>
 
-                                    {{ \App\Support\DurationHelper::format(
+                                    <div class="value">
+
+                                        {{ \App\Support\DurationHelper::format(
                     (int) $assemblySessionForSummary
                         ->total_active_seconds
                 ) }}
 
-                                </div>
+                                    </div>
 
-                            </td>
+                                </td>
 
 
-                            <td>
+                                <td>
 
-                                <div class="label">
-                                    Pausas registradas
-                                </div>
+                                    <div class="label">
+                                        Pausas registradas
+                                    </div>
 
-                                <div class="value">
+                                    <div class="value">
 
-                                    {{ $assemblySessionForSummary
+                                        {{ $assemblySessionForSummary
                     ->pauses
                     ->count()
                                 }}
-                                    pausa(s)
+                                        pausa(s)
 
-                                </div>
+                                    </div>
 
-                            </td>
+                                </td>
 
-                        </tr>
+                            </tr>
+
+                        </table>
 
             @endif
 
@@ -1923,11 +2644,11 @@
 
 
         {{-- ===================================================== --}}
-        {{-- 10. GENERACIÓN --}}
+        {{-- 11. GENERACIÓN --}}
         {{-- ===================================================== --}}
 
         <h2 class="section-title" style="margin-top: 40px;">
-            10. Información de generación
+            11. Información de generación
         </h2>
 
 

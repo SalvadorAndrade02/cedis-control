@@ -9,12 +9,18 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Throwable;
+use App\Models\UnitTransferAssignment;
+use Livewire\Attributes\On;
+use App\Enums\TransferAssignmentStatus;
+use Livewire\Attributes\Locked;
 
 class DeliveryEvidence extends Component
 {
     use WithFileUploads;
 
+    #[Locked]
     public int $unitId;
+
 
     public string $carrierName = '';
 
@@ -44,6 +50,107 @@ class DeliveryEvidence extends Component
         );
 
         $this->unitId = $unit->id;
+        $this->fillOperatorFromTransfer();
+    }
+
+    public bool $operatorWasManuallyEdited = false;
+
+
+    private function fillOperatorFromTransfer(): void
+    {
+        /*
+         * Si ya existe un operador capturado,
+         * no lo sustituimos.
+         */
+        if (filled($this->operatorName)) {
+            return;
+        }
+
+
+        $assignment =
+            UnitTransferAssignment::query()
+                ->where(
+                    'unit_id',
+                    $this->unitId
+                )
+                ->where(
+                    'status',
+                    TransferAssignmentStatus::ASSIGNED->value
+                )
+                ->latest('id')
+                ->first();
+
+
+        if (!$assignment) {
+            return;
+        }
+
+
+        $this->operatorName =
+            $assignment->transporter_name;
+    }
+
+
+    public function markOperatorAsManual(): void
+    {
+        $this->operatorWasManuallyEdited = true;
+    }
+
+
+    #[On('transfer-assigned')]
+    public function refreshOperatorFromTransfer(
+        int $unitId,
+        int $assignmentId
+    ): void {
+
+        /*
+         * Ignorar eventos pertenecientes
+         * a otra unidad.
+         */
+        if (
+            (int) $unitId
+            !== (int) $this->unitId
+        ) {
+            return;
+        }
+
+
+        /*
+         * Si ENTREGA ya cambió manualmente
+         * al operador, respetamos su captura.
+         */
+        if ($this->operatorWasManuallyEdited) {
+            return;
+        }
+
+
+        $assignment =
+            UnitTransferAssignment::query()
+                ->whereKey(
+                    $assignmentId
+                )
+                ->where(
+                    'unit_id',
+                    $this->unitId
+                )
+                ->where(
+                    'status',
+                    TransferAssignmentStatus::ASSIGNED->value
+                )
+                ->first();
+
+
+        if (!$assignment) {
+            return;
+        }
+
+
+        $this->operatorName =
+            $assignment->transporter_name;
+    }
+    public function updatedOperatorName(): void
+    {
+        $this->operatorWasManuallyEdited = true;
     }
 
     protected function rules(): array
@@ -137,23 +244,23 @@ class DeliveryEvidence extends Component
                 operatorName: trim($this->operatorName),
 
                 operatorIdentification: trim($this->operatorIdentification)
-                    ?: null,
+                ?: null,
 
                 operatorPhone: trim($this->operatorPhone)
-                    ?: null,
+                ?: null,
 
                 vehiclePlate: trim($this->vehiclePlate),
 
                 vehicleNumber: trim($this->vehicleNumber)
-                    ?: null,
+                ?: null,
 
                 transportType: trim($this->transportType)
-                    ?: null,
+                ?: null,
 
                 photos: $this->photos,
 
                 observations: trim($this->observations)
-                    ?: null,
+                ?: null,
 
                 userId: (int) Auth::id(),
             );
@@ -194,10 +301,10 @@ class DeliveryEvidence extends Component
         $unit = Unit::query()
             ->with([
                 'milestones' => fn($query) =>
-                $query->where(
-                    'stage',
-                    MilestoneStage::CARRIER_DELIVERY->value
-                ),
+                    $query->where(
+                        'stage',
+                        MilestoneStage::CARRIER_DELIVERY->value
+                    ),
             ])
             ->findOrFail(
                 $this->unitId

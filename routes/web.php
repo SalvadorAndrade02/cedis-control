@@ -9,6 +9,7 @@ use App\Http\Controllers\UnitExpedientPdfController;
 use App\Http\Controllers\ShippingGuidePdfController;
 use App\Models\UnitTransferAssignment;
 use App\Http\Controllers\FuelTicketController;
+use App\Http\Controllers\DashboardController;
 
 Route::middleware('guest')
     ->group(function () {
@@ -33,10 +34,11 @@ Route::middleware('auth')
             }
         );
 
-        Route::view(
+        Route::get(
             '/dashboard',
-            'dashboard'
-        )->name('dashboard');
+            DashboardController::class
+        )
+            ->name('dashboard');
 
         Route::post(
             '/logout',
