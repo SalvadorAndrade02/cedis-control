@@ -48,10 +48,13 @@ class DeleteUnitService
                 'local',
                 'testing',
             ])
+            && !config(
+                'cedis.allow_permanent_unit_delete',
+                false
+            )
         ) {
-
             throw new RuntimeException(
-                'La eliminación permanente de unidades sólo está habilitada en desarrollo.'
+                'La eliminación permanente de unidades no está habilitada en este entorno.'
             );
         }
 

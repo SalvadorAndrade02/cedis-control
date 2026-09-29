@@ -2,6 +2,9 @@
 
 return [
 
+    'allow_permanent_unit_delete' =>
+        env('CEDIS_ALLOW_PERMANENT_UNIT_DELETE', false),
+
     /*
     |--------------------------------------------------------------------------
     | Zona horaria operacional
